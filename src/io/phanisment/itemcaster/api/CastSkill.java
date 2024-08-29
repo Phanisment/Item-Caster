@@ -17,8 +17,7 @@ public class CastSkill {
 		MythicBukkit.inst().getSkillManager().getSkill(id).ifPresent(skill -> {
 			AbstractPlayer trigger = BukkitAdapter.adapt(player);
 			GenericCaster genericCaster = new GenericCaster(trigger);
-			SkillMetadata skillMeta = new SkillMetadataImpl(SkillTriggers.API, genericCaster, trigger, BukkitAdapter.adapt(player.getLocation()),
-			new HashSet<>(), null, 1.0F);
+			SkillMetadata skillMeta = new SkillMetadataImpl(SkillTriggers.API, genericCaster, trigger, BukkitAdapter.adapt(player.getLocation()), new HashSet<>(), null, 1.0F);
 			if (skill.isUsable(skillMeta, SkillTriggers.API)) skill.execute(skillMeta);
 		});
 	}
