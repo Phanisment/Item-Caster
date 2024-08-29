@@ -2,4 +2,5 @@ name: ${project.name}
 version: ${project.version}
 author: Phanisment
 api-version: 1.20
-author: io.phanisment.itemcaster.ItemCaster
+main: io.phanisment.itemcaster.ItemCaster
+depend: [MythicMobs]
