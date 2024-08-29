@@ -1,3 +1,7 @@
+/*
+  Stealing code form plugin AriKeys :3
+*/
+
 package io.phanisment.itemcaster.api;
 
 import io.lumine.mythic.api.adapters.AbstractPlayer;
