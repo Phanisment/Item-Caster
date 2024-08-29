@@ -81,9 +81,16 @@
       <id>spigot-repo</id>
       <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
     </repository>
+    
     <repository>
       <id>papermc</id>
       <url>https://repo.papermc.io/repository/maven-public/</url>
+    </repository>
+    
+    <repository>
+      <id>nexus</id>
+      <name>Lumine Releases</name>
+      <url>https://mvn.lumine.io/repository/maven-public/</url>
     </repository>
   </repositories>
   
@@ -92,6 +99,13 @@
       <groupId>org.spigotmc</groupId>
       <artifactId>spigot-api</artifactId>
       <version>1.20.1-R0.1-SNAPSHOT</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>io.lumine</groupId>
+      <artifactId>Mythic-Dist</artifactId>
+      <version>5.6.1</version>  
       <scope>provided</scope>
     </dependency>
   </dependencies>
