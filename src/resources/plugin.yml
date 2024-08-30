@@ -2,4 +2,4 @@ name: ${project.name}
 version: ${project.version}
 author: Phanisment
 main: io.phanisment.itemcaster.ItemCaster
-depend: [MythicMobs]
+depend: [MythicMobs, NBTAPI]
