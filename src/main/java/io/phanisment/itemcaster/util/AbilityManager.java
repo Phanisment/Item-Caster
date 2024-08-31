@@ -24,9 +24,7 @@ public class AbilityManager {
 			abilities.add(new Ability(id, event, timer));
 		}
 			return abilities;
-		}
 	}
-	
 	public static class Ability {
 		private final String id;
 		private final String event;
