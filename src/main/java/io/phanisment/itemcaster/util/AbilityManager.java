@@ -32,20 +32,22 @@ public class AbilityManager {
 		private final String event;
 		private final Integer timer;
 		
-		public String getId() {
-			return id;
-		}
-		
-		public String getEvent() {
-			return event;
-		}
-		
-		public int getTimer() {
-			return timer;
-		}
-		
-		public String toString() {
-			return "Ability{id='" + id + "', event='" + event + "', timer=" + timer + "}";
+		public Ability(String id, String event, Integer timer) {
+			public String getId() {
+				return id;
+			}
+			
+			public String getEvent() {
+				return event;
+			}
+			
+			public int getTimer() {
+				return timer;
+			}
+			
+			public String toString() {
+				return "Ability{id='" + id + "', event='" + event + "', timer=" + timer + "}";
+			}
 		}
 	}
 }
