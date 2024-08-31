@@ -2,23 +2,22 @@ package io.phanisment.itemcaster;
 
 import org.bukkit.inventory.ItemStack;
 
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 
 public class AbilityManager {
 	public AbilityManager(ItemStack item) {
 		if(item != null) {
-			NBTCompound nbtItem = item.getCompound();
-			NBTCompound skill = nbtItem.getCompound("Skill");
-			NBTCompound event = nbtItem.getCompound("Event");
+			NBTItem nbtItem = item.getCompound();
 			return item;
 		}
 	}
 	
 	public String getSkill() {
-		return skill;
+		return item.getString("Skill");
 	}
 	
 	public String getEvent() {
-		return event;
+		return item.getString("Event");
 	}
 }
