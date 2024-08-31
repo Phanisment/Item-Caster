@@ -17,8 +17,8 @@ public class AbilityManager {
 	}
 	
 	public class Ability {
-		private String this.skill = skill;
-		private String this.event = event;
+		private String skill = skill;
+		private String event = event;
 		
 		public String getSkill() {
 			return skill;
