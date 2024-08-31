@@ -16,7 +16,7 @@ import org.bukkit.entity.Player;
 import java.util.HashSet;
 
 public class CastSkill {
-	public static void runSkill(String id, Player player) {
+	public static void cast(String id, Player player) {
 	if (id == null || id.isEmpty()) return;
 		MythicBukkit.inst().getSkillManager().getSkill(id).ifPresent(skill -> {
 			AbstractPlayer trigger = BukkitAdapter.adapt(player);
