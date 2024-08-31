@@ -36,22 +36,21 @@ public class AbilityManager {
 			this.id = id;
 			this.event = event;
 			this.timer = timer;
-			
-			public String getId() {
-				return id;
-			}
-			
-			public String getEvent() {
-				return event;
-			}
-			
-			public int getTimer() {
-				return timer;
-			}
-			
-			public String toString() {
-				return "Ability{id='" + id + "', event='" + event + "', timer=" + timer + "}";
-			}
+		}
+		public String getId() {
+			return id;
+		}
+		
+		public String getEvent() {
+			return event;
+		}
+		
+		public int getTimer() {
+			return timer;
+		}
+		
+		public String toString() {
+			return "Ability{id='" + id + "', event='" + event + "', timer=" + timer + "}";
 		}
 	}
 }
