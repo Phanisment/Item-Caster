@@ -46,7 +46,7 @@ public class AbilityManager {
 			return event;
 		}
 		
-		public int getTimer() {
+		public Integer getTimer() {
 			return timer;
 		}
 		
