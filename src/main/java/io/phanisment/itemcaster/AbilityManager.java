@@ -5,7 +5,7 @@ import org.bukkit.inventory.ItemStack;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 
 public class AbilityManager {
-	public AbilityManager(ItemStack item) {
+	public AbilityManager(ItemStack item, String type) {
 		NBTItem nbtItem = new NBTItem(item);
 		if(nbtItem.hasKey("Skill")) {
 			String skill = nbtItem.getString("Skill");
@@ -14,17 +14,10 @@ public class AbilityManager {
 		if(nbtItem.hasKey("Event")) {
 			String event = nbtItem.getString("Event");
 		}
-	}
-	
-	public class Ability {
-		private String skill = skill;
-		private String event = event;
 		
-		public String getSkill() {
+		if(type == "skill"){
 			return skill;
-		}
-	
-		public String getEvent() {
+		} else if (type == "event") {
 			return event;
 		}
 	}
