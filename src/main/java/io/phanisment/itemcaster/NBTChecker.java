@@ -22,9 +22,11 @@ public class NBTChecker {
 			return null;
 		}
 
-		NBTCompound abilitiesCompound = nbtItem.getCompound("Abilities");
+		NBTCompound data = nbtItem.getCompound("Abilities");
 		List<Ability> abilities = new ArrayList<>();
-		for (NBTListCompound abilityCompound : abilitiesCompound.getCompoundList("Abilities")) {
+		for (int i = 0; < data.getSize(); i++) {
+			NBTListCompound abilityCompound = compound.getCompoundList().get(i);
+			
 			String id = abilityCompound.getString("id");
 			String event = abilityCompound.hasKey("event") ? abilityCompound.getString("event") : null;
 			Integer timer = abilityCompound.hasKey("timer") ? abilityCompound.getInteger("timer") : null;
