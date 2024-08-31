@@ -21,18 +21,4 @@ public class AbilityManager {
 			return null;
 		}
 	}
-	
-	public class Ability extends AbilityManager {
-		public String getSkill() {
-			return skill;
-		}
-		
-		public String getEvent() {
-			return event;
-		}
-		
-		public Integer getTimer() {
-			return timer;
-		}
-	}
 }
