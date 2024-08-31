@@ -7,7 +7,7 @@ import io.phanisment.itemcaster.util.PassiveSkill;
 public class ItemCaster extends JavaPlugin {
 	@Override
 	public void onEnable() {
-		getLogger().info("Plugin Installed!")
+		getLogger().info("Plugin Installed!");
 		
 		new PassiveSkill(this);
 	}
