@@ -10,7 +10,7 @@ public class AbilityManager {
 		NBTItem nbtItem = new NBTItem(item);
 		if(nbtItem.hasKey("Skill")) {
 			String skill = nbtItem.getString("Skill");
-			return skill
+			return skill;
 		}
 	}
 }
