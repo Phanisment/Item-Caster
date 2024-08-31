@@ -3,6 +3,7 @@ package io.phanisment.itemcaster;
 import org.bukkit.inventory.ItemStack;
 
 import de.tr7zw.changeme.nbtapi.NBTItem;
+import de.tr7zw.changeme.nbtapi.NBTCompound;
 
 public class AbilityManager {
 	public AbilityManager(ItemStack item, String type) {
