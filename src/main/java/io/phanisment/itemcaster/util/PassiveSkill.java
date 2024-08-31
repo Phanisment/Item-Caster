@@ -14,7 +14,7 @@ import java.util.List;
 
 public class PassiveSkill {
 	private final ItemCaster plugin;
-	private final AbilityManager nbtAbility = new AbilityManager()
+	private final AbilityManager nbtAbility = new AbilityManager();
 	
 	public PassiveSkill(ItemCaster plugin) {
 		this.plugin = plugin;
