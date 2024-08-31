@@ -1,8 +1,8 @@
 package io.phanisment.itemcaster;
 
-import io.phanisment.itemcaster.nbtapi.NBTCompound;
-import io.phanisment.itemcaster.nbtapi.NBTItem;
-import io.phanisment.itemcaster.nbtapi.NBTListCompound;
+import de.tr7zw.changeme.nbtapi.NBTCompound;
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import de.tr7zw.changeme.nbtapi.NBTListCompound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
