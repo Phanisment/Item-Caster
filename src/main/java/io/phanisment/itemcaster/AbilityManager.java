@@ -16,11 +16,16 @@ public class AbilityManager {
 		}
 	}
 	
-	public String getSkill() {
-		return skill;
-	}
+	public class Ability {
+		private final this.skill = skill;
+		private final this.event = event;
+		
+		public String getSkill() {
+			return skill;
+		}
 	
-	public String getEvent() {
-		return event;
+		public String getEvent() {
+			return event;
+		}
 	}
 }
