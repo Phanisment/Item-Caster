@@ -6,6 +6,7 @@ import de.tr7zw.changeme.nbtapi.NBTItem;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 
 public class AbilityManager {
+	@Deprecated
 	public AbilityManager(ItemStack item) {
 		NBTItem nbtItem = new NBTItem(item);
 		if(nbtItem.hasKey("Skill")) {
