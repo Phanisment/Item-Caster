@@ -63,6 +63,12 @@
             </goals>
             <configuration>
               <createDependencyReducedPom>false</createDependencyReducedPom>
+              <relocations>
+                <relocation>
+                  <pattern>de.tr7zw.changeme.nbtapi</pattern>
+                  <shadedPattern>io.phanisment.nbtapi</shadedPattern>
+                </relocation>
+             </relocations>
             </configuration>
           </execution>
         </executions>
