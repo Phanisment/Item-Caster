@@ -2,17 +2,37 @@ package io.phanisment.itemcaster;
 
 import org.bukkit.inventory.ItemStack;
 
-import de.tr7zw.changeme.nbtapi.NBTItem;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import de.tr7zw.changeme.nbtapi.NBTList;
 
 public class AbilityManager {
-	public String getSkill(ItemStack item) {
+	public String getNbt(ItemStack item) {
 		NBTItem nbtItem = new NBTItem(item);
-		if(nbtItem.hasKey("Skill")) {
-			String skill = nbtItem.getString("Skill");
-			return skill;
+		NBTCompound abilities = nbtItem.getCompound("Abilities");
+		if(abilities != null) {
+			NBTList<NBTCompound> listAbility = abilities.getCompoundList("Abilities");
+			for(NBTCompound ability : listAbility) {
+				String skill = ability.getString("skill");
+				String event = ability.getString("event");
+				int timer = ability.getInt("timer");
+			}
 		} else {
-			return null;
+			return null
+		}
+	}
+	
+	public class Ability extends AbilityManager {
+		public String getSkill() {
+			return skill;
+		}
+		
+		public String getEvent() {
+			return event;
+		}
+		
+		public Integer getTimer() {
+			return timer;
 		}
 	}
 }
