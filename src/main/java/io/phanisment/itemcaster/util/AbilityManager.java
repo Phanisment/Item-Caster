@@ -33,6 +33,10 @@ public class AbilityManager {
 		private final Integer timer;
 		
 		public Ability(String id, String event, Integer timer) {
+			this.id = id;
+			this.event = event;
+			this.timer = timer;
+			
 			public String getId() {
 				return id;
 			}
