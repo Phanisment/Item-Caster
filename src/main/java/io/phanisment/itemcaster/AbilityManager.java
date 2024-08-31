@@ -18,7 +18,7 @@ public class AbilityManager {
 				int timer = ability.getInt("timer");
 			}
 		} else {
-			return null
+			return null;
 		}
 	}
 	
