@@ -23,7 +23,7 @@ public class AbilityManager {
 			Integer timer = itemNbt.hasKey("timer") ? itemNbt.getInteger("timer") : null;
 			abilities.add(new Ability(id, event, timer));
 		}
-			return abilities;
+		return abilities;
 	}
 	public static class Ability {
 		private final String id;
