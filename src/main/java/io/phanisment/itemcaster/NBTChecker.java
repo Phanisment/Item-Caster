@@ -24,7 +24,7 @@ public class NBTChecker {
 
 		NBTCompound data = nbtItem.getCompound("Abilities");
 		List<Ability> abilities = new ArrayList<>();
-		for (int i = 0; < data.getSize(); i++) {
+		for (int i = 0; i < data.getSize(); i++) {
 			NBTListCompound abilityCompound = compound.getCompoundList().get(i);
 			
 			String id = abilityCompound.getString("id");
