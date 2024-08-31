@@ -28,9 +28,9 @@ public class AbilityManager {
 	}
 	
 	public static class Ability {
-		private final id;
-		private final event;
-		private final timer;
+		private final String id;
+		private final String event;
+		private final Integer timer;
 		
 		public String getId() {
 			return id;
