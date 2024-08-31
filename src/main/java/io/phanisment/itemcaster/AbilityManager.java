@@ -11,6 +11,8 @@ public class AbilityManager {
 		if(nbtItem.hasKey("Skill")) {
 			String skill = nbtItem.getString("Skill");
 			return skill;
+		} else {
+			return null;
 		}
 	}
 }
