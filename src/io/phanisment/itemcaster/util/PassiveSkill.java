@@ -16,8 +16,7 @@ public class PassiveSkill {
 	private final ItemCaster plugin;
 	private final AbilityManager nbtAbility = new AbilityManager()
 	
-	
-	public PassiveSkillChecker(ItemCaster plugin) {
+	public PassiveSkill(ItemCaster plugin) {
 		this.plugin = plugin;
 		
 		new BukkitRunnable() {
