@@ -37,6 +37,7 @@ public class AbilityManager {
 			this.event = event;
 			this.timer = timer;
 		}
+		
 		public String getId() {
 			return id;
 		}
@@ -49,6 +50,7 @@ public class AbilityManager {
 			return timer;
 		}
 		
+		@Override
 		public String toString() {
 			return "Ability{id='" + id + "', event='" + event + "', timer=" + timer + "}";
 		}
