@@ -9,11 +9,11 @@ public class AbilityManager {
 	public AbilityManager(ItemStack item, String type) {
 		NBTItem nbtItem = new NBTItem(item);
 		if(nbtItem.hasKey("Skill")) {
-			String skill = nbtItem.getString("Skill");
+			NBTCompound skill = nbtItem.getString("Skill");
 		}
 		
 		if(nbtItem.hasKey("Event")) {
-			String event = nbtItem.getString("Event");
+			NBTCompound event = nbtItem.getString("Event");
 		}
 		
 		if(type == "skill"){
