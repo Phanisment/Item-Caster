@@ -22,7 +22,7 @@ public class AbilityManager {
 			}
 			return abilities;
 		}
-		return null
+		return null;
 	}
 	
 	public class Abiltity {
