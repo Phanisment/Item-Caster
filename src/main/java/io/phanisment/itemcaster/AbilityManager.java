@@ -1,7 +1,7 @@
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.item.ItemStack;
 import org.bukkit.craftbukkit.v1_20_R0.inventory.CraftItemStack;
-import org.bukkit.inventory.ItemStack as BukkitItemStack;
+import org.bukkit.inventory.ItemStack;
 
 public class NBTUtil {
 	public static NBTTagCompound getNBTTag(BukkitItemStack item) {
