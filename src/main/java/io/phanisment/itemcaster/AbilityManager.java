@@ -19,9 +19,9 @@ public class AbilityManager {
 				int timer = ability.getInteger("timer");
 				String toString = "{Skill" + skill + ",Event:" + event + ",Timer:" + timer + "}";
 				return toString;
-			} else {
-				return null;
 			}
+		} else {
+			return null;
 		}
 	}
 }
