@@ -8,7 +8,7 @@ import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 
 public class AbilityManager {
-	public static String getSkill(ItemStack item) {
+	public String getSkill(ItemStack item) {
 		NBTItem nbtItem = new NBTItem(item);
 		NBTCompound abilities = nbtItem.getCompound("Abilities");
 		if(abilities != null) {
