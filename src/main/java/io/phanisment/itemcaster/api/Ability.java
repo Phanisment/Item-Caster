@@ -8,8 +8,8 @@ public class Ability {
 	private final AbilityManager timer;
 	
 	public Ability(String skill, String event, int timer) {
-		this.skill = skill;
-		this.event = event;
-		this.timer = timer;
+		String this.skill = skill;
+		String this.event = event;
+		int this.timer = timer;
 	}
 }
