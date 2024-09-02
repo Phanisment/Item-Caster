@@ -7,9 +7,15 @@ public class Ability {
 	private final AbilityManager event;
 	private final AbilityManager timer;
 	
-	public Ability(String skill, String event, int timer) {
-		String this.skill = skill;
-		String this.event = event;
-		int this.timer = timer;
+	public String getSkill() {
+		return skill;
+	}
+	
+	public String getEvent() {
+		return event;
+	}
+	
+	public int getTimer() {
+		return timer;
 	}
 }
