@@ -20,34 +20,9 @@ public class AbilityManager {
 				String skill = ability.getString("skill");
 				String event = ability.getString("event");
 				int timer = ability.getInteger("timer");
-				this.abilities.add(new Ability(skill, event, timer));
 			}
 			return abilities;
 		}
 		return null;
-	}
-
-	public static class Ability {
-		private String skill;
-		private String event;
-		private int timer;
-
-		public Ability(String skill, String event, int timer) {
-			this.skill = skill;
-			this.event = event;
-			this.timer = timer;
-		}
-
-		public String getSkill() {
-			return skill;
-		}
-
-		public String getEvent() {
-			return event;
-		}
-
-		public int getTimer() {
-			return timer;
-		}
 	}
 }
