@@ -8,8 +8,9 @@ import de.tr7zw.changeme.nbtapi.NBTCompoundList;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 
+import io.phanisment.itemcaster.api.Ability;
+
 public class AbilityManager {
-	
 	public AbilityManager(Player player) {
 		ItemStack item = player.getInventory().getItemInHand();
 		NBTItem nbtItem = new NBTItem(item);
@@ -20,9 +21,8 @@ public class AbilityManager {
 				String skill = ability.getString("skill");
 				String event = ability.getString("event");
 				int timer = ability.getInteger("timer");
+				new Ability(skill, event, timer);
 			}
-			return abilities;
 		}
-		return null;
 	}
 }
