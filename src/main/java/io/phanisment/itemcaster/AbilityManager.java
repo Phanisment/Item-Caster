@@ -8,11 +8,7 @@ import de.tr7zw.changeme.nbtapi.NBTCompoundList;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AbilityManager {
-	private List<Ability> abilities:
 	
 	public AbilityManager(Player player) {
 		ItemStack item = player.getInventory().getItemInHand();
@@ -29,10 +25,6 @@ public class AbilityManager {
 			return abilities;
 		}
 		return null;
-	}
-
-	public List<Ability> getAbility() {
-		return abilities
 	}
 
 	public static class Ability {
@@ -54,7 +46,8 @@ public class AbilityManager {
 			return event;
 		}
 
-	public int getTimer() {
-		return timer;
+		public int getTimer() {
+			return timer;
+		}
 	}
 }
