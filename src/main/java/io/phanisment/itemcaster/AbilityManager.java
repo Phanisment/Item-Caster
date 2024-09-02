@@ -24,14 +24,4 @@ public class AbilityManager {
 		}
 		return null;
 	}
-	
-	public class Abiltity {
-		private this.skill = skill;
-		private this.event = event;
-		private this.timer = timer;
-		
-		public String getSkill() {
-			return skill;
-		}
-	}
 }
