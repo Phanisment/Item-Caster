@@ -22,10 +22,13 @@ public class ItemCaster extends JavaPlugin implements Listener {
 		if(event.getAction() == Action.RIGHT_CLICK || event.getItem() != null) {
 			Player player = event.getPlayer();
 			AbilityManager nbt = AbilityManager(player);
+			String skill = nbt.getSkill();
+			String event = nbt.getEvent();
+			int timer = nbt.getTimer();
 			
-			player.sendMessage(nbt.getSkill());
-			player.sendMessage(nbt.getEvent());
-			player.sendMessage(nbt.getTimer());
+			player.sendMessage(skill);
+			player.sendMessage(event);
+			player.sendMessage(timer);
 		}
 	}
 }
