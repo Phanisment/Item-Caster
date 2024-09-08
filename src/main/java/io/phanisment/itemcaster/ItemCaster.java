@@ -4,7 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import io.phanisment.itemcaster.SkillExecutor;
 
-public class ItemCaster extends JavaPlugin{
+public class ItemCaster extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		getLogger().info("Plugin Installed!");
