@@ -2,6 +2,7 @@ package io.phanisment.itemcaster;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
+import org.bukkit.Bukkit;
 
 import io.phanisment.itemcaster.SkillExecutor;
 
