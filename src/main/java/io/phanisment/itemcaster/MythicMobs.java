@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 
 import java.util.HashSet;
 
-public class MythicMobsCompat {
+public class MythicMobs {
 	public static void runSkill(String id, Player player) {
 		if (id == null || id.isEmpty()) return;
 
