@@ -23,9 +23,9 @@ public class SkillExecutor implements Listener {
 			if(abilities != null) {
 				for(ReadWriteNBT ability : abilities) {
 					String skill = ability.getString("skill");
-					String event = ability.getString("event");
+					String type = ability.getString("event");
 					int timer = ability.getInteger("timer");
-					player.sendMessage("Skill: " + skill + ", event: " + event + ", timer: " + timer);
+					player.sendMessage("Skill: " + skill + ", event: " + type + ", timer: " + timer);
 				}
 			}
 		}
