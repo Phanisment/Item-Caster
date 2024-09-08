@@ -12,6 +12,8 @@ import de.tr7zw.changeme.nbtapi.NBTCompoundList;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 
+import io.phanisment.itemcaster.MythicMobs;
+
 public class SkillExecutor implements Listener {
 	@EventHandler
 	public void onPlayerRightClick(PlayerInteractEvent event) {
@@ -26,6 +28,7 @@ public class SkillExecutor implements Listener {
 					String type = ability.getString("event");
 					int timer = ability.getInteger("timer");
 					player.sendMessage("Skill: " + skill + ", event: " + type + ", timer: " + timer);
+					new MythicMobs.runSkill(skill, player);
 				}
 			}
 		}
