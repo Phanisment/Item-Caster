@@ -9,15 +9,8 @@ import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 
 public class AbilityManager {
-	private String skill;
-	private String event;
-	private int timer;
-	
 	public AbilityManager(Player player) {
-		this(player.getInventory().getItemInHand());
-	}
-	
-	public AbilityManager(ItemStack item) {
+		ItemStack item = player.getInventory().getItemInMainHand();
 		NBTItem nbtItem = new NBTItem(item);
 		NBTCompound abilities = nbtItem.getCompound("Abilities");
 		if(abilities != null) {
@@ -26,19 +19,8 @@ public class AbilityManager {
 				String skill = ability.getString("skill");
 				String event = ability.getString("event");
 				int timer = ability.getInteger("timer");
+				player.sendMessage("Skill: " + skill + ", event: " + event + ", timer: " + timer);
 			}
 		}
-	}
-	
-	public String getSkill() {
-		return this.skill;
-	}
-	
-	public String getEvent() {
-		return this.event;
-	}
-	
-	public int getTimer() {
-		return this.timer;
 	}
 }
