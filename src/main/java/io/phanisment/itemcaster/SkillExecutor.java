@@ -15,7 +15,7 @@ public class SkillExecutor implements Listener {
 		if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getItem() != null) {
 			Player player = event.getPlayer();
 			ItemStack item = player.getInventory().getItemInMainHand();
-			new AbilityManager(item)
+			new AbilityManager(item);
 		}
 	}
 }
