@@ -9,7 +9,7 @@ public class ItemCaster extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		if(Bukkit.getPluginManager().getPlugin("MythicMobs") == null) {
-			getLogger().error("Plugin Enabled with WARN, Need plugin MythicMobs ro enable this plugin.");
+			getLogger().warn("Plugin Enabled with WARN, Need plugin MythicMobs ro enable this plugin.");
 		}
 		getLogger().info("Plugin Installed!");
 		
