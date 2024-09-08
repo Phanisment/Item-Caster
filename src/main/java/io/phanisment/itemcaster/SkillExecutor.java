@@ -12,16 +12,10 @@ import io.phanisment.itemcaster.AbilityManager;
 public class SkillExecutor implements Listener {
 	@EventHandler
 	public void onPlayerRightClick(PlayerInteractEvent event) {
-		if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+		if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getItem() != null) {
 			Player player = event.getPlayer();
 			ItemStack item = player.getInventory().getItemInMainHand();
-			AbilityManager abilityManager = new AbilityManager(item);
-			String skill = abilityManager.getSkill();
-			if (skill != null) {
-				player.sendMessage("You have activated skill: " + skill);
-			} else {
-				player.sendMessage("This item has no abilities.");
-			}
+			new AbilityManager(item)
 		}
 	}
 }
