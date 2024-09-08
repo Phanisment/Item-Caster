@@ -2,7 +2,7 @@ package io.phanisment.itemcaster;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import io.phanisment.itemCaster.SkillExecutor;
+import io.phanisment.itemcaster.SkillExecutor;
 
 public class ItemCaster extends JavaPlugin{
 	@Override
