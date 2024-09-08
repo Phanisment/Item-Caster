@@ -1,3 +1,11 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
 name: Java CI with Maven
 
 on:
@@ -5,31 +13,24 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v4
+    
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+      
     - name: Build with Maven
-      id: build_maven
-      run: |
-        mvn -B package --file pom.xml 2>&1 | tee maven_build.log
-      continue-on-error: true
+      run: mvn -B package --file pom.xml
+
     - name: Upload Artifact
-      if: success()
       uses: actions/upload-artifact@v4
       with:
         name: artifact
         path: target/*.jar
-    - name: Send Error to Discord
-      if: failure()
-      run: |
-        LOG_OUTPUT=$(tail -n 50 maven_build.log)
-        LOG_OUTPUT_ESCAPED=$(echo "$LOG_OUTPUT" | sed ':a;N;$!ba;s/\n/\\n/g' | sed 's/"/\\"/g')
-        curl -H "Content-Type: application/json" \
-        -d "{\"content\": \"Build failed for repository: ${{ github.repository }} at commit: ${{ github.sha }}.\\n\\nLast 50 lines of log:\\n```$LOG_OUTPUT_ESCAPED```\"}" \
-        ${{ secrets.DISCORD_WEBHOOK_URL }}
