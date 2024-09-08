@@ -21,7 +21,6 @@ jobs:
     - name: Build with Maven
       id: build_maven
       run: |
-        # Jalankan Maven dan simpan output ke file log
         mvn -B package --file pom.xml 2>&1 | tee maven_build.log
       continue-on-error: true
 
