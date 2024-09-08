@@ -9,6 +9,6 @@ public class ItemCaster extends JavaPlugin{
 	public void onEnable() {
 		getLogger().info("Plugin Installed!");
 		
-		getServer().getPluginManager().registerEvents(this, this);
+		getServer().getPluginManager().registerEvents(new SkillExecutor(), this);
 	}
 }
