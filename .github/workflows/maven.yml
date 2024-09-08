@@ -17,7 +17,6 @@ jobs:
     - name: Build with Maven
       id: build_maven
       run: |
-        # Jalankan Maven dan simpan output ke file log
         mvn -B package --file pom.xml 2>&1 | tee maven_build.log
       continue-on-error: true
 
@@ -29,15 +28,10 @@ jobs:
         path: dev/libs/*.jar
 
     - name: Send Error to Discord
-      if: failure() # Hanya kirim pesan jika build gagal
+      if: failure()
       run: |
-        # Ambil log error dari file log yang dihasilkan oleh Maven
         LOG_OUTPUT=$(tail -n 50 maven_build.log)
-        
-        # Escape log untuk menghindari masalah dengan JSON dan Discord
         LOG_OUTPUT_ESCAPED=$(echo "$LOG_OUTPUT" | sed ':a;N;$!ba;s/\n/\\n/g' | sed 's/"/\\"/g')
-
-        # Kirim log error ke Discord menggunakan webhook
         curl -H "Content-Type: application/json" \
-        -d "{\"content\": \"Build failed for repository: ${{ github.repository }} at commit: ${{ github.sha }}.\\n\\nLast 50 lines of log:\\n$LOG_OUTPUT_ESCAPED\"}" \
-        ${{ secrets.DISCORD_WEBHOOK_URL }}
+        -d "{\"content\": \"Build failed for repository: ${{ github.repository }} at commit: ${{ github.sha }}.\\n\\nLast 50 lines of log:\\n```$LOG_OUTPUT_ESCAPED```\"}" \
+        ${{ secrets.WEBHOOK }}
