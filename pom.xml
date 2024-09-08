@@ -38,7 +38,7 @@
               <relocations>
                 <relocation>
                   <pattern>de.tr7zw.changeme.nbtapi</pattern>
-                  <shadedPattern>de.tr7zw.changeme.nbtapi</shadedPattern>
+                  <shadedPattern>io.phanisment.itemcaster.nbtapi</shadedPattern>
                 </relocation>
              </relocations>
             </configuration>
