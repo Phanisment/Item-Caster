@@ -28,7 +28,7 @@ public class SkillExecutor implements Listener {
 					String type = ability.getString("event");
 					int timer = ability.getInteger("timer");
 					player.sendMessage("Skill: " + skill + ", event: " + type + ", timer: " + timer);
-					new MythicMobs.runSkill(skill, player);
+					MythicMobs.runSkill(skill, player);
 				}
 			}
 		}
