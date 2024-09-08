@@ -19,9 +19,9 @@ public class SkillExecutor implements Listener {
 			Player player = event.getPlayer();
 			ItemStack item = player.getInventory().getItemInMainHand();
 			NBTItem nbtItem = new NBTItem(item);
-			NBTCompoundList listAbility = abilities.getCompoundList("Abilities");
+			NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
 			if(abilities != null) {
-				for(ReadWriteNBT ability : listAbility) {
+				for(ReadWriteNBT ability : abilities) {
 					String skill = ability.getString("skill");
 					String event = ability.getString("event");
 					int timer = ability.getInteger("timer");
