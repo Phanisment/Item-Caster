@@ -17,32 +17,6 @@
     <finalName>${project.name}-v${project.version}</finalName>
     <plugins>
       <plugin>
-        <groupId>pl.project13.maven</groupId>
-        <artifactId>git-commit-id-plugin</artifactId>
-        <version>4.9.10</version>
-        <executions>
-          <execution>
-            <id>get-the-git-infos</id>
-            <goals>
-              <goal>revision</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
-          <prefix>git</prefix>
-          <verbose>false</verbose>
-          <generateGitPropertiesFile>true</generateGitPropertiesFile>
-          <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
-          <format>json</format>
-          <gitDescribe>
-            <skip>false</skip>
-            <always>false</always>
-            <dirty>-dirty</dirty>
-          </gitDescribe>
-        </configuration>
-      </plugin>
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.12.1</version>
@@ -62,11 +36,10 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <createDependencyReducedPom>false</createDependencyReducedPom>
               <relocations>
                 <relocation>
                   <pattern>de.tr7zw.changeme.nbtapi</pattern>
-                  <shadedPattern>de.tr7zw.changeme..nbtapi</shadedPattern>
+                  <shadedPattern>de.tr7zw.changeme.nbtapi</shadedPattern>
                 </relocation>
              </relocations>
             </configuration>
