@@ -3,10 +3,10 @@ package io.phanisment.itemcaster;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.entity.Player;
 
-import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
-import de.tr7zw.changeme.nbtapi.NBTCompoundList;
-import de.tr7zw.changeme.nbtapi.NBTCompound;
-import de.tr7zw.changeme.nbtapi.NBTItem;
+import io.phanisment.nbtapi.iface.ReadWriteNBT;
+import io.phanisment.nbtapi.NBTCompoundList;
+import io.phanisment.nbtapi.NBTCompound;
+import io.phanisment.nbtapi.NBTItem;
 
 public class AbilityManager {
 	public AbilityManager(Player player) {
