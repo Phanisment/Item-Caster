@@ -19,8 +19,10 @@ jobs:
         cache: maven
     - name: Run Tests with Maven and Capture Logs
       run: |
-        mvn test > test_log.txt 2>&1 || true
+        mvn test 2>&1 | tee test_log.txt || true
       continue-on-error: true 
+    - name: Display Test Log (For Debugging)
+      run: cat test_log.txt
     - name: Send Error Logs to Discord if Tests Fail
       if: failure()
       run: |
