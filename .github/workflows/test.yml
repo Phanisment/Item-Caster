@@ -20,32 +20,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Run Tests with Maven and Capture Logs
-      run: |
-        mvn test 2>&1 | tee test_log.txt || true
-      continue-on-error: true
-    - name: Send Logs to Discord
-      run: |
-        LOG=$(tail -n 40 test_log.txt | sed 's/"/\\"/g' | sed 's/\\/\\\\/g' | sed ':a;N;$!ba;s/\n/\\n/g')
-        METADATA="**Test Log** in repository \`Phanisment/Item-Nbt-Skill-Cast\` at commit \`$(git rev-parse HEAD)\`."
-        FOOTER="Check details [here](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/runs/$(echo $GITHUB_RUN_ID))."
-        METADATA_LENGTH=${#METADATA}
-        FOOTER_LENGTH=${#FOOTER}
-        AVAILABLE_LENGTH=$((2000 - METADATA_LENGTH - FOOTER_LENGTH))
-        LOG=$(echo "$LOG" | head -c $AVAILABLE_LENGTH)
-        PAYLOAD=$(jq -n \
-          --arg description "$METADATA\n\n\`\`\`$LOG\`\`\`" \
-          --arg footer "$FOOTER" \
-          '{
-            embeds: [
-              {
-                title: "Test Log",
-                description: $description,
-                color: 16711680,
-                footer: {
-                  text: $footer
-                }
-              }
-            ]
-          }')
-        echo "$PAYLOAD" | curl -X POST -H "Content-Type: application/json" --data @- ${{ secrets.ERROR_WEBHOOK }}
- 
+      run: mvn test
