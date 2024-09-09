@@ -20,9 +20,6 @@ jobs:
     - name: Run Tests with Maven and Capture Logs
       run: |
         mvn test 2>&1 | tee test_log.txt || true
-    - name: Display Test Log (For Debugging)
-      run: cat test_log.txt
-      continue-on-error: true
     - name: Send Logs to Discord if Tests Fail
       run: |
         LOG=$(tail -n 40 test_log.txt | sed 's/"/\\"/g' | sed 's/\\/\\\\/g' | sed ':a;N;$!ba;s/\n/\\n/g')
@@ -30,6 +27,8 @@ jobs:
         FOOTER="Check details [here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
         METADATA_LENGTH=${#METADATA}
         FOOTER_LENGTH=${#FOOTER}
+        AVAILABLE_LENGTH=$((2000 - METADATA_LENGTH - FOOTER_LENGTH))
+        LOG=$(echo "$LOG" | head -c $AVAILABLE_LENGTH)
         curl -X POST -H "Content-Type: application/json" \
           -d @- <<EOF
         {
@@ -45,4 +44,4 @@ jobs:
           ]
         }
         EOF
-        ${{ secrets.ERROR_WEBHOOK }}
+        ${{ secrets.DISCORD_WEBHOOK_URL }}
