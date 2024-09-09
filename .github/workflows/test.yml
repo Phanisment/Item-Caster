@@ -33,18 +33,17 @@ jobs:
         AVAILABLE_LENGTH=$((2000 - METADATA_LENGTH - FOOTER_LENGTH))
         LOG=$(echo "$LOG" | head -c $AVAILABLE_LENGTH)
         PAYLOAD=$(jq -n \
-          --arg description "$METADATA" \
-          --arg log "\`\`\`$LOG\`\`\`" \
+          --arg description "$METADATA\n\n\`\`\`$LOG\`\`\`" \
           --arg footer "$FOOTER" \
           '{
             embeds: [
               {
                 title: "Test Log",
                 description: $description,
-                fields: [
-                  {name: "Log",value: $log},
-                  {name: "Info",value: $footer}
-                ]
+                color: 16711680,
+                footer: {
+                  text: $footer
+                }
               }
             ]
           }')
