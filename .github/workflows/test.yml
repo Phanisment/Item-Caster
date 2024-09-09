@@ -26,12 +26,23 @@ jobs:
     - name: Send Logs to Discord if Tests Fail
       run: |
         LOG=$(tail -n 40 test_log.txt | sed 's/"/\\"/g' | sed 's/\\/\\\\/g' | sed ':a;N;$!ba;s/\n/\\n/g')
-        METADATA="**Test Log** in repository \`${{ github.repository }}\` at commit \`${{ github.sha }}\`.\n\nLogs:\n\`\`\`"
-        FOOTER="\`\`\`\nCheck details [here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+        METADATA="**Test Log** in repository \`${{ github.repository }}\` at commit \`${{ github.sha }}\`."
+        FOOTER="Check details [here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
         METADATA_LENGTH=${#METADATA}
         FOOTER_LENGTH=${#FOOTER}
-        AVAILABLE_LENGTH=$((2000 - METADATA_LENGTH - FOOTER_LENGTH))
-        LOG=$(echo "$LOG" | head -c $AVAILABLE_LENGTH)
         curl -X POST -H "Content-Type: application/json" \
-          -d "{\"content\": \"$METADATA$LOG$FOOTER\"}" \
+          -d @- <<EOF
+        {
+          "embeds": [
+            {
+              "title": "Test Log",
+              "description": "$METADATA\n\n\`\`\`$LOG\`\`\`",
+              "color": 16711680,
+              "footer": {
+                "text": "$FOOTER"
+              }
+            }
+          ]
+        }
+        EOF
           ${{ secrets.ERROR_WEBHOOK }}
