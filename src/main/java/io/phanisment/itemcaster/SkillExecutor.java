@@ -31,9 +31,9 @@ public class SkillExecutor implements Listener {
 	}
 	
 	public class Manager {
-		public static final String ID;
-		public static final  String TYPE;
-		public static final int TIMER;
+		public final String ID;
+		public final  String TYPE;
+		public final int TIMER;
 		
 		public Manager(ReadWriteNBT ability, Player player) {
 			String id = ability.getString("id");
