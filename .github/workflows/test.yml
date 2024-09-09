@@ -17,5 +17,14 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
-    - name: Run Tests with Maven
-      run: mvn test
+    - name: Run Tests with Maven and Capture Logs
+      run: mvn test > test_log.txt 2>&1 || true
+      continue-on-error: true 
+    - name: Send Error Logs to Discord if Tests Fail
+      if: failure()
+      run: |
+        ERROR_LOG=$(tail -n 40 test_log.txt)
+        ERROR_LOG=$(echo "$ERROR_LOG" | sed 's/"/\\"/g')
+        curl -X POST -H "Content-Type: application/json" \
+          -d "{\"content\": \"**Test failed** in repository \`${{ github.repository }}\` at commit \`${{ github.sha }}\`.\n\nError Logs:\n\`\`\`$ERROR_LOG\`\`\`\nCheck details [here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).\"}" \
+          ${{ secrets.ERROR_WEBHOOK }}
