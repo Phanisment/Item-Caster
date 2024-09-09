@@ -42,18 +42,18 @@ public class SkillExecutor implements Listener {
 		}
 		
 		
-/*public void runSkill() {
-		String id = ability.getString("id");
-		String type = ability.getString("type");
+	/*public void runSkill() {
+			String id = ability.getString("id");
+			String type = ability.getString("type");
 		int timer = ability.getInteger("timer");
-		
-		if (id != null && type != null && timer == null) {
 			
-		} else if (id != null && type == null && timer != null) {
+			if (id != null && type != null && timer == null) {
+				
+			} else if (id != null && type == null && timer != null) {
+				
+			}
 			
-		}
-		
-		player.sendMessage("Id: " + id + ", Type: " + type + ", Timer: " + timer);
+			player.sendMessage("Id: " + id + ", Type: " + type + ", Timer: " + timer);
+		}*/
 	}
-*/
 }
