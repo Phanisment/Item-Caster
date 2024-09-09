@@ -22,18 +22,30 @@ jobs:
     - name: Run Tests with Maven and Capture Logs
       run: |
         mvn test 2>&1 | tee test_log.txt || true
-    - name: Display Test Log (For Debugging)
-      run: cat test_log.txt
       continue-on-error: true
     - name: Send Logs to Discord if Tests Fail
       run: |
         LOG=$(tail -n 40 test_log.txt | sed 's/"/\\"/g' | sed 's/\\/\\\\/g' | sed ':a;N;$!ba;s/\n/\\n/g')
-        METADATA="**Test Log** in repository \`${{ github.repository }}\` at commit \`${{ github.sha }}\`.\n\nLogs:\n\`\`\`"
-        FOOTER="\`\`\`\nCheck details [here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+        METADATA="**Test Log** in repository \`Phanisment/Item-Nbt-Skill-Cast\` at commit \`$(git rev-parse HEAD)\`."
+        FOOTER="Check details [here](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/runs/$(echo $GITHUB_RUN_ID))."
         METADATA_LENGTH=${#METADATA}
         FOOTER_LENGTH=${#FOOTER}
         AVAILABLE_LENGTH=$((2000 - METADATA_LENGTH - FOOTER_LENGTH))
         LOG=$(echo "$LOG" | head -c $AVAILABLE_LENGTH)
-        curl -X POST -H "Content-Type: application/json" \
-          -d "{\"content\": \"$METADATA$LOG$FOOTER\"}" \
-          ${{ secrets.ERROR_WEBHOOK }}
+        PAYLOAD=$(jq -n \
+          --arg description "$METADATA\n\n\`\`\`$LOG\`\`\`" \
+          --arg footer "$FOOTER" \
+          '{
+            embeds: [
+              {
+                title: "Test Log",
+                description: $description,
+                color: 16711680,
+                footer: {
+                  text: $footer
+                }
+              }
+            ]
+          }')
+        echo "$PAYLOAD" | curl -X POST -H "Content-Type: application/json" --data @- ${{ secrets.ERROR_WEBHOOK }}
+ 
