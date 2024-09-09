@@ -6,12 +6,17 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 
+import io.phanisment.itemcaster.SkillManager;
+
 public class SkillExecutor implements Listener {
 	@EventHandler
 	public void onPlayerRightClick(PlayerInteractEvent event) {
 		if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getItem() != null) {
 			Player player = event.getPlayer();
 			SkillManager.runSkill(player, "right_click");
+		} else if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK && event.getItem() != null) {
+			Player player = event.getPlayer();
+			SkillManager.runSkill(player, "left_click");
 		}
 	}
 }
