@@ -28,6 +28,10 @@ jobs:
         LOG=$(tail -n 40 test_log.txt | sed 's/"/\\"/g' | sed 's/\\/\\\\/g' | sed ':a;N;$!ba;s/\n/\\n/g')
         METADATA="**Test Log** in repository \`Phanisment/Item-Nbt-Skill-Cast\` at commit \`$(git rev-parse HEAD)\`."
         FOOTER="Check details [here](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/runs/$(echo $GITHUB_RUN_ID))."
+        METADATA_LENGTH=${#METADATA}
+        FOOTER_LENGTH=${#FOOTER}
+        AVAILABLE_LENGTH=$((2000 - METADATA_LENGTH - FOOTER_LENGTH))
+        LOG=$(echo "$LOG" | head -c $AVAILABLE_LENGTH)
         printf -v FORMATTED_LOG "%s" "$LOG"
         FORMATTED_LOG=$(echo "$FORMATTED_LOG" | sed ':a;N;$!ba;s/\n/\\n/g')
         PAYLOAD=$(jq -n \
