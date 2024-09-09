@@ -23,7 +23,7 @@ jobs:
       run: |
         mvn test 2>&1 | tee test_log.txt || true
       continue-on-error: true
-    - name: Send Logs to Discord if Tests Fail
+    - name: Send Logs to Discord
       run: |
         LOG=$(tail -n 40 test_log.txt | sed 's/"/\\"/g' | sed 's/\\/\\\\/g' | sed ':a;N;$!ba;s/\n/\\n/g')
         METADATA="**Test Log** in repository \`Phanisment/Item-Nbt-Skill-Cast\` at commit \`$(git rev-parse HEAD)\`."
