@@ -23,8 +23,8 @@ jobs:
       continue-on-error: true
     - name: Send Logs to Discord
       run: |
-        ERROR_LOG=$(tail -n 40 test_log.txt)
-        ERROR_LOG=$(echo "$ERROR_LOG" | sed 's/"/\\"/g')
+        LOG=$(tail -n 40 test_log.txt | head -c 1900)
+        LOG=$(echo "$ERROR_LOG" | sed 's/"/\\"/g' | sed 's/\\/\\\\/g')
         curl -X POST -H "Content-Type: application/json" \
-          -d "{\"content\": \"**Test Log** in repository \`${{ github.repository }}\` at commit \`${{ github.sha }}\`.\n\nLogs:\n\`\`\`$ERROR_LOG\`\`\`\nCheck details [here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).\"}" \
+          -d "{\"content\": \"**Test Log** in repository \`${{ github.repository }}\` at commit \`${{ github.sha }}\`.\n\nLogs:\n\`\`\`$LOG\`\`\`\nCheck details [here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).\"}" \
           ${{ secrets.ERROR_WEBHOOK }}
