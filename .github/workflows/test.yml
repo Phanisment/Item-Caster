@@ -26,7 +26,6 @@ jobs:
     - name: Send Logs to Discord
       run: |
         LOG=$(tail -n 40 test_log.txt)
-        LOG=$(echo "$LOG" | sed 's/"/\\"/g' | sed 's/\\/\\\\/g')
         curl -X POST -H "Content-Type: application/json" \
           -d "{\"content\": \"**Test Log** in repository \`${{ github.repository }}\` at commit \`${{ github.sha }}\`.\n\nLogs:\n\`\`\`$LOG\`\`\`\nCheck details [here](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).\"}" \
           ${{ secrets.ERROR_WEBHOOK }}
