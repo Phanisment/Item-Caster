@@ -14,9 +14,6 @@ public class SkillExecutor implements Listener {
 		if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getItem() != null) {
 			Player player = event.getPlayer();
 			SkillManager.runSkill(player, "right_click");
-		} else if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK && event.getItem() != null) {
-			Player player = event.getPlayer();
-			SkillManager.runSkill(player, "left_click");
 		}
 	}
 }
