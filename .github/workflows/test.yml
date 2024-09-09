@@ -24,7 +24,6 @@ jobs:
       run: cat test_log.txt
       continue-on-error: true
     - name: Send Logs to Discord if Tests Fail
-      if: failure()
       run: |
         LOG=$(tail -n 40 test_log.txt | sed 's/"/\\"/g' | sed 's/\\/\\\\/g' | sed ':a;N;$!ba;s/\n/\\n/g')
         METADATA="**Test Log** in repository \`${{ github.repository }}\` at commit \`${{ github.sha }}\`.\n\nLogs:\n\`\`\`"
