@@ -20,7 +20,9 @@ jobs:
     - name: Run Tests with Maven and Capture Logs
       run: |
         mvn test 2>&1 | tee test_log.txt || true
+        echo "BUILD_STATUS=$?" >> $GITHUB_ENV
     - name: Send Logs to Discord if Tests Fail
+      if: env.BUILD_STATUS != 0
       run: |
         LOG=$(tail -n 40 test_log.txt | sed 's/"/\\"/g' | sed 's/\\/\\\\/g' | sed ':a;N;$!ba;s/\n/\\n/g')
         METADATA="**Test Log** in repository \`${{ github.repository }}\` at commit \`${{ github.sha }}\`."
@@ -44,4 +46,4 @@ jobs:
           ]
         }
         EOF
-        ${{ secrets.DISCORD_WEBHOOK_URL }}
+        ${{ secrets.ERROR_WEBHOOK }}
