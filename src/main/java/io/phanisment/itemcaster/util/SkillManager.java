@@ -32,7 +32,7 @@ public class SkillManager {
 	
 	public void activeSkill(Player player, String skill, String type, String event) {
 		Boolean isSame = (type == event) ? true : false;
-		
+
 		if(isSame){
 			MythicMobs.runSkill(skill, player);
 		}
