@@ -18,7 +18,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Run Tests with Maven and Capture Logs
-      run: mvn test > test_log.txt 2>&1 || true
+      run: |
+        mvn test > test_log.txt 2>&1 || true
       continue-on-error: true 
     - name: Send Error Logs to Discord if Tests Fail
       if: failure()
