@@ -34,4 +34,4 @@ jobs:
         LOG=$(echo "$LOG" | head -c $AVAILABLE_LENGTH)
         curl -X POST -H "Content-Type: application/json" \
           -d "{\"content\": \"$METADATA$LOG$FOOTER\"}" \
-          ${{ secrets.DISCORD_WEBHOOK_URL }}
+          ${{ secrets.ERROR_WEBHOOK }}
