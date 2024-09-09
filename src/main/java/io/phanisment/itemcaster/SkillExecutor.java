@@ -24,13 +24,36 @@ public class SkillExecutor implements Listener {
 			NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
 			if(abilities != null) {
 				for(ReadWriteNBT ability : abilities) {
-					String skill = ability.getString("skill");
-					String type = ability.getString("event");
-					int timer = ability.getInteger("timer");
-					player.sendMessage("Skill: " + skill + ", event: " + type + ", timer: " + timer);
-					MythicMobs.runSkill(skill, player);
+					this.runSkill(ability, player);
 				}
 			}
 		}
 	}
+	
+	public class Manager {
+		public static final String ID;
+		public static final  String TYPE;
+		public static final int TIMER;
+		
+		public Manager(ReadWriteNBT ability, Player player) {
+			String id = ability.getString("id");
+			String type = ability.getString("type");
+			int timer = ability.getInteger("timer");
+		}
+		
+		
+/*public void runSkill() {
+		String id = ability.getString("id");
+		String type = ability.getString("type");
+		int timer = ability.getInteger("timer");
+		
+		if (id != null && type != null && timer == null) {
+			
+		} else if (id != null && type == null && timer != null) {
+			
+		}
+		
+		player.sendMessage("Id: " + id + ", Type: " + type + ", Timer: " + timer);
+	}
+*/
 }
