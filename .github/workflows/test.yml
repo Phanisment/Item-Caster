@@ -32,7 +32,7 @@ jobs:
         FORMATTED_LOG=$(echo "$FORMATTED_LOG" | sed ':a;N;$!ba;s/\n/\\n/g')
         PAYLOAD=$(jq -n \
           --arg description "$METADATA" \
-          --arg log "\`\`\`FORMATTED_LOG\`\`\`" \
+          --arg log "\`\`\`$FORMATTED_LOG\`\`\`" \
           --arg footer "$FOOTER" \
           '{
             embeds: [
