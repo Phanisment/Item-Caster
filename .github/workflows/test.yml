@@ -22,7 +22,7 @@ jobs:
         mvn test 2>&1 | tee test_log.txt || true
     - name: Debug Webhook URL
       run: |
-        echo "Webhook URL: ${{ secrets.DISCORD_WEBHOOK_URL }}"
+        echo "Webhook URL: ${{ secrets.ERROR_WEBHOOK }}"
     - name: Send Logs to Discord if Tests Fail
       run: |
         LOG=$(tail -n 40 test_log.txt | sed 's/"/\\"/g' | sed 's/\\/\\\\/g' | sed ':a;N;$!ba;s/\n/\\n/g')
