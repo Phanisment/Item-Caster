@@ -30,7 +30,7 @@ public class SkillExecutor implements Listener {
 		}
 	}
 	
-	public class Manager {
+	/*public class Manager {
 		public final String ID;
 		public final  String TYPE;
 		public final int TIMER;
@@ -42,7 +42,7 @@ public class SkillExecutor implements Listener {
 		}
 		
 		
-	/*public void runSkill() {
+	public void runSkill() {
 			String id = ability.getString("id");
 			String type = ability.getString("type");
 		int timer = ability.getInteger("timer");
@@ -54,6 +54,6 @@ public class SkillExecutor implements Listener {
 			}
 			
 			player.sendMessage("Id: " + id + ", Type: " + type + ", Timer: " + timer);
-		}*/
-	}
+		}
+	}*/
 }
