@@ -31,6 +31,7 @@ jobs:
         METADATA_LENGTH=${#METADATA}
         FOOTER_LENGTH=${#FOOTER}
         AVAILABLE_LENGTH=$((2000 - METADATA_LENGTH - FOOTER_LENGTH))
+        LOG=$(echo "$LOG" | head -c $AVAILABLE_LENGTH)
         PAYLOAD=$(jq -n \
           --arg description "$METADATA" \
           --arg log "\`\`\`$LOG\`\`\`" \
