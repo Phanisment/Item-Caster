@@ -24,7 +24,7 @@ public class SkillExecutor implements Listener {
 			NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
 			if(abilities != null) {
 				for(ReadWriteNBT ability : abilities) {
-					this.runSkill(ability, player);
+					//this.runSkill(ability, player);
 				}
 			}
 		}
