@@ -45,7 +45,7 @@ public class SkillExecutor implements Listener {
 	public void runSkill() {
 			String id = ability.getString("id");
 			String type = ability.getString("type");
-		int timer = ability.getInteger("timer");
+			int timer = ability.getInteger("timer");
 			
 			if (id != null && type != null && timer == null) {
 				
