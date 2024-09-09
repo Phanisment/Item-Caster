@@ -52,7 +52,6 @@ public class SkillExecutor implements Listener {
 			} else if (id != null && type == null && timer != null) {
 				
 			}
-			
 			player.sendMessage("Id: " + id + ", Type: " + type + ", Timer: " + timer);
 		}
 	}*/
