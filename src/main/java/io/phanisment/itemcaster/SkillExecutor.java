@@ -6,7 +6,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 
-import io.phanisment.itemcaster.SkillManager;
+import io.phanisment.itemcaster.util.SkillManager;
 
 public class SkillExecutor implements Listener {
 	@EventHandler
