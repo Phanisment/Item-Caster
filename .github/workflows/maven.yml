@@ -34,4 +34,4 @@ jobs:
       env:
         DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
       with:
-        args: ./target/itemcaster-*.jar
+        args: ./target/ItemCaster-*.jar
