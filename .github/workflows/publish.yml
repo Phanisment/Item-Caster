@@ -33,9 +33,9 @@ jobs:
       - name: Upload to Modrinth
         uses: RubixDev/modrinth-upload@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.MODRINTH_TOKEN }}
           file_path: target/${{ steps.findjar.outputs.jarname }}
-          name: My super cool mod ${{ github.event.release.tag_name }}
+          name: ${{ github.event.release.tag_name }}
           version: ${{ github.event.release.tag_name }}
           changelog: ${{ github.event.release.body }}
           relations: NLuc7Jjh:required
