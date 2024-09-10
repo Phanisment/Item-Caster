@@ -13,7 +13,7 @@ import io.phanisment.itemcaster.MythicMobs;
 import java.util.Optional;
 
 public class SkillManager {
-	public void runSkill(Player player, String event) {
+	public static void runSkill(Player player, String event) {
 		ItemStack item = player.getInventory().getItemInMainHand();
 		NBTItem nbtItem = new NBTItem(item);
 		NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
