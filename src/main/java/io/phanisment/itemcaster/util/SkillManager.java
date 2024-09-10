@@ -11,7 +11,6 @@ import de.tr7zw.changeme.nbtapi.NBTItem;
 
 import io.phanisment.itemcaster.ItemCaster;
 import io.phanisment.itemcaster.MythicMobs;
-import io.phanisment.itemcaster.util.SkillRunnable;
 
 public class SkillManager {
 	private Player player;
@@ -20,6 +19,8 @@ public class SkillManager {
 	public String SKILL;
 	public String ACTION;
 	public Integer TIMER;
+	
+	public (Player player, String event)
 	
 	public SkillManager(Player player, String event) {
 		this.player = player;
