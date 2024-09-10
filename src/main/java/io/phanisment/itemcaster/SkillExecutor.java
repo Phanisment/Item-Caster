@@ -2,6 +2,7 @@ package io.phanisment.itemcaster;
 
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -16,13 +17,6 @@ import org.bukkit.event.block.Action;
 import io.phanisment.itemcaster.util.SkillManager;
 
 public class SkillExecutor implements Listener {
-	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent event) {
-		Player player = event.getPlayer();
-		SkillManager skill = new SkillManager(player, "right_click");
-		skill.runSkill().passiveSkill();
-	}
-	
 	@EventHandler
 	public void onPlayerRightClick(PlayerInteractEvent event) {
 		if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getItem() != null) {
