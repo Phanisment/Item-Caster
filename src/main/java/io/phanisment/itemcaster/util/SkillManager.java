@@ -37,7 +37,7 @@ public class SkillManager {
 			for (ReadWriteNBT ability : abilities) {
 				this.SKILL = ability.getString("skill").toLowerCase();
 				this.ACTION = ability.getString("action").toLowerCase();
-				this.TIMER = ability.getInt("timer");
+				this.TIMER = ability.getInteger("timer");
 			}
 		}
 		return this;
