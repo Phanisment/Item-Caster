@@ -3,13 +3,14 @@ package io.phanisment.itemcaster.util;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-
 import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
 import de.tr7zw.changeme.nbtapi.NBTCompoundList;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 
+import io.phanisment.itemcaster.ItemCaster;
 import io.phanisment.itemcaster.MythicMobs;
+import io.phanisment.itemcaster.util.SkillRunnable;
 
 public class SkillManager {
 	private Player player;
@@ -49,7 +50,7 @@ public class SkillManager {
 	
 	public void passiveSkill() {
 		if (this.event == this.ACTION && this.SKILL != null || this.ACTION != null || this.TIMER != null) {
-			MythicMobs.runSkill(this.SKILL, player);
+			new SkillRunnable(this.player, this.SKILL).runTaskLater(ItemCaster.getPlugin(ItemCaster.class), timer);
 		}
 	}
 }
