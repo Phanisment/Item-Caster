@@ -9,8 +9,6 @@ import io.phanisment.itemcaster.SkillExecutor;
 import io.phanisment.itemcaster.util.SkillManager;
 
 public class ItemCaster extends JavaPlugin {
-	private SkillManager skill;
-	
 	@Override
 	public void onEnable() {
 		getLogger().info("Plugin Installed!");
