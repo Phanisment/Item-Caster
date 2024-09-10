@@ -21,7 +21,7 @@ public class SkillManager {
 				String type = ability.getString("type");
 				int timer = ability.getInteger("timer");
 				
-				if (timer != null) {
+				if (timer != NaN) {
 					if (id != null && type != null) {
 						this.activeSkill(player, skill, type, event);
 					}
