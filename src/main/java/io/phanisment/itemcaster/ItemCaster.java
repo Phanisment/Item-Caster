@@ -15,14 +15,5 @@ public class ItemCaster extends JavaPlugin {
 	public void onEnable() {
 		getLogger().info("Plugin Installed!");
 		getServer().getPluginManager().registerEvents(new SkillExecutor(), this);
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				for (Player player : Bukkit.getOnlinePlayers()) {
-					skill = new SkillManager(player, "timer");
-					skill.runSkill().passiveSkill();
-				}
-			}
-		}.runTaskTimer(this, 0L, 1L);
 	}
 }
