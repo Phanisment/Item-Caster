@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 import io.phanisment.itemcaster.MythicMobs;
 
-public class PassiveSkillHandler extends BukkitRunnable {
+public class SkillRunnable extends BukkitRunnable {
 	private final Player player;
 	private final String SKILL;
 	
