@@ -20,8 +20,6 @@ public class SkillManager {
 	public String ACTION;
 	public Integer TIMER;
 	
-	private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
 	public SkillManager(Player player, String event) {
 		this.player = player;
 		this.event = event;
@@ -50,7 +48,7 @@ public class SkillManager {
 	
 	public void passiveSkill() {
 		if (this.event == this.ACTION && this.SKILL != null || this.ACTION != null || this.TIMER != null) {
-			new SkillRunnable(this.player, this.SKILL).runTaskLater(ItemCaster.getPlugin(ItemCaster.class), timer);
+			new SkillRunnable(this.player, this.SKILL).runTaskLater(ItemCaster.getPlugin(ItemCaster.class), this.TIMER);
 		}
 	}
 }
