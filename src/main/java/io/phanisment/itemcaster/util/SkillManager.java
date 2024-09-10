@@ -20,8 +20,6 @@ public class SkillManager {
 	public String ACTION;
 	public Integer TIMER;
 	
-	public (Player player, String event)
-	
 	public SkillManager(Player player, String event) {
 		this.player = player;
 		this.event = event;
