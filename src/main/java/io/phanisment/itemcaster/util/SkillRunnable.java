@@ -12,7 +12,7 @@ public class SkillRunnable extends BukkitRunnable {
 	
 	public SkillRunnable(Player player, String skill) {
 		this.playe = player;
-		this.SKILL = skill
+		this.SKILL = skill;
 	}
 	
 	@Override
