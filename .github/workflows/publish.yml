@@ -1,43 +1,67 @@
-name: Maven Release
+name: Build and Upload to Release & Modrinth
 
 on:
   release:
-    types: [ published ]
+    types: [published]
 
 jobs:
-  publish:
-    name: Build and Upload JARs
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Set up Java
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: temurin
-      - name: Set maven project ver
-        run: mvn -B versions:set -DnewVersion=${{ github.event.release.tag_name }} -DgenerateBackupPoms=false
-      - name: Build and package Maven project
-        run: mvn clean package
-      - name: Upload to the GitHub release
-        uses: Shopify/upload-to-release@v1
-        with:
-          name: ItemCaster-${{ github.event.release.tag_name }}.jar
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          content-type: application/java-archive
 
-      - name: Upload to Modrinth
-        uses: RubixDev/modrinth-upload@v1
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
-          token: ${{ secrets.MODRINTH_TOKEN }}
-          file_path: target/${{ steps.findjar.outputs.jarname }}
-          name: ${{ github.event.release.tag_name }}
-          version: ${{ github.event.release.tag_name }}
-          changelog: ${{ github.event.release.body }}
-          relations: NLuc7Jjh:required
-          game_versions: 1.20.1
-          release_type: alpha
-          loaders: spigot, bukkit, paper, purpur
-          featured: false 
-          project_id: nyCjVsXk
+          distribution: 'temurin'
+          java-version: 17
+      - name: Set Maven Version to Release Tag
+        run: mvn versions:set -DnewVersion=${{ github.event.release.tag_name }}
+      - name: Build with Maven
+        run: mvn clean package
+      - name: Upload artifact to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: target/ItemCaster-*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload to Modrinth
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        run: |
+          curl -X POST https://api.modrinth.com/v2/version \
+          -H "Authorization: ${{ secrets.MODRINTH_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d @- << EOF
+          {
+            "name": "${{ github.event.release.tag_name }}",
+            "version_number": "${{ github.event.release.tag_name }}",
+            "changelog": "${{ github.event.release.body }}",
+            "game_versions": ["1.20.1"],
+            "version_type": "alpha",
+            "loaders": ["spigot", "paper", "bukkit"],
+            "featured": false,
+            "project_id": "nyCjVsXk",
+            "dependencies" [
+              {
+                "project_id": "NLuc7Jjh",
+                "dependency_type": "required"
+              }
+            ],
+            "file_parts": [
+              "target/ItemCaster-${{ github.event.release.tag_name }}.jar"
+            ],
+            "files": [
+              {
+                "hashes": {
+                  "sha1": "$(sha1sum target/ItemCaster-${{ github.event.release.tag_name }}.jar | awk '{print $1}')"
+                },
+                "url": "https://github.com/${{ github.repository }}/releases/download/${{ github.event.release.tag_name }}/ItemCaster-${{ github.event.release.tag_name }}.jar",
+                "filename": "ItemCaster-${{ github.event.release.tag_name }}.jar",
+                "primary": true
+              }
+            ]
+          }
+          EOF
