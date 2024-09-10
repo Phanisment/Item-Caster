@@ -24,5 +24,4 @@ public class ItemCaster extends JavaPlugin {
 			}
 		}.runTaskTimer(this, 0L, 1L);
 	}
-	}
 }
