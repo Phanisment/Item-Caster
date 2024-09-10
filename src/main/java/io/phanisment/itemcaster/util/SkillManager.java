@@ -20,14 +20,13 @@ public class SkillManager {
 				String skill = ability.getString("skill");
 				String type = ability.getString("type");
 				int timer = ability.getInteger("timer");
+				Optional<int> optimer = Optional.of(timer);
 				
-				if (timer != NaN) {
-					if (id != null && type != null) {
+				optimer.ifPresent(timer -> {
+					if (skill != null && type != null) {
 						this.activeSkill(player, skill, type, event);
 					}
-				//} else {
-					//Passive.runSkill()
-				}
+				});
 			}
 		}
 	}
