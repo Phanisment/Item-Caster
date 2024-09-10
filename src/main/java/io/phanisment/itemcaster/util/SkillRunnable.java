@@ -17,9 +17,6 @@ public class SkillRunnable extends BukkitRunnable {
 	
 	@Override
 	public void run() {
-		ItemStack item = this.player.getInventory().getItemInMainHand();
-		if (item != null) {
-			MythicMobs.runSkill(this.SKILL, this.player);
-		}
+		MythicMobs.runSkill(this.SKILL, this.player);
 	}
 }
