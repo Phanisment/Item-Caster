@@ -49,6 +49,7 @@ public class SkillManager {
 	
 	public void passiveSkill() {
 		if (this.event == this.ACTION && this.SKILL != null || this.ACTION != null || this.TIMER != null) {
+			this.player.sendMessage("Skill:" + this.SKILL + ", Timer:" + this.TIMER)
 			new SkillRunnable(this.player, this.SKILL).runTaskLater(ItemCaster.getPlugin(ItemCaster.class), this.TIMER);
 		}
 	}
