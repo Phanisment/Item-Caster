@@ -45,10 +45,4 @@ public class SkillManager {
 			MythicMobs.runSkill(this.SKILL, player);
 		}
 	}
-	
-	public void passiveSkill() {
-		if (this.event == this.ACTION && this.SKILL != null || this.ACTION != null || this.TIMER != null) {
-			new SkillRunnable(this.player, this.SKILL).runTaskLater(ItemCaster.getPlugin(ItemCaster.class), this.TIMER);
-		}
-	}
 }
