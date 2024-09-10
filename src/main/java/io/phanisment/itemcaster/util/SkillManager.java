@@ -13,30 +13,25 @@ import io.phanisment.itemcaster.MythicMobs;
 import java.util.Optional;
 
 public class SkillManager {
-	
-	public SkillManager(Player player, String event) {
+	public void runSkill(Player player, String event) {
 		ItemStack item = player.getInventory().getItemInMainHand();
 		NBTItem nbtItem = new NBTItem(item);
 		NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
-		if(abilities != null) {
-			for(ReadWriteNBT ability : abilities) {
+		
+		if (abilities != null) {
+			for (ReadWriteNBT ability : abilities) {
 				String skill = ability.getString("skill");
 				String type = ability.getString("type");
+				
+				if (skill != null && type != null) {
+					this.activeSkill(player, skill, type, event);
+				}
 			}
 		}
 	}
-	
-	public void runSkill(Player player, String event) {
-		if (skill != null && type != null) {
-			this.activeSkill(player, skill, type, event);
-		}
-		// Passive Skill.
-	}
-	
-	public void activeSkill(Player player, String skill, String type, String event) {
-		Boolean isSame = (type == event) ? true : false;
 
-		if(isSame){
+	public void activeSkill(Player player, String skill, String type, String event) {
+		if (type.equals(event)) {
 			MythicMobs.runSkill(skill, player);
 		}
 	}
