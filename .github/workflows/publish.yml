@@ -20,18 +20,27 @@ jobs:
         run: mvn -B versions:set -DnewVersion=${{ github.event.release.tag_name }} -DgenerateBackupPoms=false
       - name: Build and package Maven project
         run: mvn clean package
-      - name: Upload to release
-        uses: JasonEtco/upload-to-release@master
-        with:
-          args: target/ItemCaster-${{ github.event.release.tag_name }}.jar application/java-archive
+      - name: Upload to the GitHub release
+        uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
-      - name: Upload to Modrinth
-        uses: cloudnode-pro/modrinth-publish@1.0.0
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          token: '${{ secrets.MODRINTH_TOKEN }}'
-          project: nyCjVsXk
-          file: 'target/ItemCaster-${{ github.event.release.tag_name }}.jar'
-          changelog: '${{ github.event.release.body }}'
-          dependencies: {"project_id": "NLuc7Jjh","dependency_type": "required"}
-          loaders: 'paper, spigot'
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: target/ItemCaster-${{ github.event.release.tag_name }}.jar
+          asset_name: ItemCaster-${{ github.event.release.tag_name }}.jar
+          asset_content_type: application/java-archive
+
+      - name: Upload to Modrinth
+        uses: RubixDev/modrinth-upload@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          file_path: target/${{ steps.findjar.outputs.jarname }}
+          name: My super cool mod ${{ github.event.release.tag_name }}
+          version: ${{ github.event.release.tag_name }}
+          changelog: ${{ github.event.release.body }}
+          relations: NLuc7Jjh:required
+          game_versions: 1.20.1
+          release_type: alpha
+          loaders: spigot, bukkit, paper, purpur
+          featured: false 
+          project_id: nyCjVsXk
