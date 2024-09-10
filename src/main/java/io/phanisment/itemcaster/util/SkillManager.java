@@ -31,8 +31,8 @@ public class SkillManager {
 		NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
 		if (abilities != null) {
 			for (ReadWriteNBT ability : abilities) {
-				this.SKILL = ability.getString("skill").toLowerCase();
-				this.ACTION = ability.getString("action").toLowerCase();
+				this.SKILL = ability.getString("skill");
+				this.ACTION = ability.getString("action");
 				this.TIMER = ability.getInteger("timer");
 			}
 		}
