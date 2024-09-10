@@ -17,14 +17,14 @@ import io.phanisment.itemcaster.util.SkillManager;
 public class SkillExecutor implements Listener {
 	@EventHandler
 	public void onPlayerRightClick(PlayerInteractEvent event) {
-		if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getItem() != null) {
+		if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getItem() != null) {
 			Player player = event.getPlayer();
 			SkillManager skill = new SkillManager(player, "right_click");
-			skill.runSkill();
-		} else if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK && event.getItem() != null) {
+			skill.runSkill().activeSkill();
+		} else if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK && event.getItem() != null) {
 			Player player = event.getPlayer();
 			SkillManager skill = new SkillManager(player, "left_click");
-			skill.runSkill();
+			skill.runSkill().activeSkill();
 		}
 	}
 	
@@ -33,7 +33,7 @@ public class SkillExecutor implements Listener {
 		if (event.getEntity() instanceof Player) {
 			Player player = (Player) event.getEntity();
 			SkillManager skill = new SkillManager(player, "damaged");
-			skill.runSkill();
+			skill.runSkill().activeSkill();
 		}
 	}
 	
@@ -42,23 +42,24 @@ public class SkillExecutor implements Listener {
 		if (event.getDamager() instanceof Player) {
 			Player player = (Player) event.getDamager();
 			SkillManager skill = new SkillManager(player, "attack");
-			skill.runSkill();
+			skill.runSkill().activeSkill();
 		}
 	}
 	
 	@EventHandler
-	public void onPlayerJump(PlayerMoveEvent event) {
+	public void onPlayerMove(PlayerMoveEvent event) {
 		Player player = event.getPlayer();
 		if (player.isOnGround() && event.getTo().getY() > event.getFrom().getY()) {
 			SkillManager skill = new SkillManager(player, "jump");
-			skill.runSkill();
+			skill.runSkill().activeSkill();
 		}
+		
 	}
 	
 	@EventHandler
 	public void onPlayerSneak(PlayerToggleSneakEvent event) {
 		Player player = event.getPlayer();
 		SkillManager skill = new SkillManager(player, "sneak");
-		skill.runSkill();
+		skill.runSkill().activeSkill();
 	}
 }
