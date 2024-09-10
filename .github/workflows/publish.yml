@@ -1,0 +1,37 @@
+name: Maven Release
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  publish:
+    name: Build and Upload JARs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: temurin
+      - name: Set maven project ver
+        run: mvn -B versions:set -DnewVersion=${{ github.event.release.tag_name }} -DgenerateBackupPoms=false
+      - name: Build and package Maven project
+        run: mvn clean package
+      - name: Upload to release
+        uses: JasonEtco/upload-to-release@master
+        with:
+          args: target/ItemCaster-${{ github.event.release.tag_name }}.jar application/java-archive
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      - name: Upload to Modrinth
+        uses: cloudnode-pro/modrinth-publish@1.0.0
+        with:
+          token: '${{ secrets.MODRINTH_TOKEN }}'
+          project: nyCjVsXk
+          file: 'target/ItemCaster-${{ github.event.release.tag_name }}.jar'
+          changelog: '${{ github.event.release.body }}'
+          dependencies: {"project_id": "NLuc7Jjh","dependency_type": "required"}
+          loaders: 'paper, spigot'
