@@ -21,14 +21,9 @@ public class SkillManager {
 			for(ReadWriteNBT ability : abilities) {
 				String skill = ability.getString("skill");
 				String type = ability.getString("type");
-				int timer = ability.getInteger("timer");
-				Optional<int> optimer = Optional.of(timer);
-				
-				optimer.ifPresent(timer -> {
-					if (skill != null && type != null) {
-						this.activeSkill(player, skill, type, event);
-					}
-				});
+				if (skill != null && type != null) {
+					this.activeSkill(player, skill, type, event);
+				}
 			}
 		}
 	}
