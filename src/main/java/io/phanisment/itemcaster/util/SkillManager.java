@@ -10,6 +10,8 @@ import de.tr7zw.changeme.nbtapi.NBTItem;
 
 import io.phanisment.itemcaster.MythicMobs;
 
+import java.util.Optional;
+
 public class SkillManager {
 	public void runSkill(Player player, String event) {
 		ItemStack item = player.getInventory().getItemInMainHand();
