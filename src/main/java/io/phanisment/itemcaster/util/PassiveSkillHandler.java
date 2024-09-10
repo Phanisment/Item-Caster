@@ -9,12 +9,12 @@ import io.phanisment.itemcaster.MythicMobs;
 public class SkillRunnable extends BukkitRunnable {
 	private final Player player;
 	private final String SKILL;
-
+	
 	public SkillRunnable(Player player, String skill) {
 		this.player = player;
 		this.SKILL = skill;
 	}
-
+	
 	@Override
 	public void run() {
 		ItemStack item = this.player.getInventory().getItemInMainHand();
