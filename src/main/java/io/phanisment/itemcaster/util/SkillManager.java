@@ -3,16 +3,13 @@ package io.phanisment.itemcaster.util;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+
 import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
 import de.tr7zw.changeme.nbtapi.NBTCompoundList;
 import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 
 import io.phanisment.itemcaster.MythicMobs;
-
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class SkillManager {
 	private Player player;
@@ -52,11 +49,7 @@ public class SkillManager {
 	
 	public void passiveSkill() {
 		if (this.event == this.ACTION && this.SKILL != null || this.ACTION != null || this.TIMER != null) {
-			long timer = this.TIMER;
-			long delay = timer * 50;
-			scheduler.schedule(() -> {
-				MythicMobs.runSkill(this.SKILL, player);
-			}, delay, TimeUnit.MILLISECONDS);
+			MythicMobs.runSkill(this.SKILL, player);
 		}
 	}
 }
