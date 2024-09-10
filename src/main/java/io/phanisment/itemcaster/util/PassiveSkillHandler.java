@@ -1,5 +1,6 @@
 package io.phanisment.itemcaster.util;
 
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.entity.Player;
 
@@ -16,6 +17,9 @@ public class SkillRunnable extends BukkitRunnable {
 	
 	@Override
 	public void run() {
-		MythicMobs.runSkill(this.SKILL, player);
+		ItemStack item = this.player.getInventory().getItemInMainHand();
+		if (item != null) {
+			MythicMobs.runSkill(this.SKILL, this.player);
+		}
 	}
 }
