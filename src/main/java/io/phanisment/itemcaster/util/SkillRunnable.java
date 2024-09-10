@@ -16,6 +16,7 @@ public class SkillRunnable extends BukkitRunnable {
 	
 	@Override
 	public void run() {
+		this.player.sendMessage("Skill:" + this.SKILL + ", Timer:" + this.TIMER);
 		MythicMobs.runSkill(this.SKILL, this.player);
 	}
 }
