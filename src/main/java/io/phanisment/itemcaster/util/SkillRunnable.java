@@ -11,7 +11,7 @@ public class SkillRunnable extends BukkitRunnable {
 	private final String SKILL;
 	
 	public SkillRunnable(Player player, String skill) {
-		this.playe = player;
+		this.player = player;
 		this.SKILL = skill;
 	}
 	
