@@ -46,16 +46,16 @@ public class SkillManager {
 	public void activeSkill() {
 		if (this.event == this.ACTION && this.SKILL != null || this.ACTION != null || this.TIMER == null) {
 			// Plans i want make is make a custom cooldown.
-			MythicMobs.runSkill();
+			MythicMobs.runSkill(this.SKILL, player);
 		}
 	}
 	
-	public void passiveSkill(Player player) {
+	public void passiveSkill() {
 		if (this.event == this.ACTION && this.SKILL != null || this.ACTION != null || this.TIMER != null) {
 			long timer = this.TIMER;
 			long delay = timer * 50;
 			scheduler.schedule(() -> {
-				MythicMobs.runSkill();
+				MythicMobs.runSkill(this.SKILL, player);
 			}, delay, TimeUnit.MILLISECONDS);
 		}
 	}
