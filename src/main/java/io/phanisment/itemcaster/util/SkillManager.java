@@ -40,7 +40,7 @@ public class SkillManager {
 					this.SKILL = ability.getString("skill");
 					this.ACTION = ability.getString("action");
 					Optional<Integer> timerOpt = Optional.ofNullable(ability.getInteger("timer"));
-					this.TIMER = timerOpt.orElse(1);
+					this.TIMER = timerOpt.orElse(-1);
 				}
 			}
 		}
@@ -48,7 +48,7 @@ public class SkillManager {
 	}
 
 	public void activeSkill() {
-		if (this.event == this.ACTION && this.SKILL != null || this.ACTION != null || this.TIMER == null) {
+		if (this.event == this.ACTION && this.SKILL != null || this.ACTION != null) {
 			// Plans i want make is make a custom cooldown.
 			MythicMobs.runSkill(this.SKILL, player);
 		}
