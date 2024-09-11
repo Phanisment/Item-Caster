@@ -43,7 +43,7 @@ public class SkillManager {
 					this.SKILL = ability.getString("skill");
 					this.ACTION = ability.getString("action");
 					this.TIMER = ability.getInteger("timer");
-					if(this.TIMER == null || this.TIMER <= 0) {
+					if(this.TIMER <= 0) {
 						this.hasTimer = true;
 					}
 					this.hasTimer = false;
