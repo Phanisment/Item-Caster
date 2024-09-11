@@ -53,7 +53,7 @@ public class SkillManager {
 	
 	public void passiveSkill() {
 		skillTimers.putIfAbsent(player, new HashMap<>());
-		int localTimer = skillTimers.get(player).getOrDefault(skill, 0);
+		int cooldown = skillTimers.get(player).getOrDefault(this.SKILL, 0);
 		if (this.Timer > 0 && this.event == "timer" || this.ACTION == null || this.SKILL != null) {
 			cooldown++;
 			if (cooldown >= this.Timer) {
