@@ -32,13 +32,15 @@ public class SkillManager {
 
 	public SkillManager runSkill() {
 		ItemStack item = player.getInventory().getItemInMainHand();
-		NBTItem nbtItem = new NBTItem(item);
-		NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
-		if (abilities != null) {
-			for (ReadWriteNBT ability : abilities) {
-				this.SKILL = ability.getString("skill");
-				this.ACTION = ability.getString("action");
-				this.TIMER = ability.getInteger("timer");
+		if(item != null) {
+			NBTItem nbtItem = new NBTItem(item);
+			NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
+			if (abilities != null) {
+				for (ReadWriteNBT ability : abilities) {
+					this.SKILL = ability.getString("skill");
+					this.ACTION = ability.getString("action");
+					this.TIMER = ability.getInteger("timer");
+				}
 			}
 		}
 		return this;
@@ -54,7 +56,7 @@ public class SkillManager {
 	public void passiveSkill() {
 		skillTimers.putIfAbsent(player, new HashMap<>());
 		int cooldown = skillTimers.get(player).getOrDefault(this.SKILL, 0);
-		if (this.TIMER > 0 && this.event == "timer" || this.ACTION == null || this.SKILL != null) {
+		if (this.TIMER.hasKey("timer") && this.event == "timer" || this.ACTION == null || this.SKILL != null) {
 			cooldown++;
 			if (cooldown >= this.TIMER) {
 				MythicMobs.runSkill(this.SKILL, player);
