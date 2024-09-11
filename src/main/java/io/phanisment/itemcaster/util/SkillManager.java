@@ -35,15 +35,13 @@ public class SkillManager {
 
 	public SkillManager runSkill() {
 		ItemStack item = player.getInventory().getItemInMainHand();
-		if(item.getType() != Material.AIR || item == null) {
-			NBTItem nbtItem = new NBTItem(item);
-			NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
-			if (abilities != null) {
-				for (ReadWriteNBT ability : abilities) {
-					this.SKILL = ability.getString("skill");
-					this.ACTION = ability.getString("action");
-					this.TIMER = ability.getInteger("timer");
-				}
+		NBTItem nbtItem = new NBTItem(item);
+		NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
+		if (abilities != null) {
+			for (ReadWriteNBT ability : abilities) {
+				this.SKILL = ability.getString("skill");
+				this.ACTION = ability.getString("action");
+				this.TIMER = ability.getInteger("timer");
 			}
 		}
 		return this;
