@@ -59,7 +59,7 @@ public class SkillManager {
 			cooldown++;
 			if (cooldown >= this.Timer) {
 				MythicMobs.runSkill(this.SKILL, player);
-			}
+			} 
 			
 			skillTimers.get(player).put(this.SKILL, localTimer);
 		}
