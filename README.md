@@ -4,7 +4,7 @@
 	<a href="https://www.example.com">Donation</a>
 </div>
 
-<div style="height: 10px;"></div>
+<div style="height: 20px;"></div>
 
 ![Title](https://cdn.modrinth.com/data/cached_images/271c6f9e6fc2b79c986d4c35659e59c23a3d0ab3.png)
 
