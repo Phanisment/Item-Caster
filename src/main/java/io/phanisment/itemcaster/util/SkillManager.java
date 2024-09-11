@@ -12,6 +12,9 @@ import de.tr7zw.changeme.nbtapi.NBTItem;
 import io.phanisment.itemcaster.ItemCaster;
 import io.phanisment.itemcaster.MythicMobs;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class SkillManager {
 	private Player player;
 	private String event;
@@ -42,6 +45,12 @@ public class SkillManager {
 	public void activeSkill() {
 		if (this.event == this.ACTION && this.SKILL != null || this.ACTION != null || this.TIMER == null) {
 			// Plans i want make is make a custom cooldown.
+			MythicMobs.runSkill(this.SKILL, player);
+		}
+	}
+	
+	public void passiveSkill() {
+		if (this.Timer > 0 && this.event == "timer" || this.ACTION == null || this.SKILL != null) {
 			MythicMobs.runSkill(this.SKILL, player);
 		}
 	}
