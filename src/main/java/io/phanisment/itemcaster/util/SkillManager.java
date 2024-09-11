@@ -45,11 +45,4 @@ public class SkillManager {
 			MythicMobs.runSkill(this.SKILL, player);
 		}
 	}
-	
-	public void passiveSkill() {
-		if (this.event == this.ACTION && this.SKILL != null || this.ACTION != null || this.TIMER != null) {
-			this.player.sendMessage("Skill:" + this.SKILL + ", Timer:" + this.TIMER);
-			MythicMobs.runSkill(this.SKILL, player);
-		}
-	}
 }
