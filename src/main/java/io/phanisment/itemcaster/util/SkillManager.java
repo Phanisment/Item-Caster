@@ -53,7 +53,7 @@ public class SkillManager {
 	}
 
 	public void activeSkill() {
-		if (this.event == this.ACTION && this.SKILL != null || this.ACTION != null || !this.hasTimer) {
+		if (this.event == this.ACTION && this.SKILL != null && this.ACTION != null && !this.hasTimer) {
 			// Plans i want make is make a custom cooldown.
 			MythicMobs.runSkill(this.SKILL, player);
 		}
@@ -62,7 +62,7 @@ public class SkillManager {
 	public void passiveSkill() {
 		skillTimers.putIfAbsent(player, new HashMap<>());
 		int cooldown = skillTimers.get(player).getOrDefault(this.SKILL, 0);
-		if (this.event == "timer" || this.ACTION == null || this.SKILL != null || this.hasTimer) {
+		if (this.event == "timer" && this.ACTION == null && this.SKILL != null && this.hasTimer) {
 			cooldown++;
 			if (cooldown >= this.TIMER) {
 				MythicMobs.runSkill(this.SKILL, player);
