@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/80b20e43-0d77-45d7-abe6-92b7a8bec43a)<div align="center">
+<div>
 	<a href="https://www.example.com">Discord</a> |
 	<a href="https://www.example.com">GitHub</a> |
 	<a href="https://www.example.com">Donation</a>
