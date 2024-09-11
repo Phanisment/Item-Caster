@@ -25,7 +25,16 @@ public class ItemCaster extends JavaPlugin {
 		
 		getServer().getScheduler().runTaskTimer(this, new PassiveSkill() {
 			for (Player player : Bukkit.getOnlinePlayers()) {
-				
+				ItemStack item = player.getInventory().getItemInMainHand();
+				NBTItem nbtItem = new NBTItem(item);
+				NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
+				if (abilities != null) {
+					for (ReadWriteNBT ability : abilities) {
+						String skill = ability.getString("skill");
+						String action  = ability.getString("action");
+						this.TIMER = ability.getInt("timer");
+					}
+			}
 			}
 		}, 0L, this.Timer);
 }
