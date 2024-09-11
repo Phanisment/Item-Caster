@@ -1,4 +1,4 @@
-<div>
+<div align="center">
 	<a href="https://www.example.com">Discord</a> |
 	<a href="https://www.example.com">GitHub</a> |
 	<a href="https://www.example.com">Donation</a>
