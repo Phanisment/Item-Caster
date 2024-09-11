@@ -24,7 +24,7 @@ public class SkillManager {
 	
 	public String SKILL;
 	public String ACTION;
-	public int TIMER;
+	public Integer TIMER;
 	
 	private Map<Player, Map<String, Integer>> skillTimers = new HashMap<>();
 	
