@@ -54,13 +54,13 @@ public class SkillManager {
 	public void passiveSkill() {
 		skillTimers.putIfAbsent(player, new HashMap<>());
 		int cooldown = skillTimers.get(player).getOrDefault(this.SKILL, 0);
-		if (this.Timer > 0 && this.event == "timer" || this.ACTION == null || this.SKILL != null) {
+		if (this.TIMER > 0 && this.event == "timer" || this.ACTION == null || this.SKILL != null) {
 			cooldown++;
-			if (cooldown >= this.Timer) {
+			if (cooldown >= this.TIMER) {
 				MythicMobs.runSkill(this.SKILL, player);
 			}
 			
-			skillTimers.get(player).put(this.SKILL, localTimer);
+			skillTimers.get(player).put(this.SKILL, cooldown);
 		}
 	}
 }
