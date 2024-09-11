@@ -12,6 +12,7 @@ import de.tr7zw.changeme.nbtapi.NBTItem;
 import io.phanisment.itemcaster.ItemCaster;
 import io.phanisment.itemcaster.MythicMobs;
 
+import java.util.Optional;
 import java.util.HashMap;
 import java.util.Map;
 
