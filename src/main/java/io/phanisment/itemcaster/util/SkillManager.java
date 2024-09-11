@@ -19,6 +19,7 @@ import java.util.Map;
 public class SkillManager {
 	private Player player;
 	private String event;
+	private Boolean hasTimer;
 	
 	public String SKILL;
 	public String ACTION;
@@ -40,8 +41,11 @@ public class SkillManager {
 				for (ReadWriteNBT ability : abilities) {
 					this.SKILL = ability.getString("skill");
 					this.ACTION = ability.getString("action");
-					Optional<Integer> timerOpt = Optional.ofNullable(ability.getInteger("timer"));
-					this.TIMER = timerOpt.orElse(-1);
+					this.TIMER = ability.getInteger("timer");
+					if(this.TIMER == null || this.TIMER <= 0) {
+						this.hasTimer = true;
+					}
+					this.hasTimer = false
 				}
 			}
 		}
@@ -49,7 +53,7 @@ public class SkillManager {
 	}
 
 	public void activeSkill() {
-		if (this.event == this.ACTION && this.SKILL != null || this.ACTION != null) {
+		if (this.event == this.ACTION && this.SKILL != null || this.ACTION != null || !this.hasTimer) {
 			// Plans i want make is make a custom cooldown.
 			MythicMobs.runSkill(this.SKILL, player);
 		}
@@ -58,7 +62,7 @@ public class SkillManager {
 	public void passiveSkill() {
 		skillTimers.putIfAbsent(player, new HashMap<>());
 		int cooldown = skillTimers.get(player).getOrDefault(this.SKILL, 0);
-		if (this.event == "timer" || this.ACTION == null || this.SKILL != null) {
+		if (this.event == "timer" || this.ACTION == null || this.SKILL != null || this.hasTimer) {
 			cooldown++;
 			if (cooldown >= this.TIMER) {
 				MythicMobs.runSkill(this.SKILL, player);
