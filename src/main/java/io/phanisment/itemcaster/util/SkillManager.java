@@ -1,5 +1,6 @@
 package io.phanisment.itemcaster.util;
 
+import org.bukkit.Material;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -34,7 +35,7 @@ public class SkillManager {
 
 	public SkillManager runSkill() {
 		ItemStack item = player.getInventory().getItemInMainHand();
-		if(item != null) {
+		if(item != Material.AIR || item == null) {
 			NBTItem nbtItem = new NBTItem(item);
 			NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
 			if (abilities != null) {
