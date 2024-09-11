@@ -13,57 +13,36 @@ import de.tr7zw.changeme.nbtapi.NBTItem;
 import io.phanisment.itemcaster.ItemCaster;
 import io.phanisment.itemcaster.MythicMobs;
 
-import java.util.Optional;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SkillManager {
-	private Player player;
-	private String event;
-	private Boolean hasTimer;
-	
-	public String SKILL;
-	public String ACTION;
-	public Integer TIMER;
-	
 	private Map<Player, Map<String, Integer>> skillTimers = new HashMap<>();
 	
-	public SkillManager(Player player, String event) {
-		this.player = player;
-		this.event = event;
-	}
-
-	public SkillManager runSkill() {
+	public SkillManager runSkill(Player player, String event) {
 		ItemStack item = player.getInventory().getItemInMainHand();
 		NBTItem nbtItem = new NBTItem(item);
 		NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
 		if (abilities != null) {
 			for (ReadWriteNBT ability : abilities) {
-				this.SKILL = ability.getString("skill");
-				this.ACTION = ability.getString("action");
-				this.TIMER = ability.getInteger("timer");
+				String skill = ability.getString("skill");
+				String action = ability.getString("action");
+				String timer = ability.getInteger("timer");
+				
+				skillTimers.putIfAbsent(player, new HashMap<>());
+				int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
+				
+				if (event == action && skill != null && action != null) {
+					MythicMobs.runSkill(this.SKILL, player);
+				} else if (event == "timer" && action == null && action != null) 
+					cooldown++;
+					if (cooldown >= timer) {
+						MythicMobs.runSkill(skill, player);
+						skillTimers.remove(player);
+					}
+					skillTimers.get(player).put(skill, cooldown);
+				}
 			}
-		}
-		return this;
-	}
-
-	public void activeSkill() {
-		if (this.event == this.ACTION && this.SKILL != null && this.ACTION != null) {
-			// Plans i want make is make a custom cooldown.
-			MythicMobs.runSkill(this.SKILL, player);
-		}
-	}
-	
-	public void passiveSkill() {
-		skillTimers.putIfAbsent(player, new HashMap<>());
-		int cooldown = skillTimers.get(player).getOrDefault(this.SKILL, 0);
-		if (this.event == "timer" && this.ACTION == null && this.SKILL != null && this.TIMER > 0) {
-			cooldown++;
-			if (cooldown >= this.TIMER) {
-				MythicMobs.runSkill(this.SKILL, player);
-			}
-			
-			skillTimers.get(player).put(this.SKILL, cooldown);
 		}
 	}
 }
