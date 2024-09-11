@@ -8,9 +8,4 @@
 ---
 
 
-
-<html>
-	<description>
-		Cast Skill form Plugin <a href="https://www.example.com">MythicMobs</a>, like plugin Mmoitems or MythicCrucible but with less feature for who need Oraxen/ItemsAdder as item management, if oraxen or ItemsAdder has custom nbt modifier mybe you can make item that cast skill with only nbt because focus this plugin is use nbt as data for cast skill.
-	</description>
-</html>
+Cast Skill form Plugin [MythicMobs](https://www.example.com), like plugin Mmoitems or MythicCrucible but with less feature for who need Oraxen/ItemsAdder as item management, if oraxen or ItemsAdder has custom nbt modifier mybe you can make item that cast skill with only nbt because focus this plugin is use nbt as data for cast skill.
