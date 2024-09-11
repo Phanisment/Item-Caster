@@ -18,7 +18,6 @@ import java.util.Map;
 public class SkillManager {
 	private Player player;
 	private String event;
-	private String hasTimer;
 	
 	public String SKILL;
 	public String ACTION;
