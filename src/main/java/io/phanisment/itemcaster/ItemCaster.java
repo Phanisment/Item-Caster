@@ -34,7 +34,8 @@ public class ItemCaster extends JavaPlugin {
 						String action  = ability.getString("action");
 						this.TIMER = ability.getInt("timer");
 					}
-			}
+				}
 			}
 		}, 0L, this.Timer);
+	}
 }
