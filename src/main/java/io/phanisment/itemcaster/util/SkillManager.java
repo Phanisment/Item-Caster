@@ -18,6 +18,7 @@ import java.util.Map;
 public class SkillManager {
 	private Player player;
 	private String event;
+	private String hasTimer;
 	
 	public String SKILL;
 	public String ACTION;
@@ -39,7 +40,7 @@ public class SkillManager {
 				for (ReadWriteNBT ability : abilities) {
 					this.SKILL = ability.getString("skill");
 					this.ACTION = ability.getString("action");
-					this.TIMER = ability.getInteger("timer");
+					this.TIMER = ability.hasKey("timer") ? ability.getInteger("timer") : 1;
 				}
 			}
 		}
@@ -56,7 +57,7 @@ public class SkillManager {
 	public void passiveSkill() {
 		skillTimers.putIfAbsent(player, new HashMap<>());
 		int cooldown = skillTimers.get(player).getOrDefault(this.SKILL, 0);
-		if (this.TIMER.hasKey("timer") && this.event == "timer" || this.ACTION == null || this.SKILL != null) {
+		if (this.event == "timer" || this.ACTION == null || this.SKILL != null) {
 			cooldown++;
 			if (cooldown >= this.TIMER) {
 				MythicMobs.runSkill(this.SKILL, player);
