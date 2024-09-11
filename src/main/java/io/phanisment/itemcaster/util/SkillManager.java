@@ -45,7 +45,7 @@ public class SkillManager {
 					if(this.TIMER == null || this.TIMER <= 0) {
 						this.hasTimer = true;
 					}
-					this.hasTimer = false
+					this.hasTimer = false;
 				}
 			}
 		}
