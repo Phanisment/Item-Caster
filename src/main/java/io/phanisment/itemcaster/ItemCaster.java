@@ -23,6 +23,6 @@ public class ItemCaster extends JavaPlugin {
 					skill.runSkill().activeSkill();
 				}
 			}
-		}.runTaskTimer(plugin, 0L, 1L);
+		}.runTaskTimer(this, 0L, 1L);
 	}
 }
