@@ -21,6 +21,10 @@ public class SkillManager {
 
 	public void runSkill(Player player, String event) {
 		ItemStack item = player.getInventory().getItemInMainHand();
+		if (item == null || item.getType().isAir()) {
+			return;
+		}
+		
 		NBTItem nbtItem = new NBTItem(item);
 		NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
 		if (abilities != null) {
