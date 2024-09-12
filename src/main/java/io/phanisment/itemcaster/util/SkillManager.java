@@ -13,6 +13,7 @@ import de.tr7zw.changeme.nbtapi.NBTItem;
 import io.phanisment.itemcaster.ItemCaster;
 import io.phanisment.itemcaster.MythicMobs;
 
+import java.util.Optional;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,19 +33,22 @@ public class SkillManager {
 				String skill = ability.getString("skill");
 				String action = ability.getString("action");
 				int timer = ability.getInteger("timer");
+				Optional<Integer> optionalTimer = Optional.ofNullable(timer);
 
 				skillTimers.putIfAbsent(player, new HashMap<>());
 				int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
 				try {
 					if (event.equals(action) && skill != null && action != null) {
 						MythicMobs.runSkill(skill, player);
-					} else if (event.equals("timer") && skill != null && action == null && timer >= 1) {
-						cooldown++;
-						if (cooldown >= timer) {
-							MythicMobs.runSkill(skill, player);
-							skillTimers.remove(player);
-						}
-						skillTimers.get(player).put(skill, cooldown);
+					} else if (event.equals("timer") && skill != null && action == null) {
+						optionalTimer.ifPresent(timer -> {
+							cooldown++;
+							if (cooldown >= timer) {
+								MythicMobs.runSkill(skill, player);
+								skillTimers.remove(player);
+							}
+							skillTimers.get(player).put(skill, cooldown);
+						});
 					}
 				} catch (Exception e) {
 					
