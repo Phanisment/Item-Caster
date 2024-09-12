@@ -14,4 +14,4 @@ Cast Skill form Plugin [MythicMobs](https://www.example.com), like plugin [MMOIt
 <h1 style="color:blue">Main Feature</h1>
 - Make datapack can cast Skill.
 - Support Oraxen/ItemsAdder or other plugin that use nbt as modifier item.
-- Flexible for other plugin, maybe will little bit break if 
+- Flexible for other plugin, maybe will little bit break if another plugin using nbt `Abilities` but i will add configuration for that.
