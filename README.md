@@ -15,3 +15,32 @@ Cast Skill form Plugin [MythicMobs](https://www.example.com), like plugin [MMOIt
 - Make datapack can use cast Skill with item.
 - Support Oraxen/ItemsAdder or other plugin that use nbt as modifier item.
 - Flexible for other plugin, maybe will little bit break if another plugin using nbt `Abilities` but i will add configuration for that.
+
+## How to install:
+- Download this plugin in this [Link](https://www.example.com) or Packages below.
+- Open your server panel.
+- Upload or Drag & Drop plugin file to `./plugins`
+
+## How to Use plugin:
+Give command
+
+Lower version of 1.20.4:
+```
+/give @s diamond_sword{ Abilities: [ { skill: "SmashAttack", action: "right_click" }, { skill: "regeneration", timer: 1 } ] }
+```
+
+Json like format
+```
+{
+  Abilities: [
+    {
+      skill: "SmashAttack",
+      action: "right_click"
+    },
+    {
+      skill: "regeneration",
+      timer: 1
+    }
+  ]
+}
+```
