@@ -9,6 +9,7 @@ import io.phanisment.itemcaster.SkillExecutor;
 import io.phanisment.itemcaster.util.SkillManager;
 
 public class ItemCaster extends JavaPlugin {
+	private SkillManager skill = new SkillManager();
 	
 	@Override
 	public void onEnable() {
@@ -19,7 +20,7 @@ public class ItemCaster extends JavaPlugin {
 			@Override
 			public void run() {
 				for (Player player : Bukkit.getOnlinePlayers()) {
-					SkillManager.runSkill(player, "timer");
+					skill.runSkill(player, "timer");
 				}
 			}
 		}.runTaskTimer(this, 0L, 1L);
