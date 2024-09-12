@@ -8,9 +8,15 @@
 ![Title](https://cdn.modrinth.com/data/cached_images/271c6f9e6fc2b79c986d4c35659e59c23a3d0ab3.png)
 
 <div align="center">
-	<img alt="" src=https://img.shields.io/badge/builtbybit-%232D87C3?style=for-the-badge&logo=builtbybit&logoColor=white>
-	<img alt="" src=https://img.shields.io/badge/SpigotMC-%23ED8106?style=for-the-badge&logo=spigotmc&logoColor=white>
-	<img alt="" src=https://img.shields.io/badge/Modrinth-%2300AF5C?style=for-the-badge&logo=modrinth&logoColor=white>
+	<a href="">
+		<img alt="" src=https://img.shields.io/badge/builtbybit-%232D87C3?style=for-the-badge&logo=builtbybit&logoColor=white>
+	</a>
+	<a href="">
+		<img alt="" src=https://img.shields.io/badge/SpigotMC-%23ED8106?style=for-the-badge&logo=spigotmc&logoColor=white>
+	</a>
+	<a href="">
+		<img alt="" src=https://img.shields.io/badge/Modrinth-%2300AF5C?style=for-the-badge&logo=modrinth&logoColor=white>
+	</a>
 </div>
 
 ---
