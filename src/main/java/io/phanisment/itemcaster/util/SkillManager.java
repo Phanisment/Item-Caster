@@ -27,7 +27,7 @@ public class SkillManager {
 			for (ReadWriteNBT ability : abilities) {
 				String skill = ability.getString("skill");
 				String action = ability.getString("action");
-				String timer = ability.getInteger("timer");
+				int timer = ability.getInteger("timer");
 				
 				skillTimers.putIfAbsent(player, new HashMap<>());
 				int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
