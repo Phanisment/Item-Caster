@@ -19,7 +19,8 @@ Cast Skill form Plugin [MythicMobs](https://www.example.com), like plugin [MMOIt
 - SpigotMC
 - BuiltbyBit
 
-Ini adalah teks dengan logo ![Logo](logo.png) <img src="https://simpleicons.org/icons/modrinth.svg" alt="Logo" style="height: 1em; vertical-align: middle;"> di sebelahnya.
+Ini adalah teks dengan logo <svg xmlns="https://simpleicons.org/icons/modrinth.svg" width="1em" height="1em" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/></svg> di sebelahnya.
+
 
 
 
