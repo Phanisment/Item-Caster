@@ -27,10 +27,10 @@ public class SkillManager {
 			for (ReadWriteNBT ability : abilities) {
 				String skill = ability.getString("skill");
 				String action = ability.getString("action");
-				int timer = ability.getInteger("timer");
+				Integer timer = ability.getInteger("timer");
 
 				skillTimers.putIfAbsent(player, new HashMap<>());
-				int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
+				Integer cooldown = skillTimers.get(player).getOrDefault(skill, 0);
 
 				if (event == action && skill != null && action == null) {
 					MythicMobs.runSkill(skill, player);
