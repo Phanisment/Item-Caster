@@ -1,7 +1,7 @@
 <div align="center">
-	<a href="https://www.example.com">Discord</a> |
+	<a href="https://discord.gg/grJCgRHKvg">Discord</a> |
 	<a href="https://github.com/Phanisment/Item-Nbt-Skill-Cast">GitHub</a> |
-	<a href="https://www.example.com">Donation</a>
+	<a href="https://buymeacoffee.com/Phanisment">Donation</a>
 	<p>&nbsp;</p>
 </div>
 
