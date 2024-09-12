@@ -38,12 +38,15 @@ public class SkillManager {
 				if (event.equals(action) && skill != null && action != null) {
 					MythicMobs.runSkill(skill, player);
 				} else if (event.equals("timer") && skill != null && action == null) {
+					player.sendMessage("If condition pass")
 					optionalTimer.ifPresent(data -> {
+						player.sendMessage("Nbt timer is set, pass, data value:" + data)
 						skillTimers.putIfAbsent(player, new HashMap<>());
 						int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
 						
 						cooldown++;
 						if (cooldown >= timer) {
+							player.sendMessage("Cast skill and done")
 							MythicMobs.runSkill(skill, player);
 							skillTimers.remove(player);
 						}
