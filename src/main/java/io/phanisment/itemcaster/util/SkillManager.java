@@ -34,7 +34,7 @@ public class SkillManager {
 				
 				if (event == action && skill != null && action != null) {
 					MythicMobs.runSkill(skill, player);
-				} else if (event == "timer" && action == null && action != null) 
+				} else if (event == "timer" && skill != null && action == null) 
 					cooldown++;
 					if (cooldown >= timer) {
 						MythicMobs.runSkill(skill, player);
