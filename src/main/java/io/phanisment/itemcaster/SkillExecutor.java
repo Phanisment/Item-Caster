@@ -12,7 +12,7 @@ import io.phanisment.itemcaster.util.SkillManager;
 
 public class SkillExecutor implements Listener {
 	private SkillManager skill = new SkillManager();
-	
+
 	@EventHandler
 	public void onPlayerRightClick(PlayerInteractEvent event) {
 		if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getItem() != null) {
