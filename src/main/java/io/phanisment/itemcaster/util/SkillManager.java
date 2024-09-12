@@ -41,7 +41,6 @@ public class SkillManager {
 						skillTimers.remove(player);
 					}
 					skillTimers.get(player).put(skill, cooldown);
-				}
 			}
 		}
 	}
