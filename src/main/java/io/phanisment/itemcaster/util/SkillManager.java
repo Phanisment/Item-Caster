@@ -43,7 +43,7 @@ public class SkillManager {
 						int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
 						
 						cooldown++;
-						if (cooldown >= data) {
+						if (cooldown >= timer) {
 							MythicMobs.runSkill(skill, player);
 							skillTimers.remove(player);
 						}
