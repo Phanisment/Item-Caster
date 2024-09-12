@@ -19,6 +19,11 @@ Cast Skill form Plugin [MythicMobs](https://www.example.com), like plugin [MMOIt
 - SpigotMC
 - BuiltbyBit
 
+<p style="display: inline-block; background: url('https://simpleicons.org/icons/modrinth.svg') no-repeat left center; padding-left: 20px; background-size: 1em;">
+  Ini adalah teks dengan logo di sebelahnya.
+</p>
+
+
 ## Main Feature:
 - Make datapack can use cast Skill with item.
 - Support Oraxen/ItemsAdder or other plugin that use nbt as modifier item.
