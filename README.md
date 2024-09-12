@@ -75,7 +75,7 @@ In basic MMOItems or MythicCrucible you use condition skill on mythicmobs, but m
 ### Oraxen/ItemsaAdder support
 
 ## Contribution:
-If someone contribute in this project i will very heppy for that.. To contribute:
+If someone contribute in this project i will very heppy for that. To contribute:
 1. Fork this project.
 2. Create new branch for your code changes.
 3. Submit pull request with clear description of the changes.
