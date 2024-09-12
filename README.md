@@ -15,7 +15,7 @@
 
 ---
 
-[![Java CI with Maven](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/maven.yml/badge.svg)](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/maven.yml)
+[![Java CI with Maven](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/maven.yml/badge.svg)](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/maven.yml) [![Test Code](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/test.yml/badge.svg)](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/test.yml)
 
 > [!warning]
 > This plugin is in development, if you use this plugin now the risk is on you.
