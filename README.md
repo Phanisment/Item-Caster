@@ -82,10 +82,3 @@ If someone contribute in this project i will very heppy for that. To contribute:
 
 ## Social
 If you have questions or suggestions just tag me on discord, im always online on discord(if im not busy).
-
----
-
-<div align="center">
-	<a href="https://discord.gg/grJCgRHKvg"><img alt="" src="https://img.shields.io/badge/Discord-%235865F2?style=for-the-badge&logo=discord&logoColor=white"></a>
-	<a href="https://buymeacoffee.com/Phanisment"><img alt="" src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black"></a>
-</div>
