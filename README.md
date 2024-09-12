@@ -31,7 +31,7 @@ Cast Skill form Plugin [MythicMobs](https://www.example.com), like plugin [MMOIt
 - Open your server panel.
 - Upload or Drag & Drop plugin file to `./plugins`.
 - Install plugin MythicMobs in your server.
-- Start server
+- Start the server
 
 ## How to Use plugin:
 ### In-game Nbt
