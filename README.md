@@ -10,7 +10,7 @@
 ---
 
 > [!warning]
-> A
+> This plugin is in development, if you use this plugin now the risk is on you.
 
 Cast Skill form Plugin [MythicMobs](https://www.example.com), like plugin [MMOItems](https://www.example.com) or [MythicCrucible](https://www.example.com) but with less feature for who need Oraxen/ItemsAdder as item management, if oraxen or ItemsAdder has custom nbt modifier mybe you can make item that cast skill with only nbt because focus this plugin is use nbt as data for cast skill.
 
