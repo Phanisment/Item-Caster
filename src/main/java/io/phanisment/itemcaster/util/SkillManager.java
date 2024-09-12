@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class SkillManager {
 	private static Map<Player, Map<String, Integer>> skillTimers = new HashMap<>();
-	
+
 	public void runSkill(Player player, String event) {
 		ItemStack item = player.getInventory().getItemInMainHand();
 		NBTItem nbtItem = new NBTItem(item);
@@ -28,10 +28,10 @@ public class SkillManager {
 				String skill = ability.getString("skill");
 				String action = ability.getString("action");
 				int timer = ability.getInteger("timer");
-				
+
 				skillTimers.putIfAbsent(player, new HashMap<>());
 				int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
-				
+
 				if (event == action && skill != null && action != null) {
 					MythicMobs.runSkill(skill, player);
 				} else if (event == "timer" && skill != null && action == null) 
