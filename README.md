@@ -86,6 +86,6 @@ If you have questions or suggestions just tag me on discord, im always online on
 ---
 
 <div align="center">
-	<img href="https://discord.gg/grJCgRHKvg" alt="" src="https://img.shields.io/badge/Discord-%235865F2?style=for-the-badge&logo=discord&logoColor=white">
-	<img href="https://buymeacoffee.com/Phanisment" alt="" src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black">
+	<p href="https://discord.gg/grJCgRHKvg"><img alt="" src="https://img.shields.io/badge/Discord-%235865F2?style=for-the-badge&logo=discord&logoColor=white"></p>
+	<p href="https://buymeacoffee.com/Phanisment"><img alt="" src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black"></p>
 </div>
