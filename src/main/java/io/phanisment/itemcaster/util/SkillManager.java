@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SkillManager {
-	private final Map<Player, Map<String, Integer>> skillTimers = new HashMap<>();
+	private Map<Player, Map<String, Integer>> skillTimers = new HashMap<>();
 	
 	public void runSkill(Player player, String event) {
 		ItemStack item = player.getInventory().getItemInMainHand();
