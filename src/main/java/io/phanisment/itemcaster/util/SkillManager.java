@@ -39,6 +39,9 @@ public class SkillManager {
 					MythicMobs.runSkill(skill, player);
 				} else if (event.equals("timer") && skill != null && action == null) {
 					optionalTimer.ifPresent(data -> {
+						skillTimers.putIfAbsent(player, new HashMap<>());
+						int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
+						
 						cooldown++;
 						if (cooldown >= data) {
 							MythicMobs.runSkill(skill, player);
