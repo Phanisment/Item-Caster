@@ -30,7 +30,7 @@ Lower version of 1.20.4:
 ```
 
 Json like format
-```
+```json
 {
   Abilities: [
     {
