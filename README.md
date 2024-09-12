@@ -22,7 +22,7 @@ Cast Skill form Plugin [MythicMobs](https://www.example.com), like plugin [MMOIt
 - Upload or Drag & Drop plugin file to `./plugins`
 
 ## How to Use plugin:
-Give command
+### In-game Nbt
 
 Lower version of 1.20.4:
 ```
@@ -44,3 +44,11 @@ Json like format
   ]
 }
 ```
+
+### Nbt Format
+
+### Action/Event activator skill
+
+### Condition skill
+
+### Oraxen/ItemsaAdder support
