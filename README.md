@@ -11,7 +11,7 @@
 
 Cast Skill form Plugin [MythicMobs](https://www.example.com), like plugin [MMOItems](https://www.example.com) or [MythicCrucible](https://www.example.com) but with less feature for who need Oraxen/ItemsAdder as item management, if oraxen or ItemsAdder has custom nbt modifier mybe you can make item that cast skill with only nbt because focus this plugin is use nbt as data for cast skill.
 
-<h1 style="color:blue">Main Feature</h1>
-- Make datapack can cast Skill.
+## Main Feature:
+- Make datapack can use cast Skill with item.
 - Support Oraxen/ItemsAdder or other plugin that use nbt as modifier item.
 - Flexible for other plugin, maybe will little bit break if another plugin using nbt `Abilities` but i will add configuration for that.
