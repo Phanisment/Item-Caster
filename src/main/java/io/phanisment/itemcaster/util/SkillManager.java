@@ -40,7 +40,7 @@ public class SkillManager {
 				} else if (event.equals("timer") && skill != null && action == null) {
 					player.sendMessage("If condition pass")
 					optionalTimer.ifPresent(data -> {
-						player.sendMessage("Nbt timer is set, pass, data value:" + data)
+						player.sendMessage("Nbt timer is set, pass, data value:" + data + ", timer value:" + timer)
 						skillTimers.putIfAbsent(player, new HashMap<>());
 						int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
 						
