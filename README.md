@@ -36,7 +36,7 @@ Cast Skill form Plugin [MythicMobs](https://www.example.com), like plugin [MMOIt
 ## How to Use plugin:
 ### In-game Nbt
 
-Lower version of 1.20.4:
+1.20.4 Lower Version:
 ```
 /give @s diamond_sword{ Abilities: [ { skill: "SmashAttack", action: "right_click" }, { skill: "regeneration", timer: 1 } ] }
 ```
