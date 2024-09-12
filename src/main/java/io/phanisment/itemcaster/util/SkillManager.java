@@ -17,9 +17,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SkillManager {
-	private Map<Player, Map<String, Integer>> skillTimers = new HashMap<>();
+	private static Map<Player, Map<String, Integer>> skillTimers = new HashMap<>();
 	
-	public static void runSkill(Player player, String event) {
+	public void runSkill(Player player, String event) {
 		ItemStack item = player.getInventory().getItemInMainHand();
 		NBTItem nbtItem = new NBTItem(item);
 		NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
