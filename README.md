@@ -77,3 +77,12 @@ Im very welcome contributions from everyone. To contribute:
 1. Fork this project.
 2. Create new branch for your code changes.
 3. Submit pull request with clear description of the changes.
+
+## Social
+If you have questions or suggestions just tag me on discord, im always online on discord(if im not busy).
+
+---
+
+<div align="center">
+	<img alt="" src="https://img.shields.io/badge/Discord-%235865F2?style=for-the-badge&logo=discord&logoColor=white">
+</div>
