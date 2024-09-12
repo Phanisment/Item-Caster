@@ -46,6 +46,8 @@ public class SkillManager {
 						}
 						skillTimers.get(player).put(skill, cooldown);
 					}
+				} catch (Exception e) {
+					
 				}
 			}
 		}
