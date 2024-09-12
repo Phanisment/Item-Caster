@@ -10,18 +10,18 @@ import io.phanisment.itemcaster.util.SkillManager;
 
 public class ItemCaster extends JavaPlugin {
 	private SkillManager skill = new SkillManager();
-	
+
 	@Override
 	public void onEnable() {
-		if (!getServer().getPluginManager().getPlugin("MythicMobs").isEnabled()) {
+		if (getServer().getPluginManager().getPlugin("MythicMobs").isEnabled() == null) {
 			getLogger().warning("Can't find plugin MythicMobs, install Mythicmobs for enable this Plugin");
 			getServer().getPluginManager().disablePlugin(this);
 			return;
 		}
-		
+
 		getLogger().info("Plugin Installed!");
 		getServer().getPluginManager().registerEvents(new SkillExecutor(), this);
-		
+
 		new BukkitRunnable() {
 			@Override
 			public void run() {
