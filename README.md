@@ -29,7 +29,7 @@ Cast Skill form Plugin [MythicMobs](https://www.example.com), like plugin [MMOIt
 ## How to install:
 - Download this plugin in this [Link](https://www.example.com) or Packages below.
 - Open your server panel.
-- Upload or Drag & Drop plugin file to `./plugins`
+- Upload or Drag & Drop plugin file to `./plugins`.
 - Install plugin MythicMobs in your server.
 - Start server
 
