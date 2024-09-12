@@ -21,13 +21,13 @@
 
 ---
 
-[![Java CI with Maven](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/maven.yml/badge.svg)](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/maven.yml) [![Test Code](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/test.yml/badge.svg)](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/test.yml)
+[![Java CI with Maven](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/maven.yml/badge.svg)](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/maven.yml)
+[![Test Code](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/test.yml/badge.svg)](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/test.yml)
 
 > [!warning]
 > This plugin is in development, if you use this plugin now the risk is on you.
 
 Cast Skill form Plugin [MythicMobs](https://www.example.com), like plugin [MMOItems](https://www.example.com) or [MythicCrucible](https://www.example.com) but with less feature for who need Oraxen/ItemsAdder as item management, if oraxen or ItemsAdder has custom nbt modifier mybe you can make item that cast skill with only nbt because focus this plugin is use nbt as data for cast skill.
-
 
 ## Main Feature:
 - Make datapack can Cast Skill with item.
