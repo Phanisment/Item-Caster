@@ -63,6 +63,7 @@ Cast Skill form Plugin MythicMobs, like plugin MMOItems or MythicCrucible but wi
 
 </details>
 
+
 ### Nbt Format
 - `{skill:"<Skill ID>"}`
 Id skill on MythicMobs
@@ -109,6 +110,7 @@ items:
       model_path: excalibur_model/excalibur_sword
 ```
 
+</details>
 
 ## Contribution:
 If someone contribute in this project i will very heppy for that. To contribute:
