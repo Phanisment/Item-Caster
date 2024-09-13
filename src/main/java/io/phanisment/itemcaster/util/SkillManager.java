@@ -58,14 +58,15 @@ public class SkillManager {
 		Optional<Integer> optionalTimer = Optional.ofNullable(timer);
 		optionalTimer.ifPresent(data -> {
 			skillTimers.putIfAbsent(player, new HashMap<>());
-			int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
-
-			cooldown++;
-			if (cooldown >= data) {
+			Map<String, Integer> playerSkills = skillTimers.get(player);
+			
+			int cooldown = playerSkills.getOrDefault(skill, timer);
+			
+			if (cooldown <= 0) {
 				MythicMobs.runSkill(skill, player);
-				skillTimers.remove(player);
+				playerSkills.put(skill, timer);
 			} else {
-				skillTimers.get(player).put(skill, cooldown);
+				playerSkills.put(skill, cooldown - 1);
 			}
 		});
 	}
