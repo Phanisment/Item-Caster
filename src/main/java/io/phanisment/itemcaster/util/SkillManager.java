@@ -45,7 +45,7 @@ public class SkillManager {
 							int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
 							
 							cooldown++;
-							if (cooldown >= timer) {
+							if (cooldown >= data) {
 								player.sendMessage("Cast skill and done");
 								MythicMobs.runSkill(skill, player);
 								skillTimers.remove(player);
