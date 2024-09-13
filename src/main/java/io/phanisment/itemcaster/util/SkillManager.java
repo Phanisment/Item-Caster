@@ -35,9 +35,9 @@ public class SkillManager {
 				int timer = ability.getInteger("timer");
 				Optional<Integer> optionalTimer = Optional.ofNullable(timer);
 				try {
-					if (event.equals(action) && skill != null && action != null || action.trim().isEmpty()) {
+					if (event.equals(action) && skill != null && timer == 0 && action != null || action.trim().isEmpty()) {
 						MythicMobs.runSkill(skill, player);
-					} else if (event.equals("timer") && skill != null && action == null || action.trim().isEmpty()) {
+					} else if (event.equals("timer") && skill != null && timer != 0 && action == null || action.trim().isEmpty()) {
 						player.sendMessage("If condition pass");
 						optionalTimer.ifPresent(data -> {
 							player.sendMessage("Nbt timer is set, pass, data value:" + data + ", timer value:" + timer);
