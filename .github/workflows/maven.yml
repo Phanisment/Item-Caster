@@ -20,8 +20,8 @@ jobs:
       run: |
         VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
         BUILD_VERSION=${{ github.run_number }}
-        JAR_FILE=$(ls target/ItemNbtCaster-*.jar)
-        mv $JAR_FILE target/ItemNbtCaster-${VERSION}.${BUILD_VERSION}.jar
+        JAR_FILE=$(ls target/ItemSkillCaster-*.jar)
+        mv $JAR_FILE target/ItemSkillCaster-${VERSION}.${BUILD_VERSION}.jar
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
