@@ -95,6 +95,20 @@ In basic MMOItems or MythicCrucible you use condition skill on mythicmobs, but m
 
 
 ### Oraxen/ItemsaAdder support
+<details open>
+	<summary>ItemsAdder</summary>
+
+```yml
+items:
+  Exalibur:
+    display_name: "Exalibur"
+    nbt: '{Abilities:[{skill:"SmashAttack",timer:20},{skill:"SummonSkeletons",action:"right_click"}]}'
+    resource:
+      material: DIAMOND_SWORD
+      generate: false
+      model_path: excalibur_model/excalibur_sword
+```
+
 
 ## Contribution:
 If someone contribute in this project i will very heppy for that. To contribute:
