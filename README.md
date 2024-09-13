@@ -67,7 +67,7 @@ Cast Skill form Plugin MythicMobs, like plugin MMOItems or MythicCrucible but wi
 - `{skill:"<Skill ID>"}`
 > Id skill on MythicMobs
 
-- `{action:"<Event>"}``
+- `{action:"<Event>"}`
 > Skill Executor
 > Event for now, Next update i will add more than this.
 > right_click
