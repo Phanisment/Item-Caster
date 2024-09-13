@@ -67,6 +67,7 @@ public class SkillManager {
 				playerSkills.put(skill, timer);
 			} else {
 				playerSkills.put(skill, cooldown - 1);
+				player.sendMessage(cooldown)
 			}
 		});
 	}
