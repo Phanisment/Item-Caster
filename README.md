@@ -9,10 +9,10 @@
 
 <div align="center">
 	<a href="">
-		<img alt="" src=https://img.shields.io/badge/SpigotMC-%23ED8106?style=for-the-badge&logo=spigotmc&logoColor=white>
+		<img alt="SpigotMC" src=https://img.shields.io/badge/SpigotMC-%23ED8106?style=for-the-badge&logo=spigotmc&logoColor=white>
 	</a>
 	<a href="https://modrinth.com/project/item-caster">
-		<img alt="" src=https://img.shields.io/badge/Modrinth-%2300AF5C?style=for-the-badge&logo=modrinth&logoColor=white>
+		<img alt="Modrinth" src=https://img.shields.io/badge/Modrinth-%2300AF5C?style=for-the-badge&logo=modrinth&logoColor=white>
 	</a>
 </div>
 
@@ -76,5 +76,5 @@ If someone contribute in this project i will very heppy for that. To contribute:
 2. Create new branch for your code changes.
 3. Submit pull request with clear description of the changes.
 
-## Social
+## Credits
 If you have questions or suggestions just tag me on discord, im always online on discord(if im not busy).
