@@ -36,6 +36,7 @@ public class SkillManager {
 				try {
 					if (event.equals(action) && skill != null && timer == 0 && action != null || action.trim().isEmpty()) {
 						MythicMobs.runSkill(skill, player);
+					
 					} else if (event.equals("timer") && skill != null && timer != 0 && action == null || action.trim().isEmpty()) {
 						optionalTimer.ifPresent(data -> {
 							skillTimers.putIfAbsent(player, new HashMap<>());
