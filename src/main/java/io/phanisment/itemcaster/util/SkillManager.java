@@ -38,17 +38,15 @@ public class SkillManager {
 						MythicMobs.runSkill(skill, player);
 					
 					} else if (event.equals("timer") && skill != null && timer != 0 && action == null || action.trim().isEmpty()) {
-						optionalTimer.ifPresent(data -> {
-							skillTimers.putIfAbsent(player, new HashMap<>());
-							int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
-							
-							cooldown++;
-							if (cooldown >= timer) {
-								MythicMobs.runSkill(skill, player);
-								skillTimers.remove(player);
-							}
-							skillTimers.get(player).put(skill, cooldown);
-						});
+						skillTimers.putIfAbsent(player, new HashMap<>());
+						int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
+						
+						cooldown++;
+						if (cooldown >= timer) {
+							MythicMobs.runSkill(skill, player);
+							skillTimers.remove(player);
+						}
+						skillTimers.get(player).put(skill, cooldown);
 					}
 				} catch (Exception e) {
 					
