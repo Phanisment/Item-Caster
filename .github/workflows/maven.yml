@@ -22,8 +22,16 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: Get build version
+      id: get_build_version
+      run: echo "BUILD_VERSION=($GITHUB_RUN_NUMBER)" >> $GITHUB_ENV
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      
+    - name: Rename the build artifact
+      run: |
+        JAR_FILE=$(ls target/ItemNbtCaster-*.jar)
+        mv $JAR_FILE target/ItemNbtCaster-0.1.${{ env.BUILD_VERSION }}.jar
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
