@@ -11,7 +11,6 @@
 	<a href="">
 		<img alt="" src=https://img.shields.io/badge/SpigotMC-%23ED8106?style=for-the-badge&logo=spigotmc&logoColor=white>
 	</a>
-	
 	<a href="https://modrinth.com/project/item-caster">
 		<img alt="" src=https://img.shields.io/badge/Modrinth-%2300AF5C?style=for-the-badge&logo=modrinth&logoColor=white>
 	</a>
