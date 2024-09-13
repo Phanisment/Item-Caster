@@ -34,24 +34,27 @@ public class SkillManager {
 				String action = ability.getString("action");
 				int timer = ability.getInteger("timer");
 				Optional<Integer> optionalTimer = Optional.ofNullable(timer);
-				player.sendMessage("Skill:" + skill + ", Action:" + action + ", Timer:" + timer + ", Event:" + event);
-				if (event.equals(action) && skill != null && action != null) {
-					MythicMobs.runSkill(skill, player);
-				} else if (event.equals("timer") && skill != null && action == null) {
-					player.sendMessage("If condition pass");
-					optionalTimer.ifPresent(data -> {
-						player.sendMessage("Nbt timer is set, pass, data value:" + data + ", timer value:" + timer);
-						skillTimers.putIfAbsent(player, new HashMap<>());
-						int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
-						
-						cooldown++;
-						if (cooldown >= timer) {
-							player.sendMessage("Cast skill and done");
-							MythicMobs.runSkill(skill, player);
-							skillTimers.remove(player);
-						}
-						skillTimers.get(player).put(skill, cooldown);
-					});
+				try {
+					if (event.equals(action) && skill != null && action != null || action.trim().isEmpty()) {
+						MythicMobs.runSkill(skill, player);
+					} else if (event.equals("timer") && skill != null && action == null || action.trim().isEmpty()) {
+						player.sendMessage("If condition pass");
+						optionalTimer.ifPresent(data -> {
+							player.sendMessage("Nbt timer is set, pass, data value:" + data + ", timer value:" + timer);
+							skillTimers.putIfAbsent(player, new HashMap<>());
+							int cooldown = skillTimers.get(player).getOrDefault(skill, 0);
+							
+							cooldown++;
+							if (cooldown >= timer) {
+								player.sendMessage("Cast skill and done");
+								MythicMobs.runSkill(skill, player);
+								skillTimers.remove(player);
+							}
+							skillTimers.get(player).put(skill, cooldown);
+						});
+					}
+				} catch (Exception e) {
+					
 				}
 			}
 		}
