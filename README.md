@@ -64,6 +64,18 @@ Cast Skill form Plugin MythicMobs, like plugin MMOItems or MythicCrucible but wi
 </details>
 
 ### Nbt Format
+- `{skill:"<Skill ID>"}`
+> Id skill on MythicMobs
+
+- `{action:"<Event>"}``
+> Skill Executor
+> Event for now, Next update i will add more than this.
+> right_click
+> left_click
+
+- `{timer:<Delay>}`
+> Will Cast Skill while player hold item with nbt skill
+
 
 ### Action/Event activator skill
 
