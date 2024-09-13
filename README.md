@@ -79,6 +79,12 @@ Will Cast Skill while player hold item with nbt skill
 
 ### Action/Event activator skill
 
+|Events|Descriptions|
+|---|---|
+|`right_click`|Cast skill when right click|
+|`left_click`|Cast skill when left click|
+
+
 ### Condition nbt
 In basic MMOItems or MythicCrucible you use condition skill on mythicmobs, but mythicmobs condition mechanic is has something lost and i want to add it like condition when attack cooldown player is not over will not cast.
 
