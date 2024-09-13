@@ -19,9 +19,22 @@ jobs:
           java-version: 17
       - name: Build with Maven
         run: mvn -B package --file pom.xml
-      - name: Upload artifact to GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: target/ItemCaster-*.jar
+      - name: Modrinth Release
+        uses: dsx137/modrinth-release-action@main
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MODRINTH_TOKEN: ${{ secrets.MODRITH_TOKEN }}
+        with:
+          name: ItemSkillCaster
+          project_id: nyCjVsXk
+          loaders: bukkit, paper
+          game_versions: 1.20.1
+          version_number: 0.1
+          files: |
+             ./target/ItemNbtCaster-*.jar
+          dependencies: Vl1uNAuy:required
+          changelog: "some message"
+          version_type: alpha
+          featured: false
+          status: 'draft' # or archived, draft, unlisted, scheduled, unknown
+          requested_status: 'draft' # or archived, draft, unlisted
+          delete_old_files: false # default true
