@@ -1,9 +1,7 @@
 name: Build and Upload to Release
 
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_dispatch:
 
 jobs:
   build:
