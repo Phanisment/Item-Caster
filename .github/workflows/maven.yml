@@ -16,7 +16,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - name: Add Build attempt number
+    - name: Add Build Attempt Number
       run: |
         VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
         BUILD_VERSION=${{ github.run_number }}
