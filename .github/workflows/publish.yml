@@ -29,8 +29,8 @@ jobs:
           version_number: 0.1
           files: |
              ./target/ItemNbtCaster-*.jar
-          dependencies: Vl1uNAuy:required
-          changelog: "some message"
+          dependencies: NLuc7Jjh:required
+          changelog: ""
           version_type: alpha
           featured: false
           status: 'draft' # or archived, draft, unlisted, scheduled, unknown
