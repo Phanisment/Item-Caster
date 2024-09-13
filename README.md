@@ -8,12 +8,10 @@
 ![Title](https://cdn.modrinth.com/data/cached_images/271c6f9e6fc2b79c986d4c35659e59c23a3d0ab3.png)
 
 <div align="center">
-	<a href="https://builtbybit.com/resources/item-nbt-caster.51679/">
-		<img alt="" src=https://img.shields.io/badge/builtbybit-%232D87C3?style=for-the-badge&logo=builtbybit&logoColor=white>
-	</a>
 	<a href="">
 		<img alt="" src=https://img.shields.io/badge/SpigotMC-%23ED8106?style=for-the-badge&logo=spigotmc&logoColor=white>
 	</a>
+	
 	<a href="https://modrinth.com/project/item-caster">
 		<img alt="" src=https://img.shields.io/badge/Modrinth-%2300AF5C?style=for-the-badge&logo=modrinth&logoColor=white>
 	</a>
@@ -21,24 +19,18 @@
 
 ---
 
-[![Java CI with Maven](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/maven.yml/badge.svg)](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/maven.yml)
-[![Test Code](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/test.yml/badge.svg)](https://github.com/Phanisment/Item-Nbt-Skill-Cast/actions/workflows/test.yml)
-
-> [!warning]
-> This plugin is in development, if you use this plugin now the risk is on you.
-
-Cast Skill form Plugin [MythicMobs](https://www.example.com), like plugin [MMOItems](https://www.example.com) or [MythicCrucible](https://www.example.com) but with less feature for who need Oraxen/ItemsAdder as item management, if oraxen or ItemsAdder has custom nbt modifier mybe you can make item that cast skill with only nbt because focus this plugin is use nbt as data for cast skill.
+Cast Skill form Plugin MythicMobs, like plugin MMOItems or MythicCrucible but with less feature for who need Oraxen/ItemsAdder as item management, if oraxen or ItemsAdder has custom nbt modifier mybe you can make item that cast skill with only nbt because focus this plugin is use nbt as data for cast skill.
 
 ## Main Feature:
 - Make datapack can Cast Skill with item.
 - Support Oraxen/ItemsAdder or other plugin that use nbt as modifier item.
-- Flexible for other plugin, maybe will little bit break if another plugin using nbt `Abilities` but i will add configuration for that.
+- Flexible for other plugin.
 
 ## How to install:
 - Download this plugin in this [Link](https://www.example.com) or Packages below.
 - Open your server panel.
 - Upload or Drag & Drop plugin file to `./plugins`.
-- Install dependency plugin MythicMobs in your server.
+- Install dependency plugin [MythicMobs](https://modrinth.com/plugin/mythicmobs) in your server.
 - Start the server
 
 ## How to Use plugin:
@@ -49,12 +41,9 @@ Cast Skill form Plugin [MythicMobs](https://www.example.com), like plugin [MMOIt
 /give @s diamond_sword{ Abilities: [ { skill: "SmashAttack", action: "right_click" }, { skill: "regeneration", timer: 1 } ] }
 ```
 
-1.20.5 →:
-```
-/give @s diamond_sword[ { Abilities: [ { skill: "SmashAttack", action: "right_click" }, { skill: "regeneration", timer: 1 } ] } ]
-```
+<details open>
+  <summary>Json like format</summary>
 
-Json like format
 ```
 {
   Abilities: [
@@ -69,6 +58,8 @@ Json like format
   ]
 }
 ```
+
+</details>
 
 ### Nbt Format
 
