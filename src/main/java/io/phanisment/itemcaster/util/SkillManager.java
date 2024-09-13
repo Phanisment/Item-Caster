@@ -13,11 +13,14 @@ import de.tr7zw.changeme.nbtapi.NBTItem;
 import io.phanisment.itemcaster.ItemCaster;
 import io.phanisment.itemcaster.MythicMobs;
 
-import java.util.Optional;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SkillManager {
+	private final String skill;
+	private final String action;
+	private final int timer;
+	
 	private static Map<Player, Map<String, Integer>> skillTimers = new HashMap<>();
 
 	public void runSkill(Player player, String event) {
@@ -30,10 +33,9 @@ public class SkillManager {
 		NBTCompoundList abilities = nbtItem.getCompoundList("Abilities");
 		if (abilities != null) {
 			for (ReadWriteNBT ability : abilities) {
-				String skill = ability.getString("skill");
-				String action = ability.getString("action");
-				int timer = ability.getInteger("timer");
-				Optional<Integer> optionalTimer = Optional.ofNullable(timer);
+				this.skill = ability.getString("skill");
+				this.action = ability.getString("action");
+				this.timer = ability.getInteger("timer");
 			}
 			
 			try {
