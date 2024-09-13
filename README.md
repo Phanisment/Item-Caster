@@ -42,7 +42,7 @@ Cast Skill form Plugin MythicMobs, like plugin MMOItems or MythicCrucible but wi
 ```
 
 <details open>
-  <summary>Json like format</summary>
+	<summary>Json like format</summary>
 
 ```
 {
