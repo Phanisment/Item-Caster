@@ -79,6 +79,8 @@ Will Cast Skill while player hold item with nbt skill
 
 ### Action/Event activator skill
 
+Event can't use combination with timer, if you try it, the item nbt will not cast skill.
+
 |Events|Descriptions|
 |---|---|
 |`right_click`|Cast skill when right click|
