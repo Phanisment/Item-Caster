@@ -90,7 +90,8 @@ Event can't use combination with timer, if you try it, the item nbt will not cas
 ### Condition nbt
 > [!TIP]
 > Will added in future
-<a>In basic MMOItems or MythicCrucible you use condition skill on mythicmobs, but mythicmobs condition mechanic is has something lost and i want to add it like condition when attack cooldown player is not over will not cast.</a>
+
+In basic MMOItems or MythicCrucible you use condition skill on mythicmobs, but mythicmobs condition mechanic is has something lost and i want to add it like condition when attack cooldown player is not over will not cast.
 
 
 ### Oraxen/ItemsaAdder support
