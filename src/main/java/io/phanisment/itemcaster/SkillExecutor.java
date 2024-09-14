@@ -17,11 +17,11 @@ public class SkillExecutor implements Listener {
 	public void onPlayerRightClick(PlayerInteractEvent event) {
 		if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getItem() != null) {
 			Player player = event.getPlayer();
-			skill.runSkill(player, "right_click");
+			skill.runSkill(player, "right_click").activeSkill();
 		}
 		if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK && event.getItem() != null) {
 			Player player = event.getPlayer();
-			skill.runSkill(player, "left_click");
+			skill.runSkill(player, "left_click").activeSkill();
 		}
 	}
 }
