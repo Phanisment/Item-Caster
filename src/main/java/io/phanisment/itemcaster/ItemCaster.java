@@ -20,7 +20,7 @@ public class ItemCaster extends JavaPlugin {
 			@Override
 			public void run() {
 				for (Player player : Bukkit.getOnlinePlayers()) {
-					skill.runSkill(player, "timer").passiveSkill();
+					skill.runSkill(player, "timer");
 				}
 			}
 		}.runTaskTimer(this, 0L, 1L);
