@@ -15,6 +15,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.block.Action;
+import org.bukkit.inventory.ItemStack;
 
 import io.phanisment.itemcaster.util.SkillManager;
 
