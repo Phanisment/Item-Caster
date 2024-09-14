@@ -76,7 +76,7 @@ public class SkillManager {
 	}
 
 	private boolean isSkillEvent(String event, String skill, String action) {
-		return event.equals(action) && skill != null && !action.trim().isEmpty();
+		return event.equalsIgnoreCase(action) && skill != null && !action.trim().isEmpty();
 	}
 
 	private boolean isTimerEvent(String event, String skill, String action) {
