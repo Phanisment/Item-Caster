@@ -87,6 +87,7 @@ Event can't use combination with timer, if you try it, the item nbt will not cas
 |`right_click`               |Cast skill when right click.|
 |`left_click`                |Cast skill when left click. |
 
+See [this](/src/main/java/io/phanisment/itemcaster/SkillExecutor.java) for further info
 
 ### Condition nbt
 > [!NOTE]
