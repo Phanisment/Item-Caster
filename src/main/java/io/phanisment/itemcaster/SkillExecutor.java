@@ -28,24 +28,24 @@ public class SkillExecutor implements Listener {
 		
 		// Right Clixck Events
 		if (event.getAction() == Action.RIGHT_CLICK_AIR) {
-			skill.runSkill(player, "right_click_air").activeSkill();
+			skill.runSkill(player, "right_click_air");
 		}
 		if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			skill.runSkill(player, "right_click_block").activeSkill();
+			skill.runSkill(player, "right_click_block");
 		}
 		if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-			skill.runSkill(player, "right_click").activeSkill();
+			skill.runSkill(player, "right_click");
 		}
 		
 		// Left Click Events
 		if (event.getAction() == Action.LEFT_CLICK_AIR) {
-			skill.runSkill(player, "left_click_air").activeSkill();
+			skill.runSkill(player, "left_click_air");
 		}
 		if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
-			skill.runSkill(player, "left_click_block").activeSkill();
+			skill.runSkill(player, "left_click_block");
 		}
 		if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
-			skill.runSkill(player, "left_click").activeSkill();
+			skill.runSkill(player, "left_click");
 		}
 		
 		// Swap Hand
@@ -53,7 +53,7 @@ public class SkillExecutor implements Listener {
 			ItemStack mainHandItem = player.getInventory().getItemInMainHand();
 			ItemStack offHandItem = player.getInventory().getItemInOffHand();
 			if (!mainHandItem.equals(player.getInventory().getItemInMainHand()) || !offHandItem.equals(player.getInventory().getItemInOffHand())) {
-				skill.runSkill(player, "swap_hand").activeSkill();
+				skill.runSkill(player, "swap_hand");
 			}
 		}
 	}
@@ -62,47 +62,47 @@ public class SkillExecutor implements Listener {
 	public void onPlayerToggleSneak(PlayerToggleSneakEvent event) {
 		Player player = event.getPlayer();
 		if (event.isSneaking()) {
-			skill.runSkill(player, "sneak").activeSkill();
+			skill.runSkill(player, "sneak");
 		} else {
-			skill.runSkill(player, "unsneak").activeSkill();
+			skill.runSkill(player, "unsneak");
 		}
 	}
 	
 	// When player Eat/Drink item
 	public void onPlayerItemConsume(PlayerItemConsumeEvent event) {
-		skill.runSkill(event.getPlayer(), "consume").activeSkill();
+		skill.runSkill(event.getPlayer(), "consume");
 	}
 	
 	public void onProjectileLaunch(ProjectileLaunchEvent event) {
 		Projectile projectile = event.getEntity();
 		if (projectile.getShooter() instanceof Player) {
 			Player player = (Player) projectile.getShooter();
-			skill.runSkill(player, "projectile_launch").activeSkill();
+			skill.runSkill(player, "projectile_launch");
 		}
 	}
 	
 	public void onProjectileHit(ProjectileHitEvent event) {
 		Projectile projectile = event.getEntity();
 		Player player = (Player) projectile.getShooter();
-		skill.runSkill(player, "projectile_hit").activeSkill();
+		skill.runSkill(player, "projectile_hit");
 	}
 	
 	public void onEntityDamage(EntityDamageEvent event) {
 		Player player = (Player) event.getEntity();
 		if (event.getEntity() instanceof Player) {
-			skill.runSkill(player, "damaged").activeSkill();
+			skill.runSkill(player, "damaged");
 		}
 	}
 	
 	public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
 		if (event.getEntity() instanceof Player) {
 			Player player = (Player) event.getEntity();
-			skill.runSkill(player, "attack").activeSkill();
+			skill.runSkill(player, "attack");
 		}
 	}
 	
 	public void onPlayerDropItem(PlayerDropItemEvent event) {
 		Player player = event.getPlayer();
-		skill.runSkill(player, "drop").activeSkill();
+		skill.runSkill(player, "drop");
 	}
 }
