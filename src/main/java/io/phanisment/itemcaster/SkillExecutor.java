@@ -5,15 +5,7 @@ import org.bukkit.event.EventHandler;
 
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
 import org.bukkit.event.block.Action;
 import org.bukkit.inventory.ItemStack;
 
@@ -57,10 +49,5 @@ public class SkillExecutor implements Listener {
 		} else {
 			skill.runSkill(player, "unsneak");
 		}
-	}
-	
-	// When player Eat/Drink item
-	public void onPlayerItemConsume(PlayerItemConsumeEvent event) {
-		skill.runSkill(event.getPlayer(), "consume");
 	}
 }
