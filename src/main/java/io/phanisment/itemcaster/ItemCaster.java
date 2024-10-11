@@ -5,7 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import io.phanisment.itemcaster.SkillExecutor;
+import io.phanisment.itemcaster.common.listener.*;
 import io.phanisment.itemcaster.util.SkillManager;
 
 public class ItemCaster extends JavaPlugin {

@@ -8,7 +8,7 @@ import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
 import de.tr7zw.changeme.nbtapi.NBTCompoundList;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 
-import io.phanisment.itemcaster.MythicMobs;
+import io.phanisment.itemcaster.common.compact.MythicSkill;
 
 import java.util.Optional;
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public class SkillManager {
 				int timer = ability.getInteger("timer");
 
 				if (isValidSkillEvent(event, skill, action)) {
-					MythicMobs.runSkill(skill, player);
+					MythicSkill.run(skill, player);
 				} else if (isTimerEvent(event, skill, action)) {
 					processSkillTimer(player, skill, timer);
 				}
@@ -63,7 +63,7 @@ public class SkillManager {
 			int cooldown = playerSkills.getOrDefault(skill, timer);
 			
 			if (cooldown <= 0) {
-				MythicMobs.runSkill(skill, player);
+				MythicSkill.run(skill, player);
 				playerSkills.put(skill, timer);
 			} else {
 				playerSkills.put(skill, cooldown - 1);

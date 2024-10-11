@@ -2,7 +2,7 @@
 	Stolen form AriKeys plugin :3
 */
 
-package io.phanisment.itemcaster;
+package io.phanisment.itemcaster.common.compact.mythicmobs;
 
 import io.lumine.mythic.api.adapters.AbstractPlayer;
 import io.lumine.mythic.api.mobs.GenericCaster;
@@ -15,8 +15,8 @@ import org.bukkit.entity.Player;
 
 import java.util.HashSet;
 
-public class MythicMobs {
-	public static void runSkill(String id, Player player) {
+public class MythicSkill {
+	public static void run(String id, Player player) {
 		if (id == null || id.isEmpty()) return;
 		MythicBukkit.inst().getSkillManager().getSkill(id).ifPresent(skill -> {
 			AbstractPlayer trigger = BukkitAdapter.adapt(player);
