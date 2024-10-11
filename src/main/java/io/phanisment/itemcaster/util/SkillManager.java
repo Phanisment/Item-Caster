@@ -8,7 +8,7 @@ import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
 import de.tr7zw.changeme.nbtapi.NBTCompoundList;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 
-import io.phanisment.itemcaster.common.compact.MythicSkill;
+import io.phanisment.itemcaster.common.compact.mythicmobs.MythicSkill;
 
 import java.util.Optional;
 import java.util.HashMap;

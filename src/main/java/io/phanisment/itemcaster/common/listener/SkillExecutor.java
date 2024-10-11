@@ -17,16 +17,16 @@ public class SkillExecutor implements Listener {
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		switch (event.getAction()) {
-			case Action.RIGHT_CLICK_AIR:
+			case RIGHT_CLICK_AIR:
 				skill.runSkill(player, "right_click_air");
 				break;
-			case Action.RIGHT_CLICK_BLOCK:
+			case RIGHT_CLICK_BLOCK:
 				skill.runSkill(player, "right_click_block");
 				break;
-			case Action.LEFT_CLICK_AIR:
+			case LEFT_CLICK_AIR:
 				skill.runSkill(player, "left_click_air");
 				break;
-			case Action.LEFT_CLICK_BLOCK:
+			case LEFT_CLICK_BLOCK:
 				skill.runSkill(player, "left_click_block");
 				break;
 			default:
