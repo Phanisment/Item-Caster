@@ -7,7 +7,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
-import org.bukkit.inventory.ItemStack;
 
 import io.phanisment.itemcaster.util.SkillManager;
 
@@ -41,7 +40,6 @@ public class SkillExecutor implements Listener {
 		}
 	}
 	
-	// When player sneaking
 	@EventHandler
 	public void onPlayerToggleSneak(PlayerToggleSneakEvent event) {
 		Player player = event.getPlayer();
