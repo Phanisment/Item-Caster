@@ -1,11 +1,9 @@
 package phanisment.itemcaster;
 
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import phanisment.itemcaster.listener.MythicMobsSkills;
+import phanisment.itemcaster.listeners.MythicMobsSkills;
 
 public class Main extends JavaPlugin {
 

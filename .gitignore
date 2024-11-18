@@ -3,6 +3,8 @@
 
 # Log file
 *.log
+target
+.vscode
 
 # BlueJ files
 *.ctxt

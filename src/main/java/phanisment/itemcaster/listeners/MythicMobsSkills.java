@@ -1,4 +1,4 @@
-package phanisment.itemcaster.listener;
+package phanisment.itemcaster.listeners;
 
 import io.lumine.mythic.bukkit.events.MythicConditionLoadEvent;
 
@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import phanisment.itemcaster.Main;
-import phanisment.skills.conditions.IsAttackOnCooldownCondition;
+import phanisment.itemcaster.skills.conditions.IsAttackOnCooldownCondition;
 
 public class MythicMobsSkills implements Listener {
 	private Main pl;
