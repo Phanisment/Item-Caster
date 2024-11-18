@@ -1,5 +1,5 @@
-name: ${project.artifactId}
-version: ${project.version}
+name: ItemSkillCaster
+version: 1.0.0
 author: Phanisment
 description: Cast MythicMobs Skill with NBT item data
 main: phanisment.itemcaster.Main
