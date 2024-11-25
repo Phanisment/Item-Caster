@@ -1,4 +1,4 @@
-package phanisment.itemcaster.listeners;
+package phanisment.artifact.listeners;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -8,9 +8,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 import de.tr7zw.nbtapi.NBT;
-import phanisment.itemcaster.MythicMobs;
+import phanisment.artifact.MythicMobs;
 
 public class PlayerListener implements Listener {
+
   @EventHandler
   public void onPlayerInteract(PlayerInteractEvent event) {
     if(event.getAction() == Action.LEFT_CLICK_AIR && event.getAction() == Action.LEFT_CLICK_BLOCK) {
@@ -18,6 +19,7 @@ public class PlayerListener implements Listener {
       ItemStack item = player.getInventory().getItemInMainHand();
       String data = NBT.get(item, nbt -> (String)nbt.getString("Left-Click"));
       if (!data.isEmpty()) {
+        player.sendMessage("Has Data: " + data);
         MythicMobs.cast(data, player);
       }
     }

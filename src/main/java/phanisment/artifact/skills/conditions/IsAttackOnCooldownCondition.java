@@ -1,4 +1,4 @@
-package phanisment.itemcaster.skills.conditions;
+package phanisment.artifact.skills.conditions;
 
 import io.lumine.mythic.api.adapters.AbstractEntity;
 import io.lumine.mythic.api.config.MythicLineConfig;

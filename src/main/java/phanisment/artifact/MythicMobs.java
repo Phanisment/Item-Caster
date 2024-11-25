@@ -1,4 +1,4 @@
-package phanisment.itemcaster;
+package phanisment.artifact;
 
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.utils.MythicUtil;

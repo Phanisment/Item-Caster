@@ -1,15 +1,15 @@
-name: ItemSkillCaster
+name: MagicArtifact
 version: 1.0.0
 author: Phanisment
 description: Cast MythicMobs Skill with NBT item data
-main: phanisment.itemcaster.Main
+main: phanisment.artifact.Main
 api-version: 1.20
 depend: [MythicMobs, NBTAPI]
 commands:
-  itemskillcaster:
+  magicartifact:
     description: Main command.
-    aliases: [isc, itemsc]
+    aliases: [ma]
 permission:
-  itemskillcaster.admin:
-    description: Op permission.
+  magicartifact.admin:
+    description: Admin Permission.
     default: op

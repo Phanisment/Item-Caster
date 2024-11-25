@@ -1,4 +1,6 @@
-/workspaces/Item-Nbt-Skill-Cast/src/main/java/phanisment/itemcaster/Main.java
-/workspaces/Item-Nbt-Skill-Cast/src/main/java/phanisment/itemcaster/MythicMobs.java
-/workspaces/Item-Nbt-Skill-Cast/src/main/java/phanisment/itemcaster/listeners/MythicMobsSkills.java
-/workspaces/Item-Nbt-Skill-Cast/src/main/java/phanisment/itemcaster/skills/conditions/IsAttackOnCooldownCondition.java
+/home/codespace/Item-Nbt-Skill-Cast/src/main/java/phanisment/artifact/Main.java
+/home/codespace/Item-Nbt-Skill-Cast/src/main/java/phanisment/artifact/MythicMobs.java
+/home/codespace/Item-Nbt-Skill-Cast/src/main/java/phanisment/artifact/command/ArtifactCommand.java
+/home/codespace/Item-Nbt-Skill-Cast/src/main/java/phanisment/artifact/listeners/MythicMobsSkills.java
+/home/codespace/Item-Nbt-Skill-Cast/src/main/java/phanisment/artifact/listeners/PlayerListener.java
+/home/codespace/Item-Nbt-Skill-Cast/src/main/java/phanisment/artifact/skills/conditions/IsAttackOnCooldownCondition.java
