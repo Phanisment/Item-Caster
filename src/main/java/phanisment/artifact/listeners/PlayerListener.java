@@ -6,22 +6,20 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.Material;
 
-import de.tr7zw.nbtapi.NBT;
-import phanisment.artifact.MythicMobs;
+import phanisment.artifact.skill.ItemNbtManager;
+import phanisment.artifact.skill.ItemNbtManager.Activator;
 
 public class PlayerListener implements Listener {
 
-  @EventHandler
-  public void onPlayerInteract(PlayerInteractEvent event) {
-    if(event.getAction() == Action.LEFT_CLICK_AIR && event.getAction() == Action.LEFT_CLICK_BLOCK) {
-      Player player = event.getPlayer();
-      ItemStack item = player.getInventory().getItemInMainHand();
-      String data = NBT.get(item, nbt -> (String)nbt.getString("Left-Click"));
-      if (!data.isEmpty()) {
-        player.sendMessage("Has Data: " + data);
-        MythicMobs.cast(data, player);
-      }
-    }
-  }
+	@EventHandler
+	public void onPlayerInteract(PlayerInteractEvent event) {
+		if(event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
+			new ItemNbtManager(event.getPlayer(), Activator.LEFT_CLICK).check();
+		}
+		if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			new ItemNbtManager(event.getPlayer(), Activator.RIGHT_CLICK).check();
+		}
+	}
 }

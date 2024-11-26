@@ -17,9 +17,8 @@ public class MythicMobsSkills implements Listener {
 	
 	@EventHandler
 	public void onConditionLoadEvent(MythicConditionLoadEvent event) {
-		if(event.getConditionName().equalsIgnoreCase("isAttackCooldown")) {
+		if(event.getConditionName().equalsIgnoreCase("attackCooldown")) {
 			event.register(new IsAttackOnCooldownCondition(event.getConfig()));
-			pl.getLogger().info("-- Registered attack cooldown condition!");
 		}
 	}
 }

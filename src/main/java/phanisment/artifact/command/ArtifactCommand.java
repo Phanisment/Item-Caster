@@ -8,11 +8,13 @@ import org.bukkit.entity.Player;
 import phanisment.artifact.MythicMobs;
 
 public class ArtifactCommand implements CommandExecutor {
-  @Override
-  public boolean onCommand(CommandSender sender ,Command command, String label, String[] args) {
-    if (args.length >= 1) return false;
-    Player player = (Player)sender;
-    MythicMobs.cast(args[0], player);
-    return true;
-  }
+	@Override
+	public boolean onCommand(CommandSender sender ,Command command, String label, String[] args) {
+		if (sender instanceof Player) {
+			Player player = (Player)sender;
+			MythicMobs.cast(args[0], player);
+			return true;
+		}
+		return false;
+	}
 }
