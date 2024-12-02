@@ -1,7 +1,6 @@
-/storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact/src/main/java/phanisment/artifact/Main.java
-/storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact/src/main/java/phanisment/artifact/MythicMobs.java
-/storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact/src/main/java/phanisment/artifact/command/ArtifactCommand.java
-/storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact/src/main/java/phanisment/artifact/listeners/MythicMobsSkills.java
-/storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact/src/main/java/phanisment/artifact/listeners/PlayerListener.java
-/storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact/src/main/java/phanisment/artifact/skills/ItemNbtManager.java
-/storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact/src/main/java/phanisment/artifact/skills/conditions/IsAttackOnCooldownCondition.java
+/storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact/src/main/java/phanisment/itemcaster/Main.java
+/storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact/src/main/java/phanisment/itemcaster/command/ArtifactCommand.java
+/storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact/src/main/java/phanisment/itemcaster/listeners/ActivatorListener.java
+/storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact/src/main/java/phanisment/itemcaster/listeners/MythicMobsSkills.java
+/storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact/src/main/java/phanisment/itemcaster/skills/SkillActivator.java
+/storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact/src/main/java/phanisment/itemcaster/skills/conditions/AttackCooldownCondition.java

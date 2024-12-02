@@ -1,8 +1,9 @@
-phanisment/artifact/skills/conditions/IsAttackOnCooldownCondition.class
-phanisment/artifact/skill/ItemNbtManager$Activator.class
-phanisment/artifact/skill/ItemNbtManager.class
-phanisment/artifact/command/ArtifactCommand.class
-phanisment/artifact/MythicMobs.class
-phanisment/artifact/listeners/PlayerListener.class
-phanisment/artifact/Main.class
-phanisment/artifact/listeners/MythicMobsSkills.class
+phanisment/itemcaster/skill/SkillActivator$Activator.class
+phanisment/itemcaster/skill/SkillActivator.class
+phanisment/itemcaster/listeners/MythicMobsSkills.class
+phanisment/itemcaster/listeners/ActivatorListener.class
+phanisment/itemcaster/Main.class
+phanisment/itemcaster/listeners/ActivatorListener$1.class
+phanisment/itemcaster/skills/conditions/AttackCooldownCondition.class
+phanisment/itemcaster/listeners/ActivatorListener$2.class
+phanisment/itemcaster/command/ArtifactCommand.class

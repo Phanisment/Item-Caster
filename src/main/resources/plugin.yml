@@ -1,15 +1,16 @@
-name: ${project.artifactId}
+name: ItemCaster
 version: ${project.version}
 author: Phanisment
-description: Cast MythicMobs Skill with NBT item data
-main: phanisment.artifact.Main
+description: Cast MythicMobs Skill with NBT item.
+main: phanisment.itemcaster.Main
 api-version: 1.20
 depend: [MythicMobs, NBTAPI]
 commands:
-  magicartifact:
+  itemcaster:
     description: Main command.
-    aliases: [ma]
+    permission: itemcaster.admin
+    aliases: [ic, itemcast, itemc, icaster, icast]
 permission:
-  magicartifact.admin:
+  itemcaster.admin:
     description: Admin Permission.
-    default: op
+    default: false

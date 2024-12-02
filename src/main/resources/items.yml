@@ -1,0 +1,19 @@
+Structure_1:
+  # Required or will not detect
+  type: STONE_SWORD
+  
+  # Optional, default: name the item
+  display_name: "Example"
+  
+  # Optional but must use
+   # Note: this string will convert to NbtComponent and
+  #       insert to the item.
+  nbt: |
+    {
+      CustomModelData: 1,
+      Unbreakable: true,
+      Artifact: [
+        {skill:"Slash", cooldown:0.5, activator:"swing"},
+        {skill:"Dash", cooldown:10, activator:"use"}
+      ]
+    }

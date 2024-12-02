@@ -1,31 +1,21 @@
 #!/bin/bash
+#cd /storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact
 
-# Memastikan kita berada di direktori Git
 if [ ! -d ".git" ]; then
-    echo "Error: Ini bukan repositori Git."
-    exit 1
+	echo "Error: This is not git repository."
+	exit 1
 fi
 
-# Meminta pesan commit dari pengguna
-read -p "Masukkan pesan commit: " commit_message
-
-# Menambahkan semua perubahan
+read -p "Enter the message commit: " commit_message
 git add .
-
-# Melakukan commit
 git commit -m "$commit_message"
-
-echo "Commit berhasil dengan pesan: $commit_message"
-
-# Meminta nama branch untuk push
-read -p "Masukkan nama branch untuk push (default: main): " branch_name
-branch_name=${branch_name:-main}  # Jika tidak ada input, gunakan 'main'
-
-# Melakukan push
+echo "Successfuly commit with message: $commit_message"
+read -p "Enter the branch name for push (default: main): " branch_name
+branch_name=${branch_name:-main}
 git push origin "$branch_name"
 
 if [ $? -eq 0 ]; then
-    echo "Push berhasil ke branch: $branch_name"
+	echo "Successfuly push to branch: $branch_name"
 else
-    echo "Error: Push gagal."
+	echo "Error: Push failed."
 fi
