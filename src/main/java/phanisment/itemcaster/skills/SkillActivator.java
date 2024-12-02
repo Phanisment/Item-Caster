@@ -1,4 +1,4 @@
-package phanisment.itemcaster.skill;
+package phanisment.itemcaster.skills;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -9,9 +9,9 @@ import org.bukkit.inventory.ItemStack;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.utils.MythicUtil;
 
-import de.tr7zw.nbtapi.NBT;
 import de.tr7zw.nbtapi.NBTType;
 import de.tr7zw.nbtapi.NBTCompoundList;
+import de.tr7zw.nbtapi.NBTItem;
 import de.tr7zw.nbtapi.iface.ReadableNBT;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class SkillActivator {
 	public SkillActivator(Player player, ItemStack item, Activator activator) {
 		if (item == null || item.getType() == Material.AIR) return;
-		NBTCompoundList nbt = new NBT(item, nbt -> nbt.getCompoundList("Artifact"));
+		NBTCompoundList nbt = new NBTItem(item).getCompoundList("Artifact");
 		if (!nbt.isEmpty()) {
 			for (ReadableNBT ability : nbt) {
 				if (ability.getString("activator").replaceAll(" ", "_").toUpperCase().equals(activator.toString()) && !ability.getString("skill").isEmpty()) {

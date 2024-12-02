@@ -4,10 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
@@ -23,21 +21,10 @@ import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import phanisment.itemcaster.skill.SkillActivator;
+import phanisment.itemcaster.skills.SkillActivator;
 import phanisment.itemcaster.Main;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.List;
-
 public class ActivatorListener implements Listener {
-	private final Set<Player> activePlayer = new HashSet<>();
-	private Main plugin;
-
-	public ActivatorListener(Main plugin) {
-		this.plugin = plugin;
-	}
-
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
@@ -46,7 +33,6 @@ public class ActivatorListener implements Listener {
 			switch(event.getAction()) {
 				case LEFT_CLICK_AIR:
 				case LEFT_CLICK_BLOCK:
-					new SkillActivator(player, item, SkillActivator.Activator.LEFT_CLICK);
 					break;
 				case RIGHT_CLICK_AIR:
 				case RIGHT_CLICK_BLOCK:

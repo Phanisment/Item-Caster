@@ -13,7 +13,7 @@ public class Main extends JavaPlugin {
 	public void onEnable() {
 		ActivatorListener.runTick(this);
 		Bukkit.getPluginManager().registerEvents(new MythicMobsSkills(), this);
-		Bukkit.getPluginManager().registerEvents(new ActivatorListener(this), this);
+		Bukkit.getPluginManager().registerEvents(new ActivatorListener(), this);
 		getCommand("itemcaster").setExecutor(new ArtifactCommand());
 	}
 }
