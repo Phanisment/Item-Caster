@@ -1,5 +1,5 @@
 #!/bin/bash
-#cd /storage/emulated/0/ACode/Projects/Coding/Plugin/MagicArtifact
+#cd /storage/emulated/0/ACode/Projects/Coding/Plugin/Item-Caster
 
 if [ ! -d ".git" ]; then
 	echo "Error: This is not git repository."
