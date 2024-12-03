@@ -1,2 +1,2 @@
-> [!warning]
-> This plugin is in development!
+> [!note]
+> This repo is moved to ItemCaster!
