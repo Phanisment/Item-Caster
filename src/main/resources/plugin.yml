@@ -4,13 +4,19 @@ author: Phanisment
 description: Cast MythicMobs Skill with NBT item.
 main: phanisment.itemcaster.Main
 api-version: 1.20
-depend: [MythicMobs, NBTAPI]
+depend:
+- MythicMobs
+- NBTAPI
+softdepend:
+- Oraxen
+- ItemsAdder
+- PlaceholderAPI
 commands:
   itemcaster:
     description: Main command.
     permission: itemcaster.admin
-    aliases: [ic, itemcast, itemc, icaster, icast]
+    aliases: [itemcast, icaster, itemc, icast, ic]
 permission:
-  itemcaster.admin:
+  "itemcaster.admin":
     description: Admin Permission.
     default: false

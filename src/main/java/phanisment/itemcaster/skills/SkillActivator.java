@@ -14,6 +14,8 @@ import de.tr7zw.nbtapi.NBTCompoundList;
 import de.tr7zw.nbtapi.NBTItem;
 import de.tr7zw.nbtapi.iface.ReadableNBT;
 
+import phanisment.itemcaster.skills.SkillCooldown;
+
 import java.util.ArrayList;
 
 public class SkillActivator {
@@ -22,12 +24,24 @@ public class SkillActivator {
 		NBTCompoundList nbt = new NBTItem(item).getCompoundList("Artifact");
 		if (!nbt.isEmpty()) {
 			for (ReadableNBT ability : nbt) {
-				if (ability.getString("activator").replaceAll(" ", "_").toUpperCase().equals(activator.toString()) && !ability.getString("skill").isEmpty()) {
+				String skill = ability.getString("skill");
+				if (ability.getString("activator").replaceAll(" ", "_").toUpperCase().equals(activator.toString()) && !skill.isEmpty()) {
+					
+					// Power System
 					float power = 1.0F;
-					if (ability.hasTag("power", NBTType.NBTTagInt)) {
+					if (ability.hasTag("power", NBTType.NBTTagInt) || ability.hasTag("power", NBTType.NBTTagFloat)) {
 						power = ability.getFloat("power");
 					}
-					cast(player, ability.getString("skill"), power);
+					
+					// Cooldown System
+					SkillCooldown cd = new SkillCooldown(player);
+					if (ability.hasTag("cooldown", NBTType.NBTTagInt)) {
+						cd.setCooldown(skill, ability.getInteger("cooldown"));
+					}
+					
+					if (!cd.hasCooldown(skill)) {
+						cast(player, skill, power);
+					}
 				}
 			}
 		}
@@ -41,23 +55,15 @@ public class SkillActivator {
 	}
 	
 	public enum Activator {
-		SWING,
-		OFF_SWING,
-		USE,
+		LEFT_CLICK,
+		RIGHT_CLICK,
 		EQUIP, // Not yet added: Im lazy to add this.
-		INTERACT_ENTITY,
-		SWAP_HAND,
-		BREAK,
 		SNEAK,
 		UNSNEAK,
-		TOGGLE_SNEAK,
 		ATTACK,
 		DAMAGED,
 		CONSUME,
-		SHOOT,
-		POISONED,
-		WITHERED,
-		FALL,
+		BOW_SHOOT,
 		DEATH,
 		DROP,
 		PICKUP, 

@@ -1,8 +1,14 @@
-# File Format
+# Script File
 *.sh
+*.bash
 
-# Maven
-target
+# Maven File
+.mvn/
+pom.xml.tag
+pom.xml.releaseBackup
+dependency-reduced-pom.xml
+buildNumber.properties
+target/
 
 # Compiled class file
 *.class
