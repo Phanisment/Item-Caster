@@ -46,6 +46,11 @@
 			<id>jitpack-repo</id>
 			<url>https://jitpack.io</url>
 		</repository>
+		<repository>
+			<id>oraxen</id>
+			<name>Oraxen Repository</name>
+			<url>https://repo.oraxen.com/releases</url>
+		</repository>
 		-->
 	</repositories>
 
@@ -67,6 +72,11 @@
 			<version>5.6.1</version>	
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20240303</version>
+		</dependency>
 		<!--
 		<dependency>
 			<groupId>com.github.LoneDev6</groupId>
@@ -74,9 +84,14 @@
 			<version>3.6.1</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.th0rgal</groupId>
+			<artifactId>oraxen</artifactId>
+			<version>1.167.0</version>
+			<scope>provided</scope>
+		</dependency>
 		-->
 	</dependencies>
-	
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

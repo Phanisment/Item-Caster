@@ -25,23 +25,9 @@ public class SkillActivator {
 		if (!nbt.isEmpty()) {
 			for (ReadableNBT ability : nbt) {
 				String skill = ability.getString("skill");
-				if (ability.getString("activator").replaceAll(" ", "_").toUpperCase().equals(activator.toString()) && !skill.isEmpty()) {
-					
-					// Power System
-					float power = 1.0F;
-					if (ability.hasTag("power", NBTType.NBTTagInt) || ability.hasTag("power", NBTType.NBTTagFloat)) {
-						power = ability.getFloat("power");
-					}
-					
-					// Cooldown System
-					SkillCooldown cd = new SkillCooldown(player);
-					if (ability.hasTag("cooldown", NBTType.NBTTagInt)) {
-						cd.setCooldown(skill, ability.getInteger("cooldown"));
-					}
-					
-					if (!cd.hasCooldown(skill)) {
-						cast(player, skill, power);
-					}
+				String type = ability.getString("activator").toUpperCase();
+				if (type.equals(activator.toString()) && !skill.isEmpty()) {
+					cast(player, skill, 1.0F);
 				}
 			}
 		}
@@ -55,19 +41,12 @@ public class SkillActivator {
 	}
 	
 	public enum Activator {
-		LEFT_CLICK,
-		RIGHT_CLICK,
-		EQUIP, // Not yet added: Im lazy to add this.
-		SNEAK,
-		UNSNEAK,
-		ATTACK,
-		DAMAGED,
-		CONSUME,
-		BOW_SHOOT,
+		LEFT_CLICK, RIGHT_CLICK,
+		SNEAK, UNSNEAK,
+		ATTACK, DAMAGED,
+		CONSUME, BOW_SHOOT,
 		DEATH,
-		DROP,
-		PICKUP, 
-		SIGNAL, // Not yet added: Will add in last development version.
-		TICK;
+		DROP, PICKUP, 
+		SIGNAL, TICK;
 	}
 }

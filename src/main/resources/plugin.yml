@@ -8,6 +8,7 @@ depend:
 - MythicMobs
 - NBTAPI
 softdepend:
+- Nexo
 - Oraxen
 - ItemsAdder
 - PlaceholderAPI

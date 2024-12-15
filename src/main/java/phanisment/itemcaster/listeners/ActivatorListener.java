@@ -51,7 +51,7 @@ public class ActivatorListener implements Listener {
 	public void onPlayerDrop(PlayerDropItemEvent event) {
 		Player player = event.getPlayer();
 		ItemStack item = event.getItemDrop().getItemStack();
-		if (item != null && item.getType() != Material.AIR) {
+		if (item != null || item.getType() != Material.AIR) {
 			new SkillActivator(player, item, SkillActivator.Activator.DROP);
 		}
 	}
@@ -60,7 +60,7 @@ public class ActivatorListener implements Listener {
 	public void onPlayerPickUp(PlayerPickupItemEvent event) {
 		Player player = event.getPlayer();
 		ItemStack item = event.getItem().getItemStack();
-		if (item != null && item.getType() != Material.AIR) {
+		if (item != null || item.getType() != Material.AIR) {
 			new SkillActivator(player, item, SkillActivator.Activator.PICKUP);
 		}
 	}
@@ -102,7 +102,7 @@ public class ActivatorListener implements Listener {
 		if(event.getEntity() instanceof Player) {
 			Player player = (Player)event.getEntity();
 			ItemStack item = event.getBow();
-			if (item != null && item.getType() != Material.AIR) {
+			if (item != null || item.getType() != Material.AIR) {
 				new SkillActivator(player, item, SkillActivator.Activator.BOW_SHOOT);
 			}
 		}
@@ -118,14 +118,19 @@ public class ActivatorListener implements Listener {
 		new BukkitRunnable() {
 			@Override
 			public void run() {
+				if (Bukkit.getOnlinePlayers().isEmpty()) return;
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					runSkill(player, SkillActivator.Activator.TICK);
 					
-					SkillCooldown cd = new SkillCooldown(player);
-					Map<String, Integer> cooldown = cd.getCooldownData();
-					if (cooldown != null) {
-						cooldown.keySet().forEach(cd::decreaseCooldown);
-					}
+					Map<String, Integer> cd = SkillCooldown.getData().get(player);
+					cd.keySet().forEach(skill -> {
+						int n = cd.getOrDefault(skill, 0);
+						if (n > 0) {
+							cd.put(skill, n--);
+						} else {
+							cd.remove(skill);
+						}
+					});
 				}
 			}
 		}.runTaskTimer(pl, 0L, 1L);
@@ -133,11 +138,11 @@ public class ActivatorListener implements Listener {
 	
 	private static void runSkill(Player player, SkillActivator.Activator type) {
 		ItemStack hand = player.getInventory().getItemInMainHand();
-		if (hand != null && hand.getType() != Material.AIR) {
+		if (hand != null || hand.getType() != Material.AIR) {
 			new SkillActivator(player, hand, type);
 		}
 		ItemStack offHand = player.getInventory().getItemInOffHand();
-		if (offHand != null && offHand.getType() != Material.AIR) {
+		if (offHand != null || offHand.getType() != Material.AIR) {
 			new SkillActivator(player, offHand, type);
 		}
 	}
