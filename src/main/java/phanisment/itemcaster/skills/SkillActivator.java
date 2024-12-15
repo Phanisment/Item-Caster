@@ -27,7 +27,17 @@ public class SkillActivator {
 				String skill = ability.getString("skill");
 				String type = ability.getString("activator").toUpperCase();
 				if (type.equals(activator.toString()) && !skill.isEmpty()) {
-					cast(player, skill, 1.0F);
+					float power = 1.0F;
+					if (ability.hasTag("power", NBTType.NBTTagInt) || ability.hasTag("power", NBTType.NBTTagFloat)) {
+						power = ability.getFloat("power");
+					}
+					SkillCooldown cd = new SkillCooldown(player);
+					if (ability.hasTag("cooldown", NBTType.NBTTagInt)) {
+						cd.setCooldown(skill, ability.getInteger("cooldown"));
+					}
+					if (!cd.hasCooldown(skill)) {
+						cast(player, skill, power);
+					}
 				}
 			}
 		}
