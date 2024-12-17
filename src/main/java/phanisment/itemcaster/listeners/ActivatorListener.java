@@ -121,16 +121,7 @@ public class ActivatorListener implements Listener {
 				if (Bukkit.getOnlinePlayers().isEmpty()) return;
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					runSkill(player, SkillActivator.Activator.TICK);
-					
-					Map<String, Integer> cd = SkillCooldown.getData().get(player);
-					cd.keySet().forEach(skill -> {
-						int n = cd.getOrDefault(skill, 0);
-						if (n > 0) {
-							cd.put(skill, n--);
-						} else {
-							cd.remove(skill);
-						}
-					});
+					new SkillCooldown(player).runTick();
 				}
 			}
 		}.runTaskTimer(pl, 0L, 1L);

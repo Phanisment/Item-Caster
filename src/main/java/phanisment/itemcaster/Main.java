@@ -13,6 +13,7 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
+		ActivatorListener.runTick(this);
 		Bukkit.getPluginManager().registerEvents(new MythicMobsListener(), this);
 		Bukkit.getPluginManager().registerEvents(new ActivatorListener(), this);
 		getCommand("itemcaster").setExecutor(new ItemCasterCommand());

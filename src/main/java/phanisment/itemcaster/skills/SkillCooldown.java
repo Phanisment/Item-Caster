@@ -2,11 +2,10 @@ package phanisment.itemcaster.skills;
 
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class SkillCooldown {
-	private static final Map<Player, Map<String, Integer>> data = new HashMap<>();
+	private static Map<Player, Map<String, Integer>> data = new HashMap<>();
 	private final Player player;
 
 	public SkillCooldown(Player player) {
@@ -16,7 +15,6 @@ public class SkillCooldown {
 
 	public void setCooldown(String skill, int duration) {
 		Map<String, Integer> cd = data.get(player);
-		player.sendMessage("Set Cooldown [" + skill + "](" + player.getName() + "): "+ duration);
 		cd.put(skill, duration);
 	}
 
@@ -25,7 +23,17 @@ public class SkillCooldown {
 		return cd.containsKey(skill);
 	}
 
-	public static Map<Player, Map<String, Integer>> getData() {
-		return data;
+	public void runTick() {
+		Map<String, Integer> cd = data.get(player);
+		if (cd == null || cd.isEmpty()) return;
+		List<String> expiredSkills = new ArrayList<>();
+		cd.forEach((skill, duration) -> {
+			if (duration >= 1) {
+				cd.put(skill, duration - 1);
+			} else {
+				expiredSkills.add(skill);
+			}
+		});
+		expiredSkills.forEach(cd::remove);
 	}
 }

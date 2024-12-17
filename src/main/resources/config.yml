@@ -5,8 +5,3 @@
 # Dont't touch this!
 # If you don't know what means of this.
 version: 1.0
-
-# Debugging feature for this plugin.
-# If you want try, just make it true
-debugging:
-  cooldown: false

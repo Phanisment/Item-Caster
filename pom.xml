@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>phanisment</groupId>
 	<artifactId>ItemCaster</artifactId>
-	<version>1.0.0_indev</version>
+	<version>1.0.1</version>
 
 	<build>
 		<finalName>${project.name}-${project.version}</finalName>

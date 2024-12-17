@@ -32,11 +32,11 @@ public class SkillActivator {
 						power = ability.getFloat("power");
 					}
 					SkillCooldown cd = new SkillCooldown(player);
-					if (ability.hasTag("cooldown", NBTType.NBTTagInt)) {
-						cd.setCooldown(skill, ability.getInteger("cooldown"));
-					}
 					if (!cd.hasCooldown(skill)) {
 						cast(player, skill, power);
+						if (ability.hasTag("cooldown", NBTType.NBTTagInt)) {
+							cd.setCooldown(skill, ability.getInteger("cooldown"));
+						}
 					}
 				}
 			}

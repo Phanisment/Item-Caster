@@ -1,8 +1,11 @@
 package phanisment.itemcaster.listeners;
 
-import io.lumine.mythic.bukkit.events.MythicConditionLoadEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+
+import io.lumine.mythic.bukkit.events.MythicConditionLoadEvent;
+import io.lumine.mythic.bukkit.events.MythicPlayerSignalEvent;
+
 import phanisment.itemcaster.skills.conditions.AttackCooldownCondition;
 
 public class MythicMobsListener implements Listener {
@@ -12,4 +15,8 @@ public class MythicMobsListener implements Listener {
 			event.register(new AttackCooldownCondition(event.getConfig()));
 		}
 	}
+	/*
+	public void onSignal(MythicPlayerSignalEvent event) {
+		Player player = (Player)event.getProfile().getEntity().getBukkitEntity();
+	}*/
 }
