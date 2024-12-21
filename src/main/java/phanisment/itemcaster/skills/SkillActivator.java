@@ -55,8 +55,10 @@ public class SkillActivator {
 		SNEAK, UNSNEAK,
 		ATTACK, DAMAGED,
 		CONSUME, BOW_SHOOT,
-		DEATH,
-		DROP, PICKUP, 
+		DEATH, ITEM_BREAK,
+		DROP, PICKUP,
+		CHANGE_SLOT,
+		LOGIN, QUIT,
 		SIGNAL, TICK;
 	}
 }

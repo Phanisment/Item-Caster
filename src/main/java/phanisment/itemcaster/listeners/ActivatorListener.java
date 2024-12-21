@@ -8,17 +8,23 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
+
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerAnimationEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
+import org.bukkit.event.player.PlayerItemBreakEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import phanisment.itemcaster.skills.SkillActivator;
 import phanisment.itemcaster.skills.SkillCooldown;
@@ -44,7 +50,20 @@ public class ActivatorListener implements Listener {
 	@EventHandler
 	public void onPlayerSwing(PlayerAnimationEvent event) {
 		Player player = event.getPlayer();
-		runSkill(player, SkillActivator.Activator.LEFT_CLICK);
+		switch (event.getAnimationType()) {
+			case ARM_SWING:
+				ItemStack hand = player.getInventory().getItemInMainHand();
+				if (hand != null || hand.getType() != Material.AIR) {
+					new SkillActivator(player, hand, SkillActivator.Activator.LEFT_CLICK);
+				}
+				break;
+			case OFF_ARM_SWING:
+				ItemStack offHand = player.getInventory().getItemInOffHand();
+				if (offHand != null || offHand.getType() != Material.AIR) {
+					new SkillActivator(player, offHand, SkillActivator.Activator.LEFT_CLICK);
+				}
+				break;
+		}
 	}
 
 	@EventHandler
@@ -112,6 +131,33 @@ public class ActivatorListener implements Listener {
 	public void onPlayerDeath(PlayerDeathEvent event) {
 		Player player = event.getEntity();
 		runSkill(player, SkillActivator.Activator.DEATH);
+	}
+	
+	@EventHandler
+	public void onLogin(PlayerLoginEvent event) {
+		Player player = event.getPlayer();
+		runSkill(player, SkillActivator.Activator.LOGIN);
+	}
+
+	@EventHandler
+	public void onQuit(PlayerQuitEvent event) {
+		Player player = event.getPlayer();
+		runSkill(player, SkillActivator.Activator.QUIT);
+	}
+	
+	@EventHandler
+	public void onChangeSlot(PlayerItemHeldEvent event) {
+		Player player = event.getPlayer();
+		runSkill(player, SkillActivator.Activator.CHANGE_SLOT);
+	}
+
+	@EventHandler
+	public void onItemBreak(PlayerItemBreakEvent event) {
+		Player player = event.getPlayer();
+		ItemStack item = event.getBrokenItem();
+		if (item != null || item.getType() != Material.AIR) {
+			new SkillActivator(player, item, SkillActivator.Activator.ITEM_BREAK);
+		}
 	}
 
 	public static void runTick(Main pl) {

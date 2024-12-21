@@ -18,6 +18,6 @@ commands:
     permission: itemcaster.admin
     aliases: [itemcast, icaster, itemc, icast, ic]
 permission:
-  "itemcaster.admin":
+  itemcaster.admin:
     description: Admin Permission.
     default: false
