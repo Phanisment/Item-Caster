@@ -1,9 +1,12 @@
 items:
   example:
     type: STICK
-    displayname: "<gradient:#FFFFFF:#0000FF>Example"
+    displayname: "Example"
     options:
       modeldata: 1
       unbreakable: true
     lore:
-    - "Just generic Item."
+    - "&7Just generic Item."
+    abilities:
+    - skill: SummonSkeletons
+      activator: right_click
