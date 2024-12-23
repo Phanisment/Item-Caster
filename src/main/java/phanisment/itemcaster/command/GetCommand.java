@@ -40,12 +40,9 @@ public class GetCommand implements SubCommand {
 	@Override
 	public List<String> tabComplete(CommandSender sender, String[] args) {
 		List<String> completions = new ArrayList<>();
-		
-		if (args.length == 1) {
+		if (args.length == 2) {
 			Map<String, ItemStack> items = plugin.itemConfig.getItemList();
-			items.keySet().forEach(key -> {
-				completions.add(key);
-			});
+			items.keySet().forEach(key -> completions.add(key));
 		}
 		return completions;
 	}

@@ -5,9 +5,6 @@ import org.bukkit.command.CommandSender;
 import phanisment.itemcaster.command.SubCommand;
 import phanisment.itemcaster.Main;
 
-import java.util.Collections;
-import java.util.List;
-
 public class ReloadCommand implements SubCommand {
 	private Main plugin;
 	

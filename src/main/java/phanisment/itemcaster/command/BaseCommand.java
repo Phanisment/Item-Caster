@@ -14,11 +14,12 @@ import java.util.List;
 import java.util.Map;
 
 public class BaseCommand implements CommandExecutor, TabCompleter {
-	private final Map<String, SubCommand> commands = new HashMap<>();
+	private static final Map<String, SubCommand> commands = new HashMap<>();
 	private final Main plugin;
 	
 	public BaseCommand(Main plugin) {
 		this.plugin = plugin;
+		
 		commands.put("reload", new ReloadCommand(plugin));
 		commands.put("get", new GetCommand(plugin));
 	}
@@ -43,10 +44,11 @@ public class BaseCommand implements CommandExecutor, TabCompleter {
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		List<String> completions = new ArrayList<>();
-		if (args.length == 0) {
-			completions.add("reload");
-			completions.add("get");
-		} else if (args.length > 0) {
+		if (args.length == 1) {
+			for (String sub : commands.keySet()) {
+				completions.add(sub);
+			}
+		} else if (args.length > 1) {
 			SubCommand cmd = commands.get(args[0].toLowerCase());
 			if (cmd != null) {
 				completions = cmd.tabComplete(sender, args);

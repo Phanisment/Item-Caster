@@ -1,0 +1,9 @@
+items:
+  example:
+    type: STICK
+    displayname: "<gradient:#FFFFFF:#0000FF>Example"
+    options:
+      modeldata: 1
+      unbreakable: true
+    lore:
+    - "Just generic Item."
