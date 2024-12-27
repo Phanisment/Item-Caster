@@ -7,9 +7,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.inventory.EquipmentSlot;
 
 import de.tr7zw.nbtapi.NBT;
 import de.tr7zw.nbtapi.NBTItem;
@@ -17,8 +17,17 @@ import de.tr7zw.nbtapi.NBTCompound;
 import de.tr7zw.nbtapi.NBTCompoundList;
 import de.tr7zw.nbtapi.iface.ReadWriteNBT;
 
+import io.lumine.mythic.bukkit.BukkitAdapter;
+import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.items.MythicItem;
+
+import dev.lone.itemsadder.api.CustomStack;
+
+import phanisment.itemcaster.Main;
+
 import java.io.File;
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,9 +35,9 @@ import java.util.UUID;
 
 public class ItemConfig {
 	private static final Map<String, ItemStack> items = new HashMap<>();
-	private final JavaPlugin plugin;
+	private final Main plugin;
 
-	public ItemConfig(JavaPlugin plugin) {
+	public ItemConfig(Main plugin) {
 		this.plugin = plugin;
 		loadItems();
 	}
@@ -77,11 +86,39 @@ public class ItemConfig {
 
 	private ItemStack createItem(String type, String nbtString, String displayName, List<String> lore, Map<String, Object> options, List<String> enchants, List<Map<String, Object>> abilities, List<String> attributes, List<String> hideFlags) {
 		try {
-			Material material = Material.valueOf(type.toUpperCase());
-			ItemStack item = new ItemStack(material);
-			ItemMeta meta = item.getItemMeta();
+			ItemStack item = new ItemStack(Material.STONE);
 			
+			if (type.contains(":")) {
+				String[] parts = type.split(":");
+				String plugin = parts[0];
+				String name = parts[1];
+				switch(plugin.toLowerCase()) {
+					case "mythicmobs":
+						Optional<MythicItem> mythicItem = MythicBukkit.inst().getItemManager().getItem(name);
+						if (mythicItem.isPresent()) {
+							MythicItem mi = mythicItem.get();
+							item = BukkitAdapter.adapt(mi.generateItemStack(1));
+						} else {
+							this.plugin.getLogger().warning("MythicMobs item not found: " + name);
+						}
+						break;
+					case "itemsadder":
+						if (CustomStack.isInRegistry(name + parts[2]) && this.plugin.hasItemsAdder) {
+							item = CustomStack.getInstance(name + parts[2]).getItemStack();
+						}
+						break;
+					default:
+						this.plugin.getLogger().warning("Unknown external type: " + plugin);
+						break;
+				}
+			} else {
+				Material material = Material.valueOf(type.toUpperCase());
+				item = new ItemStack(material);
+			}
+			
+			ItemMeta meta = item.getItemMeta();
 			if (meta != null) {
+				// Display Name
 				meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&r" + displayName));
 				
 				// Lore
@@ -121,21 +158,31 @@ public class ItemConfig {
 				if (attributes != null) {
 					for (String attributeEntry : attributes) {
 						String[] parts = attributeEntry.split(" ");
-						if (parts.length == 2) {
-							String attributeName = parts[0].toUpperCase();
-							double value = Double.parseDouble(parts[1]);
-							Attribute attribute;
+						if (parts.length == 3) {
 							try {
-								attribute = Attribute.valueOf(attributeName.toUpperCase());
-							} catch (IllegalArgumentException e) {
-								attribute = null;
-							}
-							if (attribute != null) {
-								AttributeModifier modifier = new AttributeModifier(UUID.randomUUID(), attributeName, value, AttributeModifier.Operation.ADD_NUMBER);
-								meta.addAttributeModifier(attribute, modifier);
+								String attributeName = parts[0].toUpperCase();
+								double value = Double.parseDouble(parts[1]);
+								String slotName = parts[2].toUpperCase();
+				
+								Attribute attribute = Attribute.valueOf(attributeName);
+								EquipmentSlot slot = EquipmentSlot.valueOf(slotName);
+				
+								AttributeModifier modifier = new AttributeModifier(
+									UUID.randomUUID(),
+									attributeName + "_" + slotName,
+									value,
+									AttributeModifier.Operation.ADD_NUMBER,
+									slot
+								);
+				
+								if (meta != null) {
+									meta.addAttributeModifier(attribute, modifier);
+								}
+							} catch (IllegalArgumentException | NullPointerException e) {
+								plugin.getLogger().warning("Invalid attribute entry: " + attributeEntry + " (" + e.getMessage() + ")");
 							}
 						} else {
-							plugin.getLogger().warning("Format attribute is invalid: " + attributeEntry);
+							plugin.getLogger().warning("Invalid attribute format: " + attributeEntry);
 						}
 					}
 				}

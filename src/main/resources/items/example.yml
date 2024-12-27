@@ -1,3 +1,6 @@
+# This is example item configuration,
+# you can delete this file if you want.
+
 items:
   example:
     type: STICK

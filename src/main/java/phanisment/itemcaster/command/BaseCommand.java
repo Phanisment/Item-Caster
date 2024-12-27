@@ -22,10 +22,11 @@ public class BaseCommand implements CommandExecutor, TabCompleter {
 		
 		commands.put("reload", new ReloadCommand(plugin));
 		commands.put("get", new GetCommand(plugin));
+		commands.put("test",new TestCommand(plugin));
 	}
 	
 	@Override
-	public boolean onCommand(CommandSender sender ,Command command, String label, String[] args) {
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		if (sender.hasPermission("itemcaster.admin")) {
 			if (args.length < 1) {
 				sender.sendMessage("[ItemCaster] This is base command for this plugin.");

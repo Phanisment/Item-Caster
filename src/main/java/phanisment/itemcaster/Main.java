@@ -9,6 +9,10 @@ import phanisment.itemcaster.listeners.ActivatorListener;
 import phanisment.itemcaster.config.ItemConfig;
 
 public class Main extends JavaPlugin {
+	public static boolean isPaperMc = false;
+	public static boolean hasOraxen = false;
+	public static boolean hasItemsAdder = false;
+	public static boolean hasNexo = false;
 	public ItemConfig itemConfig;
 	
 	@Override
@@ -19,6 +23,11 @@ public class Main extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new ActivatorListener(), this);
 		getCommand("itemcaster").setExecutor(new BaseCommand(this));
 		getCommand("itemcaster").setTabCompleter(new BaseCommand(this));
+		
+		if (Bukkit.getPluginManager().getPlugin("ItemsAdder").isEnabled()) {
+			this.hasItemsAdder = true;
+			getLogger().info("ItemsAdder detected, activate ItemsAdder exclusive feature");
+		}
 	}
 
 	@Override

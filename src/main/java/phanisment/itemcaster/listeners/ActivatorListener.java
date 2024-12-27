@@ -97,6 +97,12 @@ public class ActivatorListener implements Listener {
 		if (event.getDamager() instanceof Player) {
 			Player player = (Player)event.getDamager();
 			runSkill(player, SkillActivator.Activator.ATTACK);
+			if (player.isSprinting()) {
+				runSkill(player, SkillActivator.Activator.SPRINT_ATTACK);
+			}
+			if (!player.isOnGround()) {
+				runSkill(player, SkillActivator.Activator.CRITICAL_ATTACK);
+			}
 		}
 	}
 

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.phanisment</groupId>
 	<artifactId>ItemCaster</artifactId>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 
 	<build>
 		<finalName>${project.name}-${project.version}</finalName>
@@ -41,17 +41,10 @@
 			<name>Lumine Releases</name>
 			<url>https://mvn.lumine.io/repository/maven-public/</url>
 		</repository>
-		<!--
 		<repository>
 			<id>jitpack-repo</id>
 			<url>https://jitpack.io</url>
 		</repository>
-		<repository>
-			<id>oraxen</id>
-			<name>Oraxen Repository</name>
-			<url>https://repo.oraxen.com/releases</url>
-		</repository>
-		-->
 	</repositories>
 
 	<dependencies>
@@ -78,19 +71,13 @@
 			<artifactId>adventure-api</artifactId>
 			<version>4.12.0</version>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>com.github.LoneDev6</groupId>
 			<artifactId>api-itemsadder</artifactId>
 			<version>3.6.1</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>io.th0rgal</groupId>
-			<artifactId>oraxen</artifactId>
-			<version>1.167.0</version>
-			<scope>provided</scope>
-		</dependency>
-		-->
 	</dependencies>
 
 	<properties>

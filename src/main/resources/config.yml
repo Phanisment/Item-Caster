@@ -5,3 +5,8 @@
 # Dont't touch this!
 # If you don't know what means of this.
 version: 1.0
+
+test:
+  item: STONE
+  displayname: "Test Item"
+  modeldata: 1
