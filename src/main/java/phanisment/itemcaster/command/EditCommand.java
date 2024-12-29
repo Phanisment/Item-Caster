@@ -5,17 +5,17 @@ import org.bukkit.command.CommandSender;
 import phanisment.itemcaster.command.SubCommand;
 import phanisment.itemcaster.Main;
 
-public class ReloadCommand implements SubCommand {
+import java.io.File;
+
+public class EditCommand implements SubCommand {
 	private Main plugin;
 	
-	public ReloadCommand(Main plugin) {
+	public EditCommand(Main plugin) {
 		this.plugin = plugin;
 	}
 	
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		plugin.reloadConfig();
-		plugin.itemConfig.loadItems();
-		sender.sendMessage("[ItemCaster] Reload Done!");
+		sender.sendMessage("[ItemCaster] In development.");
 	}
 }

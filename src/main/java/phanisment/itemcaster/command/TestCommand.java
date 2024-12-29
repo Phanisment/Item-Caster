@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.StringUtil;
 
+import de.tr7zw.nbtapi.NBTCompoundList;
 import de.tr7zw.nbtapi.NBTCompound;
 import de.tr7zw.nbtapi.NBTItem;
 
@@ -61,25 +62,23 @@ public class TestCommand implements SubCommand {
 					}
 				}
 			}
-	
 			Material material = Material.valueOf(config.getString("test.item", "STONE").toUpperCase());
 			ItemStack item = new ItemStack(material);
 			ItemMeta meta = item.getItemMeta();
-	
 			if (meta != null) {
-				meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', config.getString("test.displayname", "&rTest Item")));
+				meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&r" + config.getString("test.displayname")));
 				if (config.contains("test.modeldata")) {
 					meta.setCustomModelData(config.getInt("test.modeldata"));
 				}
 				item.setItemMeta(meta);
 			}
-	
 			NBTItem nbtItem = new NBTItem(item);
-			NBTCompound artifactCompound = nbtItem.addCompound("Artifact");
-			artifactCompound.setString("skill", skill);
-			artifactCompound.setString("activator", activator);
-			if (cooldown > 0) artifactCompound.setInteger("cooldown", cooldown);
-			if (power > 0) artifactCompound.setFloat("power", power);
+			NBTCompoundList artifactList = nbtItem.getCompoundList("Artifact");
+			NBTCompound skillCompound = artifactList.addCompound();
+			skillCompound.setString("skill", skill);
+			skillCompound.setString("activator", activator);
+			if (cooldown > 0) skillCompound.setInteger("cooldown", cooldown);
+			if (power > 0) skillCompound.setFloat("power", power);
 			player.getInventory().addItem(nbtItem.getItem());
 			player.sendMessage("[ItemCaster] Test item created with skill: " + skill);
 		} else {
@@ -93,16 +92,6 @@ public class TestCommand implements SubCommand {
 			return (List)StringUtil.copyPartialMatches((String)args[1], MythicBukkit.inst().getSkillManager().getSkillNames(), new ArrayList());
 		} else if (args.length == 3) {
 			return getActivatorList();
-		} else if (args.length > 3) {
-			if (args[args.length - 1].equalsIgnoreCase("-c")) {
-				return List.of("5", "10", "20");
-			} else if (args[args.length - 1].equalsIgnoreCase("-p")) {
-				return List.of("1", "2", "5");
-			} else if (args[args.length - 2].equalsIgnoreCase("-c")) {
-				return List.of("5", "10", "20");
-			} else if (args[args.length - 2].equalsIgnoreCase("-p")) {
-				return List.of("1", "2", "5");
-			}
 		}
 		return new ArrayList<>();
 	}
@@ -115,3 +104,4 @@ public class TestCommand implements SubCommand {
 		return activators;
 	}
 }
+// player.getInventory().addItem(nbtItem.getItem());

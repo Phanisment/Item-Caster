@@ -49,7 +49,7 @@ public class ItemConfig {
 			itemFolder.mkdirs();
 			plugin.saveResource("items/example.yml", false);
 		}
-		File[] files = itemFolder.listFiles();
+		File[] files = itemFolder.listFiles((dir, name) -> name.endsWith(".yml") && !name.contains(" "));
 		if (files != null) {
 			for (File file : files) {
 				if (file.isFile()) {
@@ -61,10 +61,11 @@ public class ItemConfig {
 
 	private void loadFileConfig(File file) {
 		YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+		String fileName = file.getName().replace(".yml", "").toLowerCase();
 		if (config.contains("items")) {
 			for (String id : config.getConfigurationSection("items").getKeys(false)) {
 				String type = config.getString("items." + id + ".type", "STONE");
-				String displayName = config.getString("items." + id + ".displayname", id);
+				String displayName = config.getString("items." + id + ".displayname");
 				List<String> lore = config.getStringList("items." + id + ".lore");
 				List<String> enchants = config.getStringList("items." + id + ".enchantments");
 				List<String> attributes = config.getStringList("items." + id + ".attributes");
@@ -74,7 +75,7 @@ public class ItemConfig {
 				List<Map<String, Object>> abilities = (List<Map<String, Object>>)config.get("items." + id + ".abilities");
 				ItemStack item = createItem(type, nbtString, displayName, lore, options, enchants, abilities, attributes, hideFlags);
 				if (item != null) {
-					items.put(id.toLowerCase(), item);
+					items.put(fileName + ":" + id.toLowerCase(), item);
 				} else {
 					plugin.getLogger().warning("Can not load item [" + id + "] form file [" + file.getName() + "].");
 				}
@@ -103,8 +104,9 @@ public class ItemConfig {
 						}
 						break;
 					case "itemsadder":
-						if (CustomStack.isInRegistry(name + parts[2]) && this.plugin.hasItemsAdder) {
-							item = CustomStack.getInstance(name + parts[2]).getItemStack();
+						if (Main.hasItemsAdder) {
+							CustomStack stack = CustomStack.getInstance(name + ":" + parts[2]);
+							if (stack != null) item = stack.getItemStack();
 						}
 						break;
 					default:
@@ -118,8 +120,9 @@ public class ItemConfig {
 			
 			ItemMeta meta = item.getItemMeta();
 			if (meta != null) {
+				
 				// Display Name
-				meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&r" + displayName));
+				if (displayName != null) meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&r" + displayName));
 				
 				// Lore
 				if (!lore.isEmpty()) {
@@ -163,10 +166,8 @@ public class ItemConfig {
 								String attributeName = parts[0].toUpperCase();
 								double value = Double.parseDouble(parts[1]);
 								String slotName = parts[2].toUpperCase();
-				
 								Attribute attribute = Attribute.valueOf(attributeName);
 								EquipmentSlot slot = EquipmentSlot.valueOf(slotName);
-				
 								AttributeModifier modifier = new AttributeModifier(
 									UUID.randomUUID(),
 									attributeName + "_" + slotName,
@@ -174,10 +175,7 @@ public class ItemConfig {
 									AttributeModifier.Operation.ADD_NUMBER,
 									slot
 								);
-				
-								if (meta != null) {
-									meta.addAttributeModifier(attribute, modifier);
-								}
+								meta.addAttributeModifier(attribute, modifier);
 							} catch (IllegalArgumentException | NullPointerException e) {
 								plugin.getLogger().warning("Invalid attribute entry: " + attributeEntry + " (" + e.getMessage() + ")");
 							}
@@ -268,6 +266,22 @@ public class ItemConfig {
 			}
 		}
 		return options;
+	}
+
+	public List<String> getListFile() {
+		File itemFolder = new File(plugin.getDataFolder(), "items");
+		List<String> fileList = new ArrayList<>();
+		if (itemFolder.exists() && itemFolder.isDirectory()) {
+			File[] files = itemFolder.listFiles((dir, name) -> name.endsWith(".yml") && !name.contains(" "));;
+			if (files != null) {
+				for (File file : files) {
+					if (file.isFile()) {
+						fileList.add(file.getName());
+					}
+				}
+			}
+		}
+		return fileList;
 	}
 
 	public ItemStack getItem(String id) {

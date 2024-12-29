@@ -22,7 +22,9 @@ public class BaseCommand implements CommandExecutor, TabCompleter {
 		
 		commands.put("reload", new ReloadCommand(plugin));
 		commands.put("get", new GetCommand(plugin));
-		commands.put("test",new TestCommand(plugin));
+		commands.put("test", new TestCommand(plugin));
+		commands.put("edit", new EditCommand(plugin));
+		
 	}
 	
 	@Override
