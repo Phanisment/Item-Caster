@@ -7,4 +7,6 @@
 You dont know how to use this plugin? read this [Wiki](https://github.com/Phanisment/Item-Caster/wiki).
 
 Library Credits:
-- [triumph-gui](https://github.com/TriumphTeam/triumph-gui)
+- [NBT-API](https://github.com/tr7zw/Item-NBT-API)
+- [Adventure](https://github.com/KyoriPowered/adventure)
+- [ObliviateInvs](https://github.com/hamza-cskn/obliviate-invs)

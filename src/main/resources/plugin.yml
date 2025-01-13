@@ -2,16 +2,14 @@ name: ItemCaster
 version: ${project.version}
 author: Phanisment
 description: Cast MythicMobs Skill with NBT item.
-main: phanisment.itemcaster.Main
+main: io.phanisment.itemcaster.ItemCaster
 api-version: 1.20
 depend:
 - MythicMobs
 - NBTAPI
 softdepend:
-- Nexo
-- Oraxen
-- ItemsAdder
 - PlaceholderAPI
+- ItemsAdder
 commands:
   itemcaster:
     description: Main command.

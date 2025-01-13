@@ -1,4 +1,4 @@
-package phanisment.itemcaster.skills.conditions;
+package io.phanisment.itemcaster.skills.conditions;
 
 import io.lumine.mythic.api.adapters.AbstractEntity;
 import io.lumine.mythic.api.config.MythicLineConfig;
@@ -8,8 +8,6 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 public class AttackCooldownCondition implements IEntityCondition {
-	public AttackCooldownCondition(MythicLineConfig config) {}
-	
 	@Override
 	public boolean check(AbstractEntity target) {
 		Entity entity = target.getBukkitEntity();

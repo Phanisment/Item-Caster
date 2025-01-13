@@ -1,4 +1,4 @@
-package phanisment.itemcaster.listeners;
+package io.phanisment.itemcaster.listeners;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -14,6 +14,11 @@ import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDamageEvent;
+import org.bukkit.event.block.BlockDamageAbortEvent;
+
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerAnimationEvent;
@@ -25,14 +30,23 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerItemBreakEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerFishEvent;
+import org.bukkit.event.player.PlayerToggleSprintEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
-import phanisment.itemcaster.skills.SkillActivator;
-import phanisment.itemcaster.skills.SkillCooldown;
-import phanisment.itemcaster.Main;
+import io.phanisment.itemcaster.skills.SkillActivator;
+import io.phanisment.itemcaster.skills.SkillCooldown;
+import io.phanisment.itemcaster.ItemCaster;
 
 import java.util.Map;
 
 public class ActivatorListener implements Listener {
+	private ItemCaster plugin;
+	
+	public ActivatorListener(ItemCaster plugin) {
+		this.plugin = plugin;
+	}
+	
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
@@ -97,11 +111,27 @@ public class ActivatorListener implements Listener {
 		if (event.getDamager() instanceof Player) {
 			Player player = (Player)event.getDamager();
 			runSkill(player, SkillActivator.Activator.ATTACK);
-			if (player.isSprinting()) {
-				runSkill(player, SkillActivator.Activator.SPRINT_ATTACK);
-			}
-			if (!player.isOnGround()) {
-				runSkill(player, SkillActivator.Activator.CRITICAL_ATTACK);
+			switch(event.getCause()) {
+				case FALL:
+					runSkill(player, SkillActivator.Activator.FALL_DAMAGE);
+					break;
+				case FIRE:
+					runSkill(player, SkillActivator.Activator.FIRE_DAMAGE);
+					break;
+				case FIRE_TICK:
+					runSkill(player, SkillActivator.Activator.FIRE_TICK_DAMAGE);
+					break;
+				case FREEZE:
+					runSkill(player, SkillActivator.Activator.FREEZE_DAMAGE);
+					break;
+				case LIGHTNING:
+					runSkill(player, SkillActivator.Activator.LIGHTNING_DAMAGE);
+					break;
+				case VOID:
+					runSkill(player, SkillActivator.Activator.VOID_DAMAGE);
+					break;
+				case WITHER:
+					runSkill(player, SkillActivator.Activator.WITHER_DAMAGE);
 			}
 		}
 	}
@@ -109,6 +139,7 @@ public class ActivatorListener implements Listener {
 	@EventHandler
 	public void onPlayerToggleSneak(PlayerToggleSneakEvent event) {
 		Player player = event.getPlayer();
+		runSkill(player, SkillActivator.Activator.TOGGLE_SNEAK);
 		if (event.isSneaking()) {
 			runSkill(player, SkillActivator.Activator.SNEAK);
 		} else {
@@ -166,7 +197,72 @@ public class ActivatorListener implements Listener {
 		}
 	}
 
-	public static void runTick(Main pl) {
+	@EventHandler
+	public void onFish(PlayerFishEvent event) {
+		Player player = event.getPlayer();
+		runSkill(player, SkillActivator.Activator.FISHING);
+	}
+	
+	@EventHandler
+	public void onSprint(PlayerToggleSprintEvent event) {
+		Player player = event.getPlayer();
+		runSkill(player, SkillActivator.Activator.TOGGLE_SPRINT);
+		if (event.isSprinting()) {
+			runSkill(player, SkillActivator.Activator.SPRINT);
+		} else {
+			runSkill(player, SkillActivator.Activator.UNSPRINT);
+		}
+	}
+
+	@EventHandler
+	public void onPlace(BlockPlaceEvent event) {
+		Player player = event.getPlayer();
+		ItemStack item = event.getItemInHand();
+		if (item != null || item.getType() != Material.AIR) {
+			new SkillActivator(player, item, SkillActivator.Activator.BLOCK_PLACE);
+		}
+	}
+	
+	@EventHandler
+	public void onBreak(BlockBreakEvent event) {
+		Player player = event.getPlayer();
+		runSkill(player, SkillActivator.Activator.BLOCK_BREAK);
+	}
+	
+	@EventHandler
+	public void onBlockDamaged(BlockDamageEvent event) {
+		Player player = event.getPlayer();
+		ItemStack item = event.getItemInHand();
+		if (item != null || item.getType() != Material.AIR) {
+			new SkillActivator(player, item, SkillActivator.Activator.BLOCK_DAMAGED);
+		}
+	}
+
+	@EventHandler
+	public void onBlockStopDamaged(BlockDamageAbortEvent event) {
+		Player player = event.getPlayer();
+		ItemStack item = event.getItemInHand();
+		if (item != null || item.getType() != Material.AIR) {
+			new SkillActivator(player, item, SkillActivator.Activator.BLOCK_STOP_DAMAGED);
+		}
+	}
+
+	@EventHandler
+	public void onTeleport(PlayerTeleportEvent event) {
+		Player player = event.getPlayer();
+		runSkill(player, SkillActivator.Activator.TELEPORT);
+	}
+/*
+	@EventHandler
+	public void onChangeArmor(PlayerArmorChangeEvent event) {
+		Player player = event.getPlayer();
+		ItemStack item = event.getNewItem();
+		if (item != null || item.getType() != Material.AIR) {
+			new SkillActivator(player, item, SkillActivator.Activator.CHANGE_ARMOR);
+		}
+	}
+*/
+	public static void runTick(ItemCaster pl) {
 		new BukkitRunnable() {
 			@Override
 			public void run() {
@@ -181,12 +277,8 @@ public class ActivatorListener implements Listener {
 	
 	private static void runSkill(Player player, SkillActivator.Activator type) {
 		ItemStack hand = player.getInventory().getItemInMainHand();
-		if (hand != null || hand.getType() != Material.AIR) {
-			new SkillActivator(player, hand, type);
-		}
+		if (hand != null || hand.getType() != Material.AIR) new SkillActivator(player, hand, type);
 		ItemStack offHand = player.getInventory().getItemInOffHand();
-		if (offHand != null || offHand.getType() != Material.AIR) {
-			new SkillActivator(player, offHand, type);
-		}
+		if (offHand != null || offHand.getType() != Material.AIR) new SkillActivator(player, offHand, type);
 	}
 }

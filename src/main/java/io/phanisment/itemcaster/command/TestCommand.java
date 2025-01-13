@@ -1,4 +1,4 @@
-package phanisment.itemcaster.command;
+package io.phanisment.itemcaster.command;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.ChatColor;
@@ -15,27 +15,34 @@ import de.tr7zw.nbtapi.NBTItem;
 
 import io.lumine.mythic.bukkit.MythicBukkit;
 
-import phanisment.itemcaster.Main;
-import phanisment.itemcaster.command.SubCommand;
-import phanisment.itemcaster.skills.SkillActivator.Activator;
+import io.phanisment.itemcaster.ItemCaster;
+import io.phanisment.itemcaster.command.SubCommand;
+import io.phanisment.itemcaster.skills.SkillActivator.Activator;
+import io.phanisment.itemcaster.util.Legacy;
+import io.phanisment.itemcaster.util.Message;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestCommand implements SubCommand {
-	private final Main plugin;
+	private final ItemCaster plugin;
 	private final FileConfiguration config;
-
-	public TestCommand(Main plugin) {
+	
+	public TestCommand(ItemCaster plugin) {
 		this.plugin = plugin;
-		this.config = plugin.getConfig();
+		this.config = plugin.getConfig("config");
+	}
+
+	@Override
+	public String[] getName() {
+		return new String[]{"test", "t"};
 	}
 
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		if (sender instanceof Player) {
 			if (args.length < 3) {
-				sender.sendMessage("[ItemCaster] Usage: /ic test <skill> <activator> [-c <cooldown>] [-p <power>]");
+				Message.send(sender, "Usage: /ic test <skill> <activator> [-c <cooldown>] [-p <power>]");
 				return;
 			}
 			Player player = (Player) sender;
@@ -49,7 +56,7 @@ public class TestCommand implements SubCommand {
 						cooldown = Integer.parseInt(args[i + 1]);
 						i++;
 					} catch (NumberFormatException e) {
-						player.sendMessage("[ItemCaster] Invalid cooldown value.");
+						Message.send(sender, "Invalid cooldown value.");
 						return;
 					}
 				} else if (args[i].equalsIgnoreCase("-p") && i + 1 < args.length) {
@@ -57,18 +64,18 @@ public class TestCommand implements SubCommand {
 						power = Float.parseFloat(args[i + 1]);
 						i++;
 					} catch (NumberFormatException e) {
-						player.sendMessage("[ItemCaster] Invalid power value.");
+						Message.send(sender, "Invalid power value.");
 						return;
 					}
 				}
 			}
-			Material material = Material.valueOf(config.getString("test.item", "STONE").toUpperCase());
+			Material material = Material.valueOf(config.getString("item_test.item", "STONE").toUpperCase());
 			ItemStack item = new ItemStack(material);
 			ItemMeta meta = item.getItemMeta();
 			if (meta != null) {
-				meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&r" + config.getString("test.displayname")));
-				if (config.contains("test.modeldata")) {
-					meta.setCustomModelData(config.getInt("test.modeldata"));
+				meta.setDisplayName(Legacy.serializer("<reset>" + config.getString("item_test.displayname")));
+				if (config.contains("item_test.modeldata")) {
+					meta.setCustomModelData(config.getInt("item_test.modeldata"));
 				}
 				item.setItemMeta(meta);
 			}
@@ -80,9 +87,7 @@ public class TestCommand implements SubCommand {
 			if (cooldown > 0) skillCompound.setInteger("cooldown", cooldown);
 			if (power > 0) skillCompound.setFloat("power", power);
 			player.getInventory().addItem(nbtItem.getItem());
-			player.sendMessage("[ItemCaster] Test item created with skill: " + skill);
-		} else {
-			sender.sendMessage("[ItemCaster] You cannot run this command from the console!");
+			Message.send(player, "Test item created with skill: " + skill);
 		}
 	}
 
@@ -104,4 +109,3 @@ public class TestCommand implements SubCommand {
 		return activators;
 	}
 }
-// player.getInventory().addItem(nbtItem.getItem());

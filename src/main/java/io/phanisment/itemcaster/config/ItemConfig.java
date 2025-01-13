@@ -1,4 +1,4 @@
-package phanisment.itemcaster.config;
+package io.phanisment.itemcaster.config;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -23,7 +23,8 @@ import io.lumine.mythic.core.items.MythicItem;
 
 import dev.lone.itemsadder.api.CustomStack;
 
-import phanisment.itemcaster.Main;
+import io.phanisment.itemcaster.ItemCaster;
+import io.phanisment.itemcaster.util.Legacy;
 
 import java.io.File;
 import java.util.HashMap;
@@ -35,9 +36,9 @@ import java.util.UUID;
 
 public class ItemConfig {
 	private static final Map<String, ItemStack> items = new HashMap<>();
-	private final Main plugin;
+	private final ItemCaster plugin;
 
-	public ItemConfig(Main plugin) {
+	public ItemConfig(ItemCaster plugin) {
 		this.plugin = plugin;
 		loadItems();
 	}
@@ -56,6 +57,34 @@ public class ItemConfig {
 					loadFileConfig(file);
 				}
 			}
+		}
+	}
+
+	public void loadItem(String fileName, String id) {
+		File itemFile = new File(plugin.getDataFolder(), "items/" + fileName);
+		if (!itemFile.exists()) {
+			plugin.getLogger().warning("File [" + fileName + "] does not exist.");
+			return;
+		}
+		if (!items.containsKey(fileName + ":" + id)) {
+			plugin.getLogger().warning("Item [" + id + "] not found in file [" + fileName + "].");
+			return;
+		}
+		YamlConfiguration config = YamlConfiguration.loadConfiguration(itemFile);
+		String type = config.getString("items." + id + ".type", "STONE");
+		String displayName = config.getString("items." + id + ".displayname");
+		List<String> lore = config.getStringList("items." + id + ".lore");
+		List<String> enchants = config.getStringList("items." + id + ".enchantments");
+		List<String> attributes = config.getStringList("items." + id + ".attributes");
+		List<String> hideFlags = config.getStringList("items." + id + ".hideflags");
+		Map<String, Object> options = parseOptions(config, id);
+		String nbtString = config.getString("items." + id + ".nbt", "{}");
+		List<Map<String, Object>> abilities = (List<Map<String, Object>>)config.get("items." + id + ".abilities");
+		ItemStack item = createItem(type, nbtString, displayName, lore, options, enchants, abilities, attributes, hideFlags);
+		if (item != null) {
+			items.put(fileName + ":" + id.toLowerCase(), item);
+		} else {
+			plugin.getLogger().warning("Can not load item [" + id + "] form file [" + fileName + "].");
 		}
 	}
 
@@ -104,7 +133,7 @@ public class ItemConfig {
 						}
 						break;
 					case "itemsadder":
-						if (Main.hasItemsAdder) {
+						if (this.plugin.hasItemsAdder()) {
 							CustomStack stack = CustomStack.getInstance(name + ":" + parts[2]);
 							if (stack != null) item = stack.getItemStack();
 						}
@@ -122,13 +151,13 @@ public class ItemConfig {
 			if (meta != null) {
 				
 				// Display Name
-				if (displayName != null) meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&r" + displayName));
+				if (displayName != null) meta.setDisplayName(Legacy.serializer("<reset>" + displayName));
 				
 				// Lore
 				if (!lore.isEmpty()) {
 					List<String> lores = new ArrayList<>();
 					for (String line : lore) {
-						lores.add(ChatColor.translateAlternateColorCodes('&', "&r" + line));
+						lores.add(Legacy.serializer("<reset>" + line));
 					}
 					meta.setLore(lores);
 				}
@@ -242,11 +271,34 @@ public class ItemConfig {
 					NBTCompound skillCompound = artifactList.addCompound();
 					skillCompound.setString("skill", (String)ability.get("skill"));
 					skillCompound.setString("activator", (String)ability.get("activator"));
+					
+					// Cooldown
 					if (ability.containsKey("cooldown")) {
 						skillCompound.setInteger("cooldown", (Integer)ability.get("cooldown"));
 					}
+					
+					// Power
 					if (ability.containsKey("power")) {
 						skillCompound.setFloat("power", (Float)ability.get("power"));
+					}
+					
+					// Variable
+					if (ability.containsKey("variable")) {
+						Map<String, Object> variable = (Map<String, Object>)ability.get("variable");
+						NBTCompound variableCompound = skillCompound.addCompound("variable");
+						for (Map.Entry<String, Object> entry : variable.entrySet()) {
+							String key = entry.getKey();
+							Object value = entry.getValue();
+							if (value instanceof String) {
+								variableCompound.setString(key, (String) value);
+							} else if (value instanceof Float) {
+								variableCompound.setFloat(key, (Float) value);
+							} else if (value instanceof Integer) {
+								variableCompound.setInteger(key, (Integer) value);
+							} else {
+								plugin.getLogger().warning("Unsupported variable type key in: " + key);
+							}
+						}
 					}
 				}
 			}

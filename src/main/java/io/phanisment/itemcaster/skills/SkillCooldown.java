@@ -1,8 +1,11 @@
-package phanisment.itemcaster.skills;
+package io.phanisment.itemcaster.skills;
 
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 
 public class SkillCooldown {
 	private static Map<Player, Map<String, Integer>> data = new HashMap<>();

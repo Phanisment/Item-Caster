@@ -1,12 +1,8 @@
-# © Phanisment | 2024
+# © Phanisment | 2025
 # Thanks for download this plugin, if you has
 # questions or error, just ask me in discord.
 
-# Dont't touch this!
-# If you don't know what means of this.
-version: 1.1
-
-test:
+item_test:
   item: stick
   displayname: "Test Item"
   modeldata: 1
