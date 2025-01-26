@@ -33,9 +33,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ItemConfig {
-	private static final Map<String, ItemStack> items = new HashMap<>();
+	public static Map<String, ItemStack> items = new HashMap<>();
 	private final ItemCaster plugin;
 
 	public ItemConfig(ItemCaster plugin) {
@@ -50,7 +52,8 @@ public class ItemConfig {
 			itemFolder.mkdirs();
 			plugin.saveResource("items/example.yml", false);
 		}
-		File[] files = itemFolder.listFiles((dir, name) -> name.endsWith(".yml") && !name.contains(" "));
+		Pattern pattern = Pattern.compile("^[a-zA-Z_]+\\.yml$");
+		File[] files = itemFolder.listFiles((dir, name) -> pattern.matcher(name).matches());
 		if (files != null) {
 			for (File file : files) {
 				if (file.isFile()) {
@@ -72,15 +75,16 @@ public class ItemConfig {
 		}
 		YamlConfiguration config = YamlConfiguration.loadConfiguration(itemFile);
 		String type = config.getString("items." + id + ".type", "STONE");
-		String displayName = config.getString("items." + id + ".displayname");
+		String displayName = config.getString("items." + id + ".display_name");
 		List<String> lore = config.getStringList("items." + id + ".lore");
 		List<String> enchants = config.getStringList("items." + id + ".enchantments");
 		List<String> attributes = config.getStringList("items." + id + ".attributes");
-		List<String> hideFlags = config.getStringList("items." + id + ".hideflags");
-		Map<String, Object> options = parseOptions(config, id);
+		List<String> hideFlags = config.getStringList("items." + id + ".hide_flags");
+		int modelData = config.getInt("items." + id + ".model_data");
+		boolean unbreakable = config.getBoolean("items." + id + "unbreakable");
 		String nbtString = config.getString("items." + id + ".nbt", "{}");
 		List<Map<String, Object>> abilities = (List<Map<String, Object>>)config.get("items." + id + ".abilities");
-		ItemStack item = createItem(type, nbtString, displayName, lore, options, enchants, abilities, attributes, hideFlags);
+		ItemStack item = createItem(type, nbtString, displayName, lore, enchants, abilities, attributes, hideFlags, modelData, unbreakable);
 		if (item != null) {
 			items.put(fileName + ":" + id.toLowerCase(), item);
 		} else {
@@ -94,15 +98,16 @@ public class ItemConfig {
 		if (config.contains("items")) {
 			for (String id : config.getConfigurationSection("items").getKeys(false)) {
 				String type = config.getString("items." + id + ".type", "STONE");
-				String displayName = config.getString("items." + id + ".displayname");
+				String displayName = config.getString("items." + id + ".display_name");
 				List<String> lore = config.getStringList("items." + id + ".lore");
 				List<String> enchants = config.getStringList("items." + id + ".enchantments");
 				List<String> attributes = config.getStringList("items." + id + ".attributes");
-				List<String> hideFlags = config.getStringList("items." + id + ".hideflags");
-				Map<String, Object> options = parseOptions(config, id);
+				List<String> hideFlags = config.getStringList("items." + id + ".hide_flags");
+				int modelData = config.getInt("items." + id + ".model_data");
+				boolean unbreakable = config.getBoolean("items." + id + ".unbreakable");
 				String nbtString = config.getString("items." + id + ".nbt", "{}");
 				List<Map<String, Object>> abilities = (List<Map<String, Object>>)config.get("items." + id + ".abilities");
-				ItemStack item = createItem(type, nbtString, displayName, lore, options, enchants, abilities, attributes, hideFlags);
+				ItemStack item = createItem(type, nbtString, displayName, lore, enchants, abilities, attributes, hideFlags, modelData, unbreakable);
 				if (item != null) {
 					items.put(fileName + ":" + id.toLowerCase(), item);
 				} else {
@@ -114,7 +119,7 @@ public class ItemConfig {
 		}
 	}
 
-	private ItemStack createItem(String type, String nbtString, String displayName, List<String> lore, Map<String, Object> options, List<String> enchants, List<Map<String, Object>> abilities, List<String> attributes, List<String> hideFlags) {
+	private ItemStack createItem(String type, String nbtString, String displayName, List<String> lore, List<String> enchants, List<Map<String, Object>> abilities, List<String> attributes, List<String> hideFlags, Integer modelData, Boolean unbreakable) {
 		try {
 			ItemStack item = new ItemStack(Material.STONE);
 			
@@ -152,15 +157,57 @@ public class ItemConfig {
 				
 				// Display Name
 				if (displayName != null) meta.setDisplayName(Legacy.serializer("<reset>" + displayName));
+				if (modelData >= 1) meta.setCustomModelData(modelData);
+				meta.setUnbreakable(unbreakable);
 				
 				// Lore
+				List<String> lores = new ArrayList<>();
 				if (!lore.isEmpty()) {
-					List<String> lores = new ArrayList<>();
 					for (String line : lore) {
 						lores.add(Legacy.serializer("<reset>" + line));
 					}
-					meta.setLore(lores);
 				}
+				
+				// Aboilities Lore
+				List<String> abilitiesLoreFormat = plugin.getConfig().getStringList("abilities.lore");
+				if (abilities != null && !abilitiesLoreFormat.isEmpty()) {
+					for (Map<String, Object> ability : abilities) {
+						if (ability.containsKey("skill") && ability.containsKey("activator")) {
+							String skill = (String)ability.get("skill");
+							String activator = (String)ability.get("activator");
+							boolean showInLore = (Boolean)ability.getOrDefault("show_in_lore", false);
+							if (showInLore) {
+								String name = (String)ability.get("name");
+								Integer cooldown = (Integer)ability.getOrDefault("cooldown", 0);
+								Integer power = (Integer)ability.getOrDefault("power", 0);
+								Map<String, Object> variable = (Map<String, Object>) ability.get("variable");
+								
+								for (String format : abilitiesLoreFormat) {
+									String formattedLine = format
+										.replace("{name}", name)
+										.replace("{skill}", skill.replace("_", " "))
+										.replace("{activator}", activator.replace("_", " "))
+										.replace("{cooldown}", String.valueOf(cooldown))
+										.replace("{power}", String.valueOf(power));
+										if (variable != null) {
+											Pattern pattern = Pattern.compile("\\{var\\.(.+?)\\}");
+											Matcher matcher = pattern.matcher(formattedLine);
+											StringBuffer sb = new StringBuffer();
+											while (matcher.find()) {
+												String varName = matcher.group(1);
+												String varValue = variable.containsKey(varName) ? variable.get(varName).toString() : "null";
+												matcher.appendReplacement(sb, varValue);
+											}
+											matcher.appendTail(sb);
+											formattedLine = sb.toString();
+										}
+									lores.add(Legacy.serializer("<reset>" + formattedLine));
+								}
+							}
+						}
+					}
+				}
+				meta.setLore(lores);
 				
 				// Enchantment
 				if (enchants != null && !enchants.isEmpty()) {
@@ -187,7 +234,7 @@ public class ItemConfig {
 				}
 				
 				// Attributes
-				if (attributes != null) {
+				if (attributes != null && meta != null) {
 					for (String attributeEntry : attributes) {
 						String[] parts = attributeEntry.split(" ");
 						if (parts.length == 3) {
@@ -212,6 +259,8 @@ public class ItemConfig {
 							plugin.getLogger().warning("Invalid attribute format: " + attributeEntry);
 						}
 					}
+				} else {
+					plugin.getLogger().warning("Attributes list is null or ItemMeta is null.");
 				}
 				
 				// HideFlags
@@ -225,30 +274,12 @@ public class ItemConfig {
 						}
 					}
 				}
-				
-				// Options
-				if (options != null) {
-					for (Map.Entry<String, Object> entry : options.entrySet()) {
-						String key = entry.getKey();
-						Object value = entry.getValue();
-						switch (key) {
-							case "unbreakable":
-								if (value instanceof Boolean) {
-									meta.setUnbreakable((Boolean)value);
-								}
-								break;
-							case "modeldata":
-								if (value instanceof Integer) {
-									meta.setCustomModelData((Integer)value);
-								}
-								break;
-						}
-					}
-				}
 				item.setItemMeta(meta);
 			}
 			
 			NBTItem nbtItem = new NBTItem(item);
+			NBTCompound nbt = nbtItem.getOrCreateCompound("ItemCaster");
+			
 			// Nbt Parsing
 			if (!nbtString.isEmpty()) {
 				try {
@@ -262,41 +293,33 @@ public class ItemConfig {
 			
 			// Abilities
 			if (abilities != null) {
-				NBTCompoundList artifactList = nbtItem.getCompoundList("Artifact");
+				NBTCompoundList abilitiesList = nbt.getCompoundList("Abilities");
 				for (Map<String, Object> ability : abilities) {
 					if (!ability.containsKey("skill") || !ability.containsKey("activator")) {
 						plugin.getLogger().warning("Ability missing required keys: " + ability);
 						continue;
 					}
-					NBTCompound skillCompound = artifactList.addCompound();
+					NBTCompound skillCompound = abilitiesList.addCompound();
 					skillCompound.setString("skill", (String)ability.get("skill"));
 					skillCompound.setString("activator", (String)ability.get("activator"));
-					
-					// Cooldown
-					if (ability.containsKey("cooldown")) {
-						skillCompound.setInteger("cooldown", (Integer)ability.get("cooldown"));
-					}
-					
-					// Power
-					if (ability.containsKey("power")) {
-						skillCompound.setFloat("power", (Float)ability.get("power"));
-					}
-					
-					// Variable
+					if (ability.containsKey("cooldown")) skillCompound.setInteger("cooldown", (Integer)ability.get("cooldown"));
+					if (ability.containsKey("power")) skillCompound.setFloat("power", (Float)ability.get("power"));
+					if (ability.containsKey("sneak")) skillCompound.setBoolean("sneak", (Boolean)ability.get("sneak"));
+					if (ability.containsKey("show_cooldown")) skillCompound.setBoolean("show_cooldown", (Boolean)ability.get("show_cooldown"));
 					if (ability.containsKey("variable")) {
 						Map<String, Object> variable = (Map<String, Object>)ability.get("variable");
-						NBTCompound variableCompound = skillCompound.addCompound("variable");
+						NBTCompound variableCompound = skillCompound.getOrCreateCompound("variable");
 						for (Map.Entry<String, Object> entry : variable.entrySet()) {
 							String key = entry.getKey();
 							Object value = entry.getValue();
 							if (value instanceof String) {
-								variableCompound.setString(key, (String) value);
+								variableCompound.setString(key, (String)value);
 							} else if (value instanceof Float) {
-								variableCompound.setFloat(key, (Float) value);
+								variableCompound.setFloat(key, (Float)value);
 							} else if (value instanceof Integer) {
-								variableCompound.setInteger(key, (Integer) value);
+								variableCompound.setInteger(key, (Integer)value);
 							} else {
-								plugin.getLogger().warning("Unsupported variable type key in: " + key);
+								variableCompound.setFloat(key, (Float)value);
 							}
 						}
 					}
@@ -307,33 +330,6 @@ public class ItemConfig {
 			plugin.getLogger().warning("Material " + type + " is invalid!");
 			return null;
 		}
-	}
-
-	private Map<String, Object> parseOptions(YamlConfiguration config, String id) {
-		Map<String, Object> options = new HashMap<>();
-		if (config.contains("items." + id + ".options")) {
-			for (String key : config.getConfigurationSection("items." + id + ".options").getKeys(false)) {
-				Object value = config.get("items." + id + ".options." + key);
-				options.put(key.toLowerCase(), value);
-			}
-		}
-		return options;
-	}
-
-	public List<String> getListFile() {
-		File itemFolder = new File(plugin.getDataFolder(), "items");
-		List<String> fileList = new ArrayList<>();
-		if (itemFolder.exists() && itemFolder.isDirectory()) {
-			File[] files = itemFolder.listFiles((dir, name) -> name.endsWith(".yml") && !name.contains(" "));;
-			if (files != null) {
-				for (File file : files) {
-					if (file.isFile()) {
-						fileList.add(file.getName());
-					}
-				}
-			}
-		}
-		return fileList;
 	}
 
 	public ItemStack getItem(String id) {

@@ -10,19 +10,18 @@ import io.phanisment.itemcaster.ItemCaster;
 import java.util.logging.Logger;
 
 public class Message {
-	private static final String prefix = ItemCaster.getInst().getConfig("message").getString("prefix");
 	private static final Logger logger = ItemCaster.getInst().getLogger();
 
-	public static void sendConsole(String message) {
-		Bukkit.getConsoleSender().sendMessage(Legacy.serializer(prefix + message));
+	public static void send(String message) {
+		Bukkit.getConsoleSender().sendMessage(Legacy.serializer(ItemCaster.getInst().getConfig().getString("prefix") + message));
 	}
 
 	public static void send(Player player, String message) {
-		player.sendMessage(Legacy.serializer(prefix + message));
+		player.sendMessage(Legacy.serializer(ItemCaster.getInst().getConfig().getString("prefix") + message));
 	}
 
 	public static void send(CommandSender sender, String message) {
-		sender.sendMessage(Legacy.serializer(prefix + message));
+		sender.sendMessage(Legacy.serializer(ItemCaster.getInst().getConfig().getString("prefix") + message));
 	}
 
 	public static void send(Type type, String message) {

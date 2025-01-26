@@ -26,6 +26,11 @@ public class SkillCooldown {
 		return cd.containsKey(skill);
 	}
 
+	public int getCooldown(String skill) {
+		Map<String, Integer> cd = data.get(player);
+		return cd.getOrDefault(skill, 0);
+	}
+
 	public void runTick() {
 		Map<String, Integer> cd = data.get(player);
 		if (cd == null || cd.isEmpty()) return;

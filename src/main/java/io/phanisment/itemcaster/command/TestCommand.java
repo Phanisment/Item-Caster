@@ -13,7 +13,11 @@ import de.tr7zw.nbtapi.NBTCompoundList;
 import de.tr7zw.nbtapi.NBTCompound;
 import de.tr7zw.nbtapi.NBTItem;
 
+import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.items.MythicItem;
+
+import dev.lone.itemsadder.api.CustomStack;
 
 import io.phanisment.itemcaster.ItemCaster;
 import io.phanisment.itemcaster.command.SubCommand;
@@ -22,15 +26,16 @@ import io.phanisment.itemcaster.util.Legacy;
 import io.phanisment.itemcaster.util.Message;
 
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 public class TestCommand implements SubCommand {
 	private final ItemCaster plugin;
-	private final FileConfiguration config;
 	
 	public TestCommand(ItemCaster plugin) {
 		this.plugin = plugin;
-		this.config = plugin.getConfig("config");
 	}
 
 	@Override
@@ -50,6 +55,7 @@ public class TestCommand implements SubCommand {
 			String activator = args[2];
 			int cooldown = 0;
 			float power = 0;
+			Map<String, Object> variables = new HashMap<>();
 			for (int i = 3; i < args.length; i++) {
 				if (args[i].equalsIgnoreCase("-c") && i + 1 < args.length) {
 					try {
@@ -67,45 +73,100 @@ public class TestCommand implements SubCommand {
 						Message.send(sender, "Invalid power value.");
 						return;
 					}
+				} else if (args[i].equalsIgnoreCase("-v") && i + 1 < args.length) {
+					String[] keyValue = args[i + 1].split(":");
+					if (keyValue.length == 2) {
+						variables.put(keyValue[0], (Object)keyValue[1]);
+						i++;
+					} else {
+						Message.send(sender, "Invalid variable format. Use key:value.");
+						return;
+					}
 				}
 			}
-			Material material = Material.valueOf(config.getString("item_test.item", "STONE").toUpperCase());
-			ItemStack item = new ItemStack(material);
-			ItemMeta meta = item.getItemMeta();
-			if (meta != null) {
-				meta.setDisplayName(Legacy.serializer("<reset>" + config.getString("item_test.displayname")));
-				if (config.contains("item_test.modeldata")) {
-					meta.setCustomModelData(config.getInt("item_test.modeldata"));
+			
+			String type = plugin.getConfig().getString("item_test.item", "STONE");
+			try {
+				ItemStack item = new ItemStack(Material.STONE);
+				ItemMeta meta = item.getItemMeta();
+				if (type.contains(":")) {
+					String[] parts = type.split(":");
+					String plugin = parts[0];
+					String name = parts[1];
+					switch(plugin.toLowerCase()) {
+						case "mythicmobs":
+							Optional<MythicItem> mythicItem = MythicBukkit.inst().getItemManager().getItem(name);
+							if (mythicItem.isPresent()) {
+								MythicItem mi = mythicItem.get();
+								item = BukkitAdapter.adapt(mi.generateItemStack(1));
+							} else {
+								Message.send(player, "MythicMobs item not found: " + name);
+							}
+							break;
+						case "itemsadder":
+							if (this.plugin.hasItemsAdder()) {
+								CustomStack stack = CustomStack.getInstance(name + ":" + parts[2]);
+								if (stack != null) item = stack.getItemStack();
+							}
+							break;
+						default:
+							Message.send(player, "Unknown external type: " + plugin);
+							break;
+					}
+				} else {
+					Material material = Material.valueOf(type.toUpperCase());
+					item = new ItemStack(material);
 				}
-				item.setItemMeta(meta);
+				if (meta != null) {
+					meta.setDisplayName(Legacy.serializer("<reset>" + plugin.getConfig().getString("item_test.displayname")));
+					if (plugin.getConfig().contains("item_test.modeldata")) meta.setCustomModelData(plugin.getConfig().getInt("item_test.modeldata"));
+					item.setItemMeta(meta);
+				}
+				NBTItem nbtItem = new NBTItem(item);
+				NBTCompound nbt = nbtItem.getOrCreateCompound("ItemCaster");
+				nbt.setBoolean("test_item", true);
+				NBTCompoundList artifactList = nbt.getCompoundList("Artifact");
+				NBTCompound skillCompound = artifactList.addCompound();
+				skillCompound.setString("skill", skill);
+				skillCompound.setString("activator", activator);
+				if (cooldown > 0) skillCompound.setInteger("cooldown", cooldown);
+				if (power > 0) skillCompound.setFloat("power", power);
+				NBTCompound variableCompound = skillCompound.getOrCreateCompound("variable");
+				for (Map.Entry<String, Object> entry : variables.entrySet()) {
+					String key = entry.getKey();
+					Object value = entry.getValue();
+					if (value instanceof String) {
+						variableCompound.setString(key, (String) value);
+					} else if (value instanceof Float) {
+						variableCompound.setFloat(key, (Float) value);
+					} else if (value instanceof Integer) {
+						variableCompound.setInteger(key, (Integer) value);
+					} else {
+						Message.send(player, "Unsupported variable type key in: " + key);
+					}
+				}
+				player.getInventory().addItem(nbtItem.getItem());
+				Message.send(player, "Test item created with skill: " + skill);
+			} catch (IllegalArgumentException e) {
+				plugin.getLogger().warning("Material " + type + " is invalid!");
 			}
-			NBTItem nbtItem = new NBTItem(item);
-			NBTCompoundList artifactList = nbtItem.getCompoundList("Artifact");
-			NBTCompound skillCompound = artifactList.addCompound();
-			skillCompound.setString("skill", skill);
-			skillCompound.setString("activator", activator);
-			if (cooldown > 0) skillCompound.setInteger("cooldown", cooldown);
-			if (power > 0) skillCompound.setFloat("power", power);
-			player.getInventory().addItem(nbtItem.getItem());
-			Message.send(player, "Test item created with skill: " + skill);
 		}
 	}
 
 	@Override
 	public List<String> tabComplete(CommandSender sender, String[] args) {
+		List<String> completions = new ArrayList<>();
 		if (args.length == 2) {
 			return (List)StringUtil.copyPartialMatches((String)args[1], MythicBukkit.inst().getSkillManager().getSkillNames(), new ArrayList());
 		} else if (args.length == 3) {
-			return getActivatorList();
+			for (Activator activator : Activator.values()) {
+				completions.add(activator.name().toLowerCase());
+			}
+		} else if (args.length > 3) {
+			completions.add("-v <key>:<value>");
+			completions.add("-c <number>");
+			completions.add("-p <number>");
 		}
-		return new ArrayList<>();
-	}
-	
-	private List<String> getActivatorList() {
-		List<String> activators = new ArrayList<>();
-		for (Activator activator : Activator.values()) {
-			activators.add(activator.name().toLowerCase());
-		}
-		return activators;
+		return completions;
 	}
 }

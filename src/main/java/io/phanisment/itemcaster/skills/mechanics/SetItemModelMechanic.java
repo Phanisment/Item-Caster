@@ -6,6 +6,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.Material;
 
+import dev.lone.itemsadder.api.CustomStack;
+
 import io.lumine.mythic.api.adapters.AbstractEntity;
 import io.lumine.mythic.api.config.MythicLineConfig;
 import io.lumine.mythic.api.skills.ITargetedEntitySkill;
@@ -13,13 +15,17 @@ import io.lumine.mythic.api.skills.SkillMetadata;
 import io.lumine.mythic.api.skills.SkillResult;
 import io.lumine.mythic.bukkit.BukkitAdapter;
 
+import io.phanisment.itemcaster.ItemCaster;
+
 public class SetItemModelMechanic implements ITargetedEntitySkill {
 	private final EquipmentSlot slot;
 	private final int modelData;
+	private final String ri;
 	
 	public SetItemModelMechanic(MythicLineConfig config) {
 		this.slot = EquipmentSlot.valueOf(config.getString(new String[]{"slot", "s"}, "HAND").toUpperCase());
-		this.modelData = config.getInteger(new String[]{"modelData", "model", "data", "m", "d"});
+		this.modelData = config.getInteger(new String[]{"modelData", "model", "data", "m", "d"}, 0);
+		this.ri = config.getString(new String[]{"item","i"});
 	}
 
 	public SkillResult castAtEntity(SkillMetadata data, AbstractEntity target) {
@@ -45,10 +51,22 @@ public class SetItemModelMechanic implements ITargetedEntitySkill {
 				item = entity.getEquipment().getItemInOffHand();
 				break;
 		}
-		if ((item != null && item.getType() != Material.AIR) && modelData >= 1) {
-			ItemMeta meta = item.getItemMeta();
-			meta.setCustomModelData(modelData);
-			item.setItemMeta(meta);
+		ItemMeta meta = item.getItemMeta();
+		if (item != null && item.getType() != Material.AIR) {
+			if (modelData >= 1) {
+				meta.setCustomModelData(modelData);
+				item.setItemMeta(meta);
+			} else {
+				if (ItemCaster.hasItemsAdder()) {
+					CustomStack stack = CustomStack.getInstance(ri);
+					if (stack != null) {
+						ItemStack ri_i = stack.getItemStack();
+						item.setType(ri_i.getType());
+						meta.setCustomModelData(ri_i.getItemMeta().getCustomModelData());
+						item.setItemMeta(meta);
+					}
+				}
+			}
 			return SkillResult.SUCCESS;
 		}
 		return SkillResult.INVALID_CONFIG;

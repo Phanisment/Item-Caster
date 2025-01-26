@@ -24,8 +24,7 @@ public class ReloadCommand implements SubCommand {
 		Message.send(sender, "Reloading...");
 		Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
 			try {
-				plugin.getConfigManagers().forEach((key, manager) -> manager.reloadConfig());
-				plugin.getItemConfig().loadItems();
+				plugin.reloadConfigs();
 				Message.send(sender, "Reload Done!");
 			} catch (Exception e) {
 				Message.send(sender, "An error occurred while reloading the configuration.");

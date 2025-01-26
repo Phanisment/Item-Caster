@@ -26,6 +26,7 @@ public class BaseCommand implements CommandExecutor, TabCompleter {
 		register(new TestCommand(plugin));
 		register(new ReloadCommand(plugin));
 		register(new GiveCommand(plugin));
+		register(new HandCommand(plugin));
 	}
 	
 	private void register(SubCommand cmd) {
@@ -63,7 +64,7 @@ public class BaseCommand implements CommandExecutor, TabCompleter {
 		List<String> completions = new ArrayList<>();
 		if (args.length == 1) {
 			for (String sub : commands.keySet()) {
-				completions.add(sub);
+				if (sub.length() > 1) completions.add(sub);
 			}
 		} else if (args.length >= 2) {
 			SubCommand cmd = commands.get(args[0].toLowerCase());

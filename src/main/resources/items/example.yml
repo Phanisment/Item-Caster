@@ -1,15 +1,19 @@
 # This is example item configuration,
 # you can delete this file if you want.
 
+#author: Phanisment
+#description:
+#- 'Example item'
 items:
-  example:
-    type: STICK
-    displayname: "Example"
-    options:
-      modeldata: 1
-      unbreakable: true
+  example_item:
+    type: IRON_SWORD
+    displayname: '<white>Example Item'
+    modeldata: 1
+    unbreakable: true
     lore:
-    - "&7Just generic Item."
+    - '<gray>Just generic Item.'
     abilities:
     - skill: SummonSkeletons
       activator: right_click
+      show_in_lore: true
+      show_cooldown: true

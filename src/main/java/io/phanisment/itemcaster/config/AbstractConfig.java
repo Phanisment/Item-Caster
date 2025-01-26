@@ -11,10 +11,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class AbstractConfig {
-	protected final JavaPlugin plugin;
-	protected YamlConfiguration config;
-	protected final String fileName;
-	protected File configFile;
+	private final JavaPlugin plugin;
+	private static YamlConfiguration config;
+	private final String fileName;
+	private File configFile;
 
 	public AbstractConfig(JavaPlugin plugin, String fileName) {
 		this.plugin = plugin;
@@ -30,14 +30,9 @@ public abstract class AbstractConfig {
 	public void reloadConfig() {
 		if (configFile == null) configFile = new File(plugin.getDataFolder(), fileName);
 		config = YamlConfiguration.loadConfiguration(configFile);
-		try {
-			config.load(configFile);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
-	public FileConfiguration getConfig() {
+	public YamlConfiguration getConfig() {
 		if (config == null) reloadConfig();
 		return config;
 	}
@@ -67,6 +62,9 @@ public abstract class AbstractConfig {
 			reloadConfig();
 			addDefaults();
 			saveConfig();
+		} else {
+			saveDefaultConfig();
+			reloadConfig();
 		}
 	}
 

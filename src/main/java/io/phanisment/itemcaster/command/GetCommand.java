@@ -22,7 +22,7 @@ public class GetCommand implements SubCommand {
 	
 	@Override
 	public String[] getName() {
-		return new String[]{"get"};
+		return new String[]{"get", "g"};
 	}
 	
 	@Override
@@ -34,12 +34,13 @@ public class GetCommand implements SubCommand {
 	public void execute(CommandSender sender, String[] args) {
 		if (sender instanceof Player) {
 			if (args.length < 2) {
-				Message.send(sender, "Usage: /ic get <item id>");
+				Message.send(sender, "Usage: /ic get <item id> [amount]");
 				return;
 			}
 			ItemStack item = plugin.getItemConfig().getItem(args[1]);
 			Player player = (Player)sender;
 			if (item != null) {
+				if (args.length == 3) item.setAmount(Integer.parseInt(args[2]));
 				player.getInventory().addItem(item);
 				Message.send(sender, "Geting item (" + args[1] + ")!");
 			} else {
@@ -54,6 +55,11 @@ public class GetCommand implements SubCommand {
 		if (args.length == 2) {
 			Map<String, ItemStack> items = plugin.getItemConfig().getItemList();
 			items.keySet().forEach(key -> completions.add(key));
+		} else if (args.length == 3) {
+			completions.add("2");
+			completions.add("8");
+			completions.add("16");
+			completions.add("64");
 		}
 		return completions;
 	}
