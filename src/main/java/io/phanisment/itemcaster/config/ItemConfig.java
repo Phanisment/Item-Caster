@@ -52,43 +52,14 @@ public class ItemConfig {
 			itemFolder.mkdirs();
 			plugin.saveResource("items/example.yml", false);
 		}
-		Pattern pattern = Pattern.compile("^[a-zA-Z_]+\\.yml$");
-		File[] files = itemFolder.listFiles((dir, name) -> pattern.matcher(name).matches());
+		
+		File[] files = itemFolder.listFiles((dir, name) -> name.endsWith(".yml") && !name.contains(" "));
 		if (files != null) {
 			for (File file : files) {
 				if (file.isFile()) {
 					loadFileConfig(file);
 				}
 			}
-		}
-	}
-
-	public void loadItem(String fileName, String id) {
-		File itemFile = new File(plugin.getDataFolder(), "items/" + fileName);
-		if (!itemFile.exists()) {
-			plugin.getLogger().warning("File [" + fileName + "] does not exist.");
-			return;
-		}
-		if (!items.containsKey(fileName + ":" + id)) {
-			plugin.getLogger().warning("Item [" + id + "] not found in file [" + fileName + "].");
-			return;
-		}
-		YamlConfiguration config = YamlConfiguration.loadConfiguration(itemFile);
-		String type = config.getString("items." + id + ".type", "STONE");
-		String displayName = config.getString("items." + id + ".display_name");
-		List<String> lore = config.getStringList("items." + id + ".lore");
-		List<String> enchants = config.getStringList("items." + id + ".enchantments");
-		List<String> attributes = config.getStringList("items." + id + ".attributes");
-		List<String> hideFlags = config.getStringList("items." + id + ".hide_flags");
-		int modelData = config.getInt("items." + id + ".model_data");
-		boolean unbreakable = config.getBoolean("items." + id + "unbreakable");
-		String nbtString = config.getString("items." + id + ".nbt", "{}");
-		List<Map<String, Object>> abilities = (List<Map<String, Object>>)config.get("items." + id + ".abilities");
-		ItemStack item = createItem(type, nbtString, displayName, lore, enchants, abilities, attributes, hideFlags, modelData, unbreakable);
-		if (item != null) {
-			items.put(fileName + ":" + id.toLowerCase(), item);
-		} else {
-			plugin.getLogger().warning("Can not load item [" + id + "] form file [" + fileName + "].");
 		}
 	}
 
@@ -177,14 +148,12 @@ public class ItemConfig {
 							String activator = (String)ability.get("activator");
 							boolean showInLore = (Boolean)ability.getOrDefault("show_in_lore", false);
 							if (showInLore) {
-								String name = (String)ability.get("name");
 								Integer cooldown = (Integer)ability.getOrDefault("cooldown", 0);
 								Integer power = (Integer)ability.getOrDefault("power", 0);
 								Map<String, Object> variable = (Map<String, Object>) ability.get("variable");
 								
 								for (String format : abilitiesLoreFormat) {
 									String formattedLine = format
-										.replace("{name}", name)
 										.replace("{skill}", skill.replace("_", " "))
 										.replace("{activator}", activator.replace("_", " "))
 										.replace("{cooldown}", String.valueOf(cooldown))

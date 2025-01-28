@@ -14,7 +14,6 @@ import io.phanisment.itemcaster.util.Message;
 public class ItemCaster extends JavaPlugin {
 	private static boolean hasItemsAdder;
 	private ItemConfig itemConfig;
-	private ConfigManager configManager;
 	private static ItemCaster plugin;
 	
 	public ItemCaster() {
@@ -24,7 +23,6 @@ public class ItemCaster extends JavaPlugin {
 	@Override
 	public void onLoad() {
 		this.itemConfig = new ItemConfig(this);
-		this.configManager = new ConfigManager(this);
 		saveDefaultConfig();
 	}
 	
@@ -42,10 +40,6 @@ public class ItemCaster extends JavaPlugin {
 		}
 	}
 	
-	public YamlConfiguration getConfig(String id) {
-		return configManager.getConfig(id).getConfig();
-	}
-	
 	public static ItemCaster getInst() {
 		return plugin;
 	}
@@ -54,17 +48,12 @@ public class ItemCaster extends JavaPlugin {
 		return itemConfig;
 	}
 	
-	public ConfigManager getConfigManager() {
-		return configManager;
-	}
-	
 	public static boolean hasItemsAdder() {
 		return hasItemsAdder;
 	}
 	
 	public void reloadConfigs() {
 		plugin.reloadConfig();
-		plugin.getConfigManager().load();
 		plugin.getItemConfig().loadItems();
 	}
 }

@@ -7,8 +7,8 @@
 items:
   example_item:
     type: IRON_SWORD
-    displayname: '<white>Example Item'
-    modeldata: 1
+    display_name: '<white>Example Item'
+    model_data: 1
     unbreakable: true
     lore:
     - '<gray>Just generic Item.'
