@@ -1,6 +1,5 @@
 package io.phanisment.itemcaster.config;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -44,13 +43,12 @@ public class ItemConfig {
 
 	public ItemConfig(ItemCaster plugin) {
 		this.plugin = plugin;
-		Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-			loadItems();
-		});
+		loadItems();
 	}
 
 	public void loadItems() {
 		items.clear();
+		allItems = 0;
 		File itemFolder = new File(plugin.getDataFolder(), "items");
 		if (!itemFolder.exists()) {
 			itemFolder.mkdirs();
