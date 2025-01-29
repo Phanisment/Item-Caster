@@ -38,10 +38,9 @@ public class MythicMobsListener implements Listener {
 			Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
 				try {
 					plugin.reloadConfigs();
-					Message.send("Reload Done!");
+					Message.send("Reload " + plugin.itemConfig.allItems + " Items!");
 				} catch (Exception e) {
 					Message.send("An error occurred while reloading the configuration.");
-					e.printStackTrace();
 				}
 			});
 		}

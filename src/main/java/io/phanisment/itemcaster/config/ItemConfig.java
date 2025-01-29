@@ -1,5 +1,6 @@
 package io.phanisment.itemcaster.config;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -38,11 +39,14 @@ import java.util.regex.Pattern;
 
 public class ItemConfig {
 	public static Map<String, ItemStack> items = new HashMap<>();
+	public static int allItems = 0;
 	private final ItemCaster plugin;
 
 	public ItemConfig(ItemCaster plugin) {
 		this.plugin = plugin;
-		loadItems();
+		Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+			loadItems();
+		});
 	}
 
 	public void loadItems() {
@@ -81,6 +85,7 @@ public class ItemConfig {
 				ItemStack item = createItem(type, nbtString, displayName, lore, enchants, abilities, attributes, hideFlags, modelData, unbreakable);
 				if (item != null) {
 					items.put(fileName + ":" + id.toLowerCase(), item);
+					allItems++;
 				} else {
 					plugin.getLogger().warning("Can not load item [" + id + "] form file [" + file.getName() + "].");
 				}
@@ -139,7 +144,7 @@ public class ItemConfig {
 					}
 				}
 				
-				// Aboilities Lore
+				// Abilities Lore
 				List<String> abilitiesLoreFormat = plugin.getConfig().getStringList("abilities.lore");
 				if (abilities != null && !abilitiesLoreFormat.isEmpty()) {
 					for (Map<String, Object> ability : abilities) {
@@ -148,12 +153,14 @@ public class ItemConfig {
 							String activator = (String)ability.get("activator");
 							boolean showInLore = (Boolean)ability.getOrDefault("show_in_lore", false);
 							if (showInLore) {
+								String name = (String)ability.getOrDefault("name", "");
 								Integer cooldown = (Integer)ability.getOrDefault("cooldown", 0);
 								Integer power = (Integer)ability.getOrDefault("power", 0);
 								Map<String, Object> variable = (Map<String, Object>) ability.get("variable");
 								
 								for (String format : abilitiesLoreFormat) {
 									String formattedLine = format
+										.replace("{name}", name)
 										.replace("{skill}", skill.replace("_", " "))
 										.replace("{activator}", activator.replace("_", " "))
 										.replace("{cooldown}", String.valueOf(cooldown))

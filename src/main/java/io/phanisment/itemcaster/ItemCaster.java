@@ -12,9 +12,9 @@ import io.phanisment.itemcaster.config.*;
 import io.phanisment.itemcaster.util.Message;
 
 public class ItemCaster extends JavaPlugin {
-	private static boolean hasItemsAdder;
-	private ItemConfig itemConfig;
-	private static ItemCaster plugin;
+	public static boolean hasItemsAdder;
+	public ItemConfig itemConfig;
+	public static ItemCaster plugin;
 	
 	public ItemCaster() {
 		plugin = this;
