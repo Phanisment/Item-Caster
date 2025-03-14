@@ -5,6 +5,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
+import de.tr7zw.changeme.nbtapi.NBT;
+
 import io.phanisment.itemcaster.command.BaseCommand;
 import io.phanisment.itemcaster.listeners.MythicMobsListener;
 import io.phanisment.itemcaster.listeners.ActivatorListener;
@@ -22,12 +24,17 @@ public class ItemCaster extends JavaPlugin {
 	
 	@Override
 	public void onLoad() {
-		this.itemConfig = new ItemConfig(this);
+		this.itemConfig = new ItemConfig();
 		saveDefaultConfig();
 	}
 	
 	@Override
 	public void onEnable() {
+		if (!NBT.preloadApi()) {
+			Message.send("NBT-API wasn't initialized properly, disabling the plugin");
+			getPluginLoader().disablePlugin(this);
+			return;
+		}
 		Message.send("The plugin is loaded!");
 		ActivatorListener.runTick(this);
 		getServer().getPluginManager().registerEvents(new MythicMobsListener(this), this);

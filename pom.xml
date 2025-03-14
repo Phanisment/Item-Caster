@@ -39,7 +39,15 @@
 					<relocations>
 						<relocation>
 							<pattern>net.kyori</pattern>
-							<shadedPattern>io.phanisment.itemcaster.lib</shadedPattern>
+							<shadedPattern>io.phanisment.itemcaster.lib.adventure</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>de.tr7zw.changeme.nbtapi</pattern>
+							<shadedPattern>io.phanisment.itemcaster.lib.nbtapi</shadedPattern>
+						</relocation>
+						<relocation>
+							<pattern>fr.mrmicky.fastinv</pattern>
+							<shadedPattern>io.phanisment.itemcaster.lib.fastinv</shadedPattern>
 						</relocation>
 					</relocations>
 				</configuration>
@@ -102,9 +110,13 @@
 		</dependency>
 		<dependency>
 			<groupId>de.tr7zw</groupId>
-			<artifactId>item-nbt-api-plugin</artifactId>
-			<version>2.14.0</version>
-			<scope>provided</scope>
+			<artifactId>item-nbt-api</artifactId>
+			<version>2.14.1</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.mrmicky</groupId>
+			<artifactId>FastInv</artifactId>
+			<version>3.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.LoneDev6</groupId>

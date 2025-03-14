@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import io.phanisment.itemcaster.command.SubCommand;
 import io.phanisment.itemcaster.ItemCaster;
+import io.phanisment.itemcaster.config.item.CasterItem;
 import io.phanisment.itemcaster.util.Message;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class GiveCommand implements SubCommand {
 			Message.send(sender, "Usage: /ic give <player> <item> [amount]");
 			return;
 		}
-		ItemStack item = plugin.getItemConfig().getItem(args[2]);
+		ItemStack item = plugin.getItemConfig().getItem(args[2]).getItemStack();
 		if (args.length == 4) item.setAmount(Integer.parseInt(args[3]));
 		Player target = Bukkit.getPlayer(args[1]);
 		if (item != null) {
@@ -49,7 +50,7 @@ public class GiveCommand implements SubCommand {
 			List<Player> onlinePlayer = (List<Player>)Bukkit.getOnlinePlayers();
 			onlinePlayer.forEach(player -> completions.add(player.getName()));
 		} else if (args.length == 3) {
-			Map<String, ItemStack> items = plugin.getItemConfig().getItemList();
+			Map<String, CasterItem> items = plugin.getItemConfig().getItemList();
 			items.keySet().forEach(key -> completions.add(key));
 		}
 		return completions;

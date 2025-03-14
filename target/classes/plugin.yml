@@ -1,5 +1,5 @@
 name: ItemCaster
-version: ${project.version}
+version: 1.2.1
 author: Phanisment
 description: Cast MythicMobs Skill with NBT item.
 main: io.phanisment.itemcaster.ItemCaster

@@ -22,6 +22,6 @@ public class ItemCasterDrop implements IItemDrop {
 
 	@Override
 	public AbstractItemStack getDrop(DropMetadata data, double amount) {
-		return new BukkitItemStack(ItemCaster.getInst().getItemConfig().getItem(type));
+		return new BukkitItemStack(ItemCaster.getInst().getItemConfig().getItem(type).getItemStack());
 	}
 }

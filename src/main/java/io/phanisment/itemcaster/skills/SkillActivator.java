@@ -8,15 +8,16 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.event.Cancellable;
 
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.utils.MythicUtil;
 
-import de.tr7zw.nbtapi.NBTType;
-import de.tr7zw.nbtapi.NBTItem;
-import de.tr7zw.nbtapi.NBTCompound;
-import de.tr7zw.nbtapi.NBTCompoundList;
-import de.tr7zw.nbtapi.iface.ReadableNBT;
+import de.tr7zw.changeme.nbtapi.NBTType;
+import de.tr7zw.changeme.nbtapi.NBTItem;
+import de.tr7zw.changeme.nbtapi.NBTCompound;
+import de.tr7zw.changeme.nbtapi.NBTCompoundList;
+import de.tr7zw.changeme.nbtapi.iface.ReadableNBT;
 
 import io.phanisment.itemcaster.skills.SkillCooldown;
 import io.phanisment.itemcaster.skills.CooldownBar;
@@ -27,10 +28,14 @@ import java.util.HashMap;
 
 public class SkillActivator {
 	public SkillActivator(Player player, ItemStack item, Activator activator) {
-		this(player, item, activator, "");
+		this(player, item, activator, "", null);
 	}
 
 	public SkillActivator(Player player, ItemStack item, Activator activator, String signal) {
+		this(player, item, activator, signal, null);
+	}
+
+	public SkillActivator(Player player, ItemStack item, Activator activator, String signal, Cancellable event) {
 		if (item == null || item.getType() == Material.AIR) return;
 		NBTCompound nbt = new NBTItem(item).getCompound("ItemCaster");
 		if (nbt != null) {
@@ -44,13 +49,14 @@ public class SkillActivator {
 						if (ability.hasTag("power", NBTType.NBTTagInt) || ability.hasTag("power", NBTType.NBTTagFloat)) power = ability.getFloat("power");
 						if (ability.hasTag("signal", NBTType.NBTTagString) && !signal.equals(ability.getString("signal"))) return;
 						if ((ability.getBoolean("sneak") != null && ability.getBoolean("sneak")) && player.isSneaking()) return;
+						if (ability.getBoolean("cancel_event") != null && ability.getBoolean("cancel_event")) event.setCancelled(true);
 						
 						SkillCooldown cd = new SkillCooldown(player);
 						if (!cd.hasCooldown(skill)) {
 							LivingEntity target = MythicUtil.getTargetedEntity(player);
 							ArrayList<Entity> targets = new ArrayList<Entity>();
 							targets.add((Entity)target);
-							MythicBukkit.inst().getAPIHelper().castSkill((Entity)player, skill, (Entity)player, player.getLocation(), targets, null, power, data -> {
+							boolean isCasted = MythicBukkit.inst().getAPIHelper().castSkill((Entity)player, skill, (Entity)player, player.getLocation(), targets, null, power, data -> {
 								if (ability.hasTag("variable", NBTType.NBTTagCompound)) {
 									NBTCompound variable = (NBTCompound)ability.getCompound("variable");
 									for(String key : variable.getKeys()) {

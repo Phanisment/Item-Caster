@@ -8,7 +8,9 @@ You dont know how to use this plugin? read this [Wiki](https://github.com/Phanis
 Library Credits:
 - [NBT-API](https://github.com/tr7zw/Item-NBT-API)
 - [Adventure](https://github.com/KyoriPowered/adventure)
+- [FastInv](https://github.com/MrMicky-FR/FastInv)
 
 # PR
-- [ ] Make support on AuraSkill and other free plugin.
 - [ ] Make support only for 1.20.5-1.20.6.
+- [ ] Create gui for select item.
+- [ ] Add Maven Dependency and API for this plugin.

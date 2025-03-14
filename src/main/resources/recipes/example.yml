@@ -1,0 +1,12 @@
+test:
+  type: shaped
+  result:
+    item: itemcaster:example:copper_sword
+    amount: 1
+  shape:
+  - " C "
+  - " C "
+  - " S "
+  ingredient:
+    I: copper_ingot
+    S: stick
