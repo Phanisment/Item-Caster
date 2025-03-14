@@ -10,7 +10,42 @@ Library Credits:
 - [Adventure](https://github.com/KyoriPowered/adventure)
 - [FastInv](https://github.com/MrMicky-FR/FastInv)
 
-# PR
+## Installation
+### Maven
+```xml
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+	
+	<dependencies>
+		<dependency>
+			<groupId>com.github.Phanisment</groupId>
+			<artifactId>Item-Caster</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+	</dependencies>
+```
+
+### Maven
+```gradle
+	dependencyResolutionManagement {
+		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+		repositories {
+			mavenCentral()
+			maven { url 'https://jitpack.io' }
+		}
+	}
+	
+	dependencies {
+		implementation 'com.github.Phanisment:Item-Caster:1.2.1'
+	}
+```
+
+## Backlog
 - [ ] Make support only for 1.20.5-1.20.6.
 - [ ] Create gui for select item.
-- [ ] Add Maven Dependency and API for this plugin.
+- [x] Add Maven Dependency for this plugin.
+- [ ] Make API for plugin developer.
