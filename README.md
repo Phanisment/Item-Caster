@@ -13,35 +13,35 @@ Library Credits:
 ## Installation
 ### Maven
 ```xml
-	<repositories>
-		<repository>
-			<id>jitpack.io</id>
-			<url>https://jitpack.io</url>
-		</repository>
-	</repositories>
-	
-	<dependencies>
-		<dependency>
-			<groupId>com.github.Phanisment</groupId>
-			<artifactId>Item-Caster</artifactId>
-			<version>1.2.1</version>
-		</dependency>
-	</dependencies>
+  <repositories>
+    <repository>
+      <id>jitpack.io</id>
+      <url>https://jitpack.io</url>
+    </repository>
+  </repositories>
+  
+  <dependencies>
+    <dependency>
+      <groupId>com.github.Phanisment</groupId>
+      <artifactId>Item-Caster</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+  </dependencies>
 ```
 
 ### Maven
 ```gradle
-	dependencyResolutionManagement {
-		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-		repositories {
-			mavenCentral()
-			maven { url 'https://jitpack.io' }
-		}
-	}
-	
-	dependencies {
-		implementation 'com.github.Phanisment:Item-Caster:1.2.1'
-	}
+  dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+      mavenCentral()
+      maven { url 'https://jitpack.io' }
+    }
+  }
+  
+  dependencies {
+    implementation 'com.github.Phanisment:Item-Caster:1.2.1'
+  }
 ```
 
 ## Backlog
