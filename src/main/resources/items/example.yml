@@ -13,4 +13,3 @@ items:
     - skill: SummonSkeletons
       activator: right_click
       show_in_lore: true
-      show_cooldown: true

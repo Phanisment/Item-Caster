@@ -5,15 +5,18 @@
 # Recommend to check the wiki this plugin:
 # https://github.com/Phanisment/Item-Caster/wiki
 
+# For debugging.
+debug: false
+
 # The prefix message this plugin.
 prefix: '<gradient:#62A5DF:#375DB2>ItemCaster</gradient> | '
 
 # You can modify this configuration
 # if you want change appearance test item.
 item_test:
-  item: stick
-  displayname: '<white>Test Item</white>'
-  modeldata: 1
+  type: stick
+  display_name: '<white>Test Item</white>'
+  model_data: 1
 
 # If true, will reload the configuration when
 # plugin mythicmobs is reload using `/mm reload`.
@@ -21,13 +24,82 @@ auto_reload: true
 
 # For further information, see in the wiki.
 abilities:
-  actionbar:
-    format: '<dark_gray>[</dark_gray>{cooldown_bar}<dark_gray>] -</dark_gray> {skill} <gray>is in cooldown, wait {cooldown} seconds</gray>'
-    cooldown_bar:
-      font: '|' # |, ■
-      size: 20
-      fill_color: '<green>'
-      empty_color: '<white>'
-    cooldown_type: second # tick, second, minute
   lore:
-  - '<color:#4b287d>{skill}</color> <dark_gray>- {activator} |</dark_gray> <color:#316194>{cooldown}</color>'
+  - '<color:#4b287d>{skill}</color> <dark_gray>- {activator} | </dark_gray><color:#316194>{var.damage}</color>'
+
+# menu
+gui:
+  icon:
+    next:
+      icon: arrow
+      display_name: 'Next Page'
+    previous:
+      icon: arrow
+      display_name: 'Previous Page'
+    back:
+      icon: arrow
+      display_name: 'Back'
+    create_item:
+      icon: paper
+      display_name: 'Create a new Item'
+    ability:
+      icon: blaze_powder
+      display_name: 'Edit Ability'
+  main:
+    title: '<white>Item Browser'
+    interface:
+      content:
+        lore:
+        - ''
+        - '<gray>[Left Click] | Get'
+        - '<gray>[Right Click] | Edit'
+        - '<gray>[Shift + Click] | Remove'
+      create_item:
+        icon: paper
+        display_name: 'Create new Item'
+  edit:
+    title: '<white>Item Edit'
+    interface:
+    - icon: diamond
+      type: TYPE
+      display_name: 'Edit Type'
+    - icon: book
+      type: NBT
+      display_name: 'Edit Nbt'
+    - icon: name_tag
+      type: DISPLAY_NAME
+      display_name: 'Edit Display Name'
+    - icon: knowledge_book
+      type: MODEL_DATA
+      display_name: 'Edit Model Data'
+    - icon: bedrock
+      type: UNBREAKABLE
+      display_name: 'Set Item Unbreakable'
+    - icon: brush
+      type: COLOR
+      display_name: 'Edit Color'
+    - icon: iron_sword
+      type: DAMAGE
+      display_name: 'Edit Item Damage'
+    - icon: anvil
+      type: REPAIR_COST
+      display_name: 'Edit Repair Cost'
+    - icon: axolotl_bucket
+      type: AXOLOTL_VARIANT
+      display_name: 'Edit Axolotl Variant'
+    - icon: blaze_powder
+      type: ABILITIES
+      display_name: 'Edit item Abilities'
+  abilities:
+    title: '<white>Item Abilities'
+  ability:
+    title: '<white>Item ability'
+    interface:
+    - icon: blaze_powder
+      type: SKILL
+      display_name: 'Edit Skill'
+    - icon: beacon
+      type: ACTIVATOR
+      display_name: 'Edit Activator'
+    - icon: paper
+      type: SHOW_IN_LORE

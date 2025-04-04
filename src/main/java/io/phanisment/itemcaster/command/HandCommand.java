@@ -36,7 +36,7 @@ public class HandCommand implements SubCommand {
 	public void execute(CommandSender sender, String[] args) {
 		Player player = (Player)sender;
 		if (args.length < 2) {
-			Message.send(player, "Usage: /ic hand <set/remove/removeAll> [skill] [activator]");
+			Message.send(player, "<color:#677178>Usage: /ic hand <set/remove/removeAll> [skill] [activator]</color>");
 			return;
 		}
 
@@ -44,7 +44,7 @@ public class HandCommand implements SubCommand {
 		switch (action) {
 			case "set":
 				if (args.length < 4) {
-					Message.send(player, "Usage: /ic hand set <skill> <activator>");
+					Message.send(player, "<color:#677178>Usage: /ic hand set <skill> <activator></color>");
 					return;
 				}
 				String skill = args[2];
@@ -53,27 +53,27 @@ public class HandCommand implements SubCommand {
 				try {
 					activator = HandActivator.Activator.valueOf(activatorName);
 				} catch (IllegalArgumentException e) {
-					Message.send(player, "Invalid activator! Valid options: RIGHT_CLICK, LEFT_CLICK, SNEAK, TICK");
+					Message.send(player, "<color:#d61c38>Invalid activator! Valid options: RIGHT_CLICK, LEFT_CLICK, SNEAK, TICK</color>");
 					return;
 				}
 				HandActivator.set(player, activator, skill);
-				Message.send(player, "Skill '" + skill + "' has been set with activator '" + activator.name() + "'.");
+				Message.send(player, "Skill <color:#3ccf79>" + skill + "</color> has been set with activator <color:#3ccf79>" + activator.name() + "</color>.");
 				break;
 			case "remove":
 				if (args.length < 3) {
-					Message.send(player, "Usage: /ic hand remove <skill>");
+					Message.send(player, "<color:#677178>Usage: /ic hand remove <skill></color>");
 					return;
 				}
 				String skillToRemove = args[2];
 				HandActivator.remove(player, skillToRemove);
-				Message.send(player, "Skill '" + skillToRemove + "' has been removed.");
+				Message.send(player, "Skill <color:#d61c38>" + skillToRemove + "</color> has been removed.");
 				break;
 			case "removeall":
 				HandActivator.removeAll(player);
-				Message.send(player, "All skills have been removed.");
+				Message.send(player, "<color:#d61c38>All skills have been removed.</color>");
 				break;
 			default:
-				Message.send(player, "Invalid action! Valid options: set, remove, removeAll");
+				Message.send(player, "<color:#d61c38>Invalid action! Valid options: set, remove, removeAll</color>");
 		}
 	}
 

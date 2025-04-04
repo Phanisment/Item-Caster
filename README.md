@@ -11,8 +11,9 @@
 
 </div>
 
-
 ---
+
+[![Jitpack](https://jitpack.io/v/Phanisment/Item-Caster.svg)](https://jitpack.io/#Phanisment/Item-Caster)
 
 You dont know how to use this plugin? read this [Wiki](https://github.com/Phanisment/Item-Caster/wiki).
 
@@ -43,17 +44,13 @@ Library Credits:
 
 ### Gradle
 ```gradle
-  dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-      mavenCentral()
-      maven { url 'https://jitpack.io' }
-    }
-  }
-  
-  dependencies {
-    implementation 'com.github.Phanisment:Item-Caster:1.2.1'
-  }
+repositories {
+  maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+  implementation 'com.github.Phanisment:Item-Caster:1.2.1'
+}
 ```
 
 ## Backlog

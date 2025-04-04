@@ -27,6 +27,7 @@ public class BaseCommand implements CommandExecutor, TabCompleter {
 		register(new ReloadCommand(plugin));
 		register(new GiveCommand(plugin));
 		register(new HandCommand(plugin));
+		register(new MenuCommand(plugin));
 	}
 	
 	private void register(SubCommand cmd) {
@@ -45,16 +46,16 @@ public class BaseCommand implements CommandExecutor, TabCompleter {
 		SubCommand cmd = commands.get(args[0].toLowerCase());
 		if (cmd != null) {
 			if (!cmd.allowConsole() && sender instanceof ConsoleCommandSender) {
-				Message.send(sender, "You can not run this command on console!");
+				Message.send(sender, "<color:#d61c38>You can not run this command on console!");
 				return true;
 			}
 			if (cmd.allowMember() && sender.hasPermission("itemcaster.admin")) {
-				Message.send(sender, "Sorry, you don't have permission this comamnd.");
+				Message.send(sender, "<color:#d61c38>Sorry, you don't have permission this comamnd.");
 				return true;
 			}
 			cmd.execute(sender, args);
 		} else {
-			Message.send(sender, "Unknown argument!");
+			Message.send(sender, "<color:#d61c38>Unknown argument!");
 		}
 		return true;
 	}

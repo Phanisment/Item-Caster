@@ -1,0 +1,36 @@
+{
+	"providers":[
+		{"file":"char/black.png","chars":[""],"height":1,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":2,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":3,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":4,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":5,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":6,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":7,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":15,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":31,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":63,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":127,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":256,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":512,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":1024,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-3,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-4,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-5,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-6,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-7,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-8,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-9,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-10,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-18,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-34,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-66,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-130,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-259,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-515,"ascent":-5000,"type":"bitmap"},
+		{"file":"char/black.png","chars":[""],"height":-1027,"ascent":-5000,"type":"bitmap"},
+		
+		{"file":"itemcaster:ui/main.png","chars":[""],"height":256,"ascent":14,"type":"bitmap"},
+		{"file":"itemcaster:ui/edit.png","chars":["💿"],"height":256,"ascent":14,"type":"bitmap"}
+	]
+}

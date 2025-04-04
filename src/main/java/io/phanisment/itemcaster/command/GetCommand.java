@@ -35,7 +35,7 @@ public class GetCommand implements SubCommand {
 	public void execute(CommandSender sender, String[] args) {
 		if (sender instanceof Player) {
 			if (args.length < 2) {
-				Message.send(sender, "Usage: /ic get <item id> [amount]");
+				Message.send(sender, "<color:#677178>Usage: /ic get <item id> [amount]</color>");
 				return;
 			}
 			ItemStack item = plugin.getItemConfig().getItem(args[1]).getItemStack();
@@ -43,9 +43,9 @@ public class GetCommand implements SubCommand {
 			if (item != null) {
 				if (args.length == 3) item.setAmount(Integer.parseInt(args[2]));
 				player.getInventory().addItem(item);
-				Message.send(sender, "Geting item (" + args[1] + ")!");
+				Message.send(sender, "<color:#f7d340>" + args[1] + "</color> added to your inventory");
 			} else {
-				Message.send(sender, "Invalid item id!");
+				Message.send(sender, "<color:#d61c38>Invalid item id!</color>");
 			}
 		}
 	}

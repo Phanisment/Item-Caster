@@ -29,7 +29,7 @@ public class GiveCommand implements SubCommand {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		if (args.length < 3) {
-			Message.send(sender, "Usage: /ic give <player> <item> [amount]");
+			Message.send(sender, "<color:#677178>Usage: /ic give <player> <item> [amount]</color>");
 			return;
 		}
 		ItemStack item = plugin.getItemConfig().getItem(args[2]).getItemStack();
@@ -37,9 +37,9 @@ public class GiveCommand implements SubCommand {
 		Player target = Bukkit.getPlayer(args[1]);
 		if (item != null) {
 			target.getInventory().addItem(item);
-			Message.send(sender, "Give item (" + args[2] + ") to [" + target.getName() + "]");
+			Message.send(sender, "<color:#f7d340>" + args[2] + "</color> added to <color:#677178>" + target.getName() + "</color> inventory");
 		} else {
-			Message.send(sender, "Invalid item id!");
+			Message.send(sender, "<color:#d61c38>Invalid item id!</color>");
 		}
 	}
 

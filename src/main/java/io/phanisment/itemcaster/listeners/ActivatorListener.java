@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.event.block.Action;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -34,9 +35,8 @@ import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
-import io.phanisment.itemcaster.skills.SkillActivator;
-import io.phanisment.itemcaster.skills.SkillCooldown;
 import io.phanisment.itemcaster.skills.HandActivator;
+import io.phanisment.itemcaster.skills.SkillActivator;
 import io.phanisment.itemcaster.ItemCaster;
 
 import java.util.HashMap;
@@ -55,7 +55,7 @@ public class ActivatorListener implements Listener {
 		Player player = event.getPlayer();
 		if (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			new HandActivator(player, HandActivator.Activator.RIGHT_CLICK);
-			runSkill(player, SkillActivator.Activator.RIGHT_CLICK);
+			runSkill(player, SkillActivator.Activator.RIGHT_CLICK, event);
 		}
 	}
 
@@ -63,7 +63,7 @@ public class ActivatorListener implements Listener {
 	public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
 		Player player = event.getPlayer();
 		new HandActivator(player, HandActivator.Activator.RIGHT_CLICK);
-		runSkill(player, SkillActivator.Activator.RIGHT_CLICK);
+		runSkill(player, SkillActivator.Activator.RIGHT_CLICK, event);
 	}
 
 	@EventHandler
@@ -273,21 +273,12 @@ public class ActivatorListener implements Listener {
 		}
 	}
 */
-	public static void runTick(ItemCaster pl) {
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				if (Bukkit.getOnlinePlayers().isEmpty()) return;
-				for (Player player : Bukkit.getOnlinePlayers()) {
-					runSkill(player, SkillActivator.Activator.TICK);
-					new SkillCooldown(player).runTick();
-					new HandActivator(player, HandActivator.Activator.TICK);
-					if (player.isSneaking()) {
-						runSkill(player, SkillActivator.Activator.HOLD_SNEAK);
-					}
-				}
-			}
-		}.runTaskTimer(pl, 0L, 1L);
+	public static void tick(Player player) {
+		runSkill(player, SkillActivator.Activator.TICK);
+		new HandActivator(player, HandActivator.Activator.TICK);
+		if (player.isSneaking()) {
+			runSkill(player, SkillActivator.Activator.HOLD_SNEAK);
+		}
 	}
 
 	private static void runSkill(Player player, SkillActivator.Activator type) {
@@ -319,6 +310,38 @@ public class ActivatorListener implements Listener {
 		ItemStack boots = player.getInventory().getBoots();
 		if (boots != null && boots.getType() != Material.AIR) {
 			new SkillActivator(player, boots, type);
+		}
+	}
+
+	private static void runSkill(Player player, SkillActivator.Activator type, Cancellable event) {
+		ItemStack mainHand = player.getInventory().getItemInMainHand();
+		if (mainHand != null && mainHand.getType() != Material.AIR) {
+			new SkillActivator(player, mainHand, type, event);
+		}
+		
+		ItemStack offHand = player.getInventory().getItemInOffHand();
+		if (offHand != null && offHand.getType() != Material.AIR) {
+			new SkillActivator(player, offHand, type, event);
+		}
+		
+		ItemStack helmet = player.getInventory().getHelmet();
+		if (helmet != null && helmet.getType() != Material.AIR) {
+			new SkillActivator(player, helmet, type, event);
+		}
+		
+		ItemStack chestplate = player.getInventory().getChestplate();
+		if (chestplate != null && chestplate.getType() != Material.AIR) {
+			new SkillActivator(player, chestplate, type, event);
+		}
+		
+		ItemStack leggings = player.getInventory().getLeggings();
+		if (leggings != null && leggings.getType() != Material.AIR) {
+			new SkillActivator(player, leggings, type, event);
+		}
+		
+		ItemStack boots = player.getInventory().getBoots();
+		if (boots != null && boots.getType() != Material.AIR) {
+			new SkillActivator(player, boots, type, event);
 		}
 	}
 }

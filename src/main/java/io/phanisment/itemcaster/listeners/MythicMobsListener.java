@@ -18,11 +18,9 @@ import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.phanisment.itemcaster.ItemCaster;
 import io.phanisment.itemcaster.util.Message;
 import io.phanisment.itemcaster.skills.SkillActivator;
-import io.phanisment.itemcaster.skills.conditions.AttackCooldownCondition;
-import io.phanisment.itemcaster.skills.drops.ItemCasterDrop;
-import io.phanisment.itemcaster.skills.mechanics.SetItemModelMechanic;
-import io.phanisment.itemcaster.skills.mechanics.SetItemTypeMechanic;
-import io.phanisment.itemcaster.skills.mechanics.AddEnchantmentMechanic;
+import io.phanisment.itemcaster.skills.conditions.*;
+import io.phanisment.itemcaster.skills.drops.*;
+import io.phanisment.itemcaster.skills.mechanics.*;
 
 public class MythicMobsListener implements Listener {
 	private ItemCaster plugin;
@@ -33,12 +31,12 @@ public class MythicMobsListener implements Listener {
 	
 	@EventHandler
 	public void onReloaded(MythicReloadedEvent event) {
-		if (plugin.getConfig().getBoolean("auto_reload")) {
+		if (plugin.getConfig().getBoolean("auto_reload", true)) {
 			Message.send("Reloading...");
 			Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
 				try {
 					plugin.reloadConfigs();
-					Message.send("Reload " + plugin.itemConfig.allItems + " Items!");
+					Message.send("Reload " + plugin.itemConfig.all_item + " Items!");
 				} catch (Exception e) {
 					Message.send("An error occurred while reloading the configuration.");
 				}
@@ -60,12 +58,6 @@ public class MythicMobsListener implements Listener {
 		switch(event.getMechanicName().toLowerCase()) {
 			case "setitemmodel":
 				event.register(new SetItemModelMechanic(event.getConfig()));
-				break;
-			case "setitemtype":
-				event.register(new SetItemTypeMechanic(event.getConfig()));
-				break;
-			case "addenchantment":
-				event.register(new AddEnchantmentMechanic(event.getConfig()));
 				break;
 		}
 	}

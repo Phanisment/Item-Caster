@@ -19,20 +19,21 @@ import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTCompoundList;
 import de.tr7zw.changeme.nbtapi.iface.ReadableNBT;
 
-import io.phanisment.itemcaster.skills.SkillCooldown;
-import io.phanisment.itemcaster.skills.CooldownBar;
-
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
 public class SkillActivator {
 	public SkillActivator(Player player, ItemStack item, Activator activator) {
-		this(player, item, activator, "", null);
+		this(player, item, activator, "");
 	}
 
 	public SkillActivator(Player player, ItemStack item, Activator activator, String signal) {
 		this(player, item, activator, signal, null);
+	}
+
+	public SkillActivator(Player player, ItemStack item, Activator activator, Cancellable event) {
+		this(player, item, activator, "", event);
 	}
 
 	public SkillActivator(Player player, ItemStack item, Activator activator, String signal, Cancellable event) {
@@ -51,40 +52,30 @@ public class SkillActivator {
 						if ((ability.getBoolean("sneak") != null && ability.getBoolean("sneak")) && player.isSneaking()) return;
 						if (ability.getBoolean("cancel_event") != null && ability.getBoolean("cancel_event")) event.setCancelled(true);
 						
-						SkillCooldown cd = new SkillCooldown(player);
-						if (!cd.hasCooldown(skill)) {
-							LivingEntity target = MythicUtil.getTargetedEntity(player);
-							ArrayList<Entity> targets = new ArrayList<Entity>();
-							targets.add((Entity)target);
-							boolean isCasted = MythicBukkit.inst().getAPIHelper().castSkill((Entity)player, skill, (Entity)player, player.getLocation(), targets, null, power, data -> {
-								if (ability.hasTag("variable", NBTType.NBTTagCompound)) {
-									NBTCompound variable = (NBTCompound)ability.getCompound("variable");
-									for(String key : variable.getKeys()) {
-										switch(variable.getType(key)) {
-											case NBTTagFloat:
-												data.getVariables().putFloat(key, variable.getFloat(key));
-												break;
-											case NBTTagInt:
-												data.getVariables().putInt(key, variable.getInteger(key));
-												break;
-											case NBTTagString:
-												data.getVariables().putString(key, variable.getString(key));
-												break;
-											default:
-												data.getVariables().putFloat(key, variable.getFloat(key));
-												break;
-										}
+						LivingEntity target = MythicUtil.getTargetedEntity(player);
+						ArrayList<Entity> targets = new ArrayList<Entity>();
+						targets.add((Entity)target);
+						MythicBukkit.inst().getAPIHelper().castSkill((Entity)player, skill, (Entity)player, player.getLocation(), targets, null, power, data -> {
+							if (ability.hasTag("variable", NBTType.NBTTagCompound)) {
+								NBTCompound variable = (NBTCompound)ability.getCompound("variable");
+								for(String key : variable.getKeys()) {
+									switch(variable.getType(key)) {
+										case NBTTagFloat:
+											data.getVariables().putFloat(key, variable.getFloat(key));
+											break;
+										case NBTTagInt:
+											data.getVariables().putInt(key, variable.getInteger(key));
+											break;
+										case NBTTagString:
+											data.getVariables().putString(key, variable.getString(key));
+											break;
+										default:
+											data.getVariables().putFloat(key, variable.getFloat(key));
+											break;
 									}
 								}
-							});
-							if (ability.hasTag("cooldown", NBTType.NBTTagInt)) {
-								cd.setCooldown(skill, ability.getInteger("cooldown"));
 							}
-						} else {
-							if (ability.getBoolean("show_cooldown")) {
-								player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(new CooldownBar(skill, cd.getCooldown(skill), ability.getInteger("cooldown")).generate()));
-							}
-						}
+						});
 					}
 				}
 			}

@@ -24,6 +24,7 @@ import io.phanisment.itemcaster.command.SubCommand;
 import io.phanisment.itemcaster.skills.SkillActivator.Activator;
 import io.phanisment.itemcaster.util.Legacy;
 import io.phanisment.itemcaster.util.Message;
+import io.phanisment.itemcaster.config.item.CasterItem;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -47,7 +48,7 @@ public class TestCommand implements SubCommand {
 	public void execute(CommandSender sender, String[] args) {
 		if (sender instanceof Player) {
 			if (args.length < 3) {
-				Message.send(sender, "Usage: /ic test <skill> <activator> [-c <cooldown>] [-p <power>]");
+				Message.send(sender, "<color:#677178>Usage: /ic test <skill> <activator> [-c <cooldown>] [-p <power>]</color>");
 				return;
 			}
 			Player player = (Player) sender;
@@ -85,41 +86,13 @@ public class TestCommand implements SubCommand {
 				}
 			}
 			
-			String type = plugin.getConfig().getString("item_test.item", "STONE");
+			String type = plugin.getConfig().getString("item_test.type", "STONE");
 			try {
-				ItemStack item = new ItemStack(Material.STONE);
+				ItemStack item = CasterItem.itemType(type);
 				ItemMeta meta = item.getItemMeta();
-				if (type.contains(":")) {
-					String[] parts = type.split(":");
-					String plugin = parts[0];
-					String name = parts[1];
-					switch(plugin.toLowerCase()) {
-						case "mythicmobs":
-							Optional<MythicItem> mythicItem = MythicBukkit.inst().getItemManager().getItem(name);
-							if (mythicItem.isPresent()) {
-								MythicItem mi = mythicItem.get();
-								item = BukkitAdapter.adapt(mi.generateItemStack(1));
-							} else {
-								Message.send(player, "MythicMobs item not found: " + name);
-							}
-							break;
-						case "itemsadder":
-							if (this.plugin.hasItemsAdder()) {
-								CustomStack stack = CustomStack.getInstance(name + ":" + parts[2]);
-								if (stack != null) item = stack.getItemStack();
-							}
-							break;
-						default:
-							Message.send(player, "Unknown external type: " + plugin);
-							break;
-					}
-				} else {
-					Material material = Material.valueOf(type.toUpperCase());
-					item = new ItemStack(material);
-				}
 				if (meta != null) {
-					meta.setDisplayName(Legacy.serializer("<reset>" + plugin.getConfig().getString("item_test.displayname")));
-					if (plugin.getConfig().contains("item_test.modeldata")) meta.setCustomModelData(plugin.getConfig().getInt("item_test.modeldata"));
+					meta.setDisplayName(Legacy.serializer("<reset>" + plugin.getConfig().getString("item_test.display_name")));
+					if (plugin.getConfig().contains("item_test.model_data")) meta.setCustomModelData(plugin.getConfig().getInt("item_test.modeldata"));
 					item.setItemMeta(meta);
 				}
 				NBTItem nbtItem = new NBTItem(item);
