@@ -1,0 +1,13 @@
+warrior:
+  name: "Warrior"
+  description: |
+    Someone that Brave and unwavering, no
+    fear with someone more powerful that
+    there self.
+
+assasisin:
+  name: "Assassin"
+  description: |
+    The way they killed the target very
+    stealth and required skill to not
+    make no one see them.

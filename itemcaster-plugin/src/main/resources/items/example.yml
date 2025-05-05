@@ -1,0 +1,25 @@
+# This is example item configuration,
+# you can delete this file if you want.
+
+items:
+  example_item:
+    type: IRON_SWORD
+    display_name: 'Example Item'
+    model_data: 1
+    unbreakable: true
+    disable:
+      crafting: true
+      anvil: true
+      enchant: true
+      drop_on_death: true
+      grindstone: true
+      smithing: true
+      chest: true
+      shulker: true
+      ender_chest: true
+    lore:
+    - '<gray>Just generic Item.'
+    abilities:
+    - skill: SummonSkeletons
+      activator: right_click
+      show_in_lore: true

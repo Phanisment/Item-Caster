@@ -1,0 +1,41 @@
+info:
+  namespace: _itemcaster
+items:
+  back:
+    display_name: back
+    resource:
+      material: paper
+      generate: true
+      textures:
+      - ui/back_arrow
+  next:
+    display_name: next
+    resource:
+      material: paper
+      generate: true
+      textures:
+      - ui/next_arrow
+  previous:
+    display_name: previous
+    resource:
+      material: paper
+      generate: true
+      textures:
+      - ui/previous_arrow
+  create_item:
+    display_name: back
+    resource:
+      material: paper
+      generate: true
+      textures:
+      - ui/create_item
+
+font_images:
+  main:
+    path: "ui/main.png"
+    scale_ratio: 256
+    y_position: 14
+  edit:
+    path: "ui/edit.png"
+    scale_ratio: 256
+    y_position: 14

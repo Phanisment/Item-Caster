@@ -1,0 +1,209 @@
+# © Phanisment | 2025
+# Thanks for download this plugin, if you has
+# questions or error, just ask me in discord.
+# 
+# Recommend to check the wiki this plugin:
+# https://github.com/Phanisment/Item-Caster/wiki
+
+# For debugging.
+debug: false
+
+# The prefix message this plugin.
+prefix: '<gradient:#62A5DF:#375DB2>ItemCaster</gradient> | '
+
+# You can modify this configuration
+# if you want change appearance test item.
+item_test:
+  type: stick
+  display_name: '<white>Test Item</white>'
+  model_data: 1
+
+# If true, will reload the configuration when
+# plugin mythicmobs is reload using `/mm reload`.
+auto_reload: true
+
+# For further information, see in the wiki.
+abilities:
+  lore:
+  - '<color:#4b287d>{skill}</color> <dark_gray>- {activator}</dark_gray>'
+
+# menu
+gui:
+  sound:
+  icon:
+    next:
+      icon: arrow
+      display_name: 'Next Page'
+    previous:
+      icon: arrow
+      display_name: 'Previous Page'
+    back:
+      icon: arrow
+      display_name: 'Back'
+    create_item:
+      icon: paper
+      display_name: 'Create a new Item'
+    ability:
+      icon: blaze_powder
+      display_name: 'Edit Ability'
+    create_ability:
+      icon: paper
+      display_name: "Add Ability"
+  main:
+    title: '<white>Item Browser'
+    interface:
+      lore:
+      - ''
+      - '<gray>[Left Click] | Get'
+      - '<gray>[Right Click] | Edit'
+      - '<gray>[Shift + Click] | Remove'
+  edit:
+    title: '<white>Item Edit'
+    interface:
+    - icon: diamond
+      type: TYPE
+      display_name: 'Type'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+    - icon: book
+      type: NBT
+      display_name: 'Edit Nbt'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+    - icon: name_tag
+      type: DISPLAY_NAME
+      display_name: 'Display Name'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+    - icon: knowledge_book
+      type: MODEL_DATA
+      display_name: 'Model Data'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+    - icon: bedrock
+      type: UNBREAKABLE
+      display_name: 'Unbreakable'
+      lore:
+      - ''
+      - '<gray>[Click] | Toggle'
+    - icon: brush
+      type: COLOR
+      display_name: 'Color'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+    - icon: iron_sword
+      type: DAMAGE
+      display_name: 'Item Damage'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+    - icon: anvil
+      type: REPAIR_COST
+      display_name: 'Repair Cost'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+    - icon: axolotl_bucket
+      type: AXOLOTL_VARIANT
+      display_name: 'Axolotl Variant'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+    - icon: blaze_powder
+      type: ABILITIES
+      display_name: 'Abilities'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+    - icon: paper
+      type: LORE
+      display_name: 'Lore'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+    - icon: stone
+      type: ENCHANTS
+      display_name: 'Enchantments'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+    - icon: stone
+      type: ATTRIBUTES
+      display_name: 'Attributes'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+    - icon: stone
+      type: CROSSBOW_PROJECTILES
+      display_name: 'Crossword Projectile'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+    - icon: stone
+      type: BUNDLE_ITEMS
+      display_name: 'Bundle Item'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+  abilities:
+    title: '<white>Item Abilities'
+    interface:
+      lore:
+      - ''
+      - '<gray>[Left Click] | Edit'
+      - '<gray>[Right Click] | Duplicate'
+      - '<gray>[Shift + Click] | reset'
+  ability:
+    title: '<white>Item ability'
+    interface:
+    - icon: blaze_powder
+      type: SKILL
+      display_name: 'Skill'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+    - icon: beacon
+      type: ACTIVATOR
+      display_name: 'Activator'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
+    - icon: paper
+      type: SHOW_LORE
+      display_name: 'Show in Lore'
+      lore:
+      - ''
+      - '<gray>[Click] | Toggle'
+    - icon: stone
+      type: SNEAK
+      display_name: 'Sneaking'
+      lore:
+      - ''
+      - '<gray>[Click] | Toggle'
+    - icon: stone
+      type: SIGNAL
+      display_name: 'Signal'
+      lore:
+      - ''
+      - '<gray>[Click] | Edit'
+      - '<gray>[Shift + Click] | reset'
