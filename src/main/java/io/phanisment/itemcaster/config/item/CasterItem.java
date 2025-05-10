@@ -444,7 +444,7 @@ public class CasterItem implements Cloneable, ItemCasterItems {
 			
 			// Abilities
 			if (abilities != null) {
-				NBTCompoundList abilitiesList = nbt.getCompoundList("Abilities");
+				NBTCompoundList abilitiesList = nbt.getCompoundList("abilities");
 				for (Map<String, Object> ability : abilities) {
 					if (!ability.containsKey("skill") || !ability.containsKey("activator")) {
 						getPl().getLogger().warning("Ability missing required keys: " + ability);
@@ -618,6 +618,20 @@ public class CasterItem implements Cloneable, ItemCasterItems {
 		return this;
 	}
 	
+	public CasterItem setLoreFormat(String format) {
+		this.config.set("lore_format", format);
+		this.lore_format = format;
+		saveConfig();
+		return this;
+	}
+	
+	public CasterItem setHideAllFlags(boolean hide_all_flags) {
+		this.config.set("hide_all_flags", hide_all_flags);
+		this.hide_all_flags = hide_all_flags;
+		saveConfig();
+		return this;
+	}
+	
 	public CasterItem setColor(String color) {
 		this.config.set("color", color);
 		this.color = color;
@@ -763,6 +777,20 @@ public class CasterItem implements Cloneable, ItemCasterItems {
 	public CasterItem resetUnbreakable() {
 		this.config.set("unbreakable", null);
 		this.unbreakable = false;
+		saveConfig();
+		return this;
+	}
+	
+	public CasterItem resetLoreFormat() {
+		this.config.set("lore_format", null);
+		this.lore_format = "";
+		saveConfig();
+		return this;
+	}
+	
+	public CasterItem resetHideAllFlags() {
+		this.config.set("hide_all_flags", null);
+		this.hide_all_flags = false;
 		saveConfig();
 		return this;
 	}

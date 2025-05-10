@@ -89,6 +89,8 @@ public class GuiListener implements Listener {
 				case COLOR:
 					item = item.setColor(value).save();
 					break;
+				case LORE_FORMAT:
+					item = item.setLoreFormat(value).save();
 				case DAMAGE:
 					try {
 						item = item.setDamage(Integer.parseInt(value.trim())).save();
@@ -109,7 +111,20 @@ public class GuiListener implements Listener {
 					item = item.setLore(inputList(item.lore, value)).save();
 					break;
 				case ENCHANTS:
-					item = item.setEnchants(inputList(item.lore, value)).save();
+					item = item.setEnchants(inputList(item.enchants, value)).save();
+					break;
+				case HIDE_FLAGS:
+					item = item.setFlags(inputList(item.hide_flags, value)).save();
+					break;
+				case ATTRIBUTES:
+					item = item.setAttributes(inputList(item.attributes, value)).save();
+					break;
+				case CROSSBOW_PROJECTILES:
+					item = item.setCrossbowProjectiles(inputList(item.crossbow_projectiles, value)).save();
+					break;
+				case BUNDLE_ITEMS:
+					item = item.setBundleItems(inputList(item.bundle_items, value)).save();
+					break;
 				default:
 					break;
 			}

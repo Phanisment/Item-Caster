@@ -21,6 +21,7 @@ Library Credits:
 - [NBT-API](https://github.com/tr7zw/Item-NBT-API)
 - [Adventure](https://github.com/KyoriPowered/adventure)
 - [FastInv](https://github.com/MrMicky-FR/FastInv)
+- [Nashron-Core](https://github.com/openjdk/nashorn)
 
 ## Installation
 ### Maven
@@ -36,7 +37,7 @@ Library Credits:
     <dependency>
       <groupId>com.github.Phanisment</groupId>
       <artifactId>Item-Caster</artifactId>
-      <version>1.2.1</version>
+      <version>1.2.2</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
@@ -49,12 +50,12 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.github.Phanisment:Item-Caster:1.2.1'
+  implementation 'com.github.Phanisment:Item-Caster:1.2.2'
 }
 ```
 
 ## Backlog
 - [ ] Make support only for 1.20.5-1.20.6.
-- [ ] Create gui for select item.
+- [x] Create gui for select item.
 - [x] Add Maven Dependency for this plugin.
 - [ ] Make API for plugin developer.

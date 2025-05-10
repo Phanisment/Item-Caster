@@ -49,7 +49,7 @@ gui:
       icon: redstone
       display_name: 'Variable'
   main:
-    title: '<white>Item Browser'
+    title: 'Item Browser'
     interface:
       lore:
       - ''
@@ -57,7 +57,7 @@ gui:
       - '<gray>[Right Click] | Edit'
       - '<gray>[Shift + Click] | Remove'
   edit:
-    title: '<white>Item Edit'
+    title: 'Item Edit'
     interface:
     - icon: diamond
       type: TYPE
@@ -71,21 +71,21 @@ gui:
       lore:
       - ''
       - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Shift + Click] | Reset'
     - icon: name_tag
       type: DISPLAY_NAME
       display_name: 'Display Name'
       lore:
       - ''
       - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Shift + Click] | Reset'
     - icon: knowledge_book
       type: MODEL_DATA
       display_name: 'Model Data'
       lore:
       - ''
       - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Shift + Click] | Reset'
     - icon: bedrock
       type: UNBREAKABLE
       display_name: 'Unbreakable'
@@ -98,80 +98,107 @@ gui:
       lore:
       - ''
       - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Shift + Click] | Reset'
     - icon: iron_sword
       type: DAMAGE
       display_name: 'Item Damage'
       lore:
       - ''
       - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Shift + Click] | Reset'
     - icon: anvil
       type: REPAIR_COST
       display_name: 'Repair Cost'
       lore:
       - ''
       - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Shift + Click] | Reset'
     - icon: axolotl_bucket
       type: AXOLOTL_VARIANT
       display_name: 'Axolotl Variant'
       lore:
       - ''
       - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Shift + Click] | Reset'
     - icon: blaze_powder
       type: ABILITIES
       display_name: 'Abilities'
       lore:
       - ''
       - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Shift + Click] | Reset'
     - icon: paper
       type: LORE
       display_name: 'Lore'
       lore:
       - ''
-      - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Left Click] | Edit'
+      - '<gray>[Right Click] | Remove'
+      - '<gray>[Shift + Click] | Reset'
     - icon: enchanted_book
       type: ENCHANTS
       display_name: 'Enchantments'
       lore:
       - ''
-      - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Left Click] | Edit'
+      - '<gray>[Right Click] | Remove'
+      - '<gray>[Shift + Click] | Reset'
     - icon: iron_chestplate
       type: ATTRIBUTES
       display_name: 'Attributes'
       lore:
       - ''
-      - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Left Click] | Edit'
+      - '<gray>[Right Click] | Remove'
+      - '<gray>[Shift + Click] | Reset'
     - icon: crossbow
       type: CROSSBOW_PROJECTILES
       display_name: 'Crossword Projectile'
       lore:
       - ''
-      - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Left Click] | Edit'
+      - '<gray>[Right Click] | Remove'
+      - '<gray>[Shift + Click] | Reset'
     - icon: bundle
       type: BUNDLE_ITEMS
       display_name: 'Bundle Item'
       lore:
       - ''
+      - '<gray>[Left Click] | Edit'
+      - '<gray>[Right Click] | Remove'
+      - '<gray>[Shift + Click] | Reset'
+    - icon: paper
+      type: HIDE_FLAGS
+      display_name: 'Hide Flags'
+      lore:
+      - ''
+      - '<gray>[Left Click] | Edit'
+      - '<gray>[Right Click] | Remove'
+      - '<gray>[Shift + Click] | Reset'
+    - icon: barrel
+      type: LORE_FORMAT
+      display_name: 'Lore Format'
+      lore:
+      - ''
       - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Shift + Click] | Reset'
+    - icon: paper
+      type: HIDE_ALL_FLAG
+      display_name: 'Hide All Flags'
+      lore:
+      - ''
+      - '<gray>[Click] | Toggle'
+      - '<gray>[Shift + Click] | Reset'
   abilities:
-    title: '<white>Item Abilities'
+    title: 'Item Abilities'
     interface:
       lore:
       - ''
       - '<gray>[Left Click] | Edit'
       - '<gray>[Right Click] | Duplicate'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Shift + Click] | Reset'
   ability:
-    title: '<white>Item ability'
+    title: 'Item ability'
     interface:
     - icon: blaze_powder
       type: SKILL
@@ -179,14 +206,14 @@ gui:
       lore:
       - ''
       - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Shift + Click] | Reset'
     - icon: beacon
       type: ACTIVATOR
       display_name: 'Activator'
       lore:
       - ''
       - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Shift + Click] | Reset'
     - icon: paper
       type: SHOW_LORE
       display_name: 'Show in Lore'
@@ -205,7 +232,7 @@ gui:
       lore:
       - ''
       - '<gray>[Click] | Edit'
-      - '<gray>[Shift + Click] | reset'
+      - '<gray>[Shift + Click] | Reset'
     - icon: command_block
       type: VARIABLE
       display_name: 'Variable'
@@ -213,8 +240,8 @@ gui:
       - ''
       - '<gray>[Click] | Edit'
   variable:
-    title: '<white>Ability Variable'
+    title: 'Ability Variable'
     interface:
       lore:
       - ''
-      - '<gray>[Click] | delete'
+      - '<gray>[Click] | Delete'

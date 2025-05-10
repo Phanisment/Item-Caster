@@ -7,16 +7,7 @@ items:
     display_name: 'Example Item'
     model_data: 1
     unbreakable: true
-    disable:
-      crafting: true
-      anvil: true
-      enchant: true
-      drop_on_death: true
-      grindstone: true
-      smithing: true
-      chest: true
-      shulker: true
-      ender_chest: true
+    lore_format: default.js
     lore:
     - '<gray>Just generic Item.'
     abilities:

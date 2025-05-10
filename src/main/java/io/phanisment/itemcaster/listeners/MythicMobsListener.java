@@ -20,7 +20,7 @@ import io.phanisment.itemcaster.util.Message;
 import io.phanisment.itemcaster.skills.SkillActivator;
 import io.phanisment.itemcaster.skills.conditions.*;
 import io.phanisment.itemcaster.skills.drops.*;
-import io.phanisment.itemcaster.skills.mechanics.*;
+//import io.phanisment.itemcaster.skills.mechanics.*;
 
 public class MythicMobsListener implements Listener {
 	private ItemCaster plugin;
@@ -55,11 +55,11 @@ public class MythicMobsListener implements Listener {
 	
 	@EventHandler
 	public void onMechanicLoad(MythicMechanicLoadEvent event) {
-		switch(event.getMechanicName().toLowerCase()) {
+		/*switch(event.getMechanicName().toLowerCase()) {
 			case "setitemmodel":
 				event.register(new SetItemModelMechanic(event.getConfig()));
 				break;
-		}
+		}*/
 	}
 	
 	@EventHandler

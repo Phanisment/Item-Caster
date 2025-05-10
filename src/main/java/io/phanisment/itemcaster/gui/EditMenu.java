@@ -86,6 +86,23 @@ public class EditMenu extends PaginatedFastInv {
 							Message.send(player, "Set the item Unbreakable to: " + item.getItemMeta().isUnbreakable());
 						}
 						break;
+					case LORE_FORMAT:
+						if (e.getClick() == ClickType.SHIFT_LEFT || e.getClick() == ClickType.SHIFT_RIGHT) {
+							update(ci.resetLoreFormat().save(), player);
+						} else {
+							chatInput(player, EditType.LORE_FORMAT);
+							Message.send(player, "Editing the item Lore Format.");
+						}
+						break;
+					case HIDE_ALL_FLAG:
+						if (e.getClick() == ClickType.SHIFT_LEFT || e.getClick() == ClickType.SHIFT_RIGHT) {
+							update(ci.resetHideAllFlags().save(), player);
+						} else {
+							CasterItem item = ci.setHideAllFlags(!ci.hide_all_flags).save();
+							update(item, player);
+							Message.send(player, "Set the item hide all flag to: " + item.hide_all_flags);
+						}
+						break;
 					case COLOR:
 						if (e.getClick() == ClickType.SHIFT_LEFT || e.getClick() == ClickType.SHIFT_RIGHT) {
 							update(ci.resetColor().save(), player);
@@ -122,7 +139,6 @@ public class EditMenu extends PaginatedFastInv {
 						if (e.getClick() == ClickType.SHIFT_LEFT || e.getClick() == ClickType.SHIFT_RIGHT) {
 							update(ci.resetAxolotlVariant().save(), player);
 						} else {
-							player.closeInventory();
 							new AbilitiesMenu(ci).open(player);
 						}
 						break;
@@ -137,6 +153,8 @@ public class EditMenu extends PaginatedFastInv {
 							update(ci.setLore(lore).save(), player);
 						} else {
 							chatInput(player, EditType.LORE);
+							Message.send(player, "You can use this format <gray>`<number>| <lore>;<new_line>`</gray> for make multiple line.");
+							Message.send(player, "Ex: 0|This is line 1;1|This is line 2");
 						}
 						break;
 					case ENCHANTS:
@@ -150,6 +168,8 @@ public class EditMenu extends PaginatedFastInv {
 							update(ci.setEnchants(list).save(), player);
 						} else {
 							chatInput(player, EditType.ENCHANTS);
+							Message.send(player, "You can use this format <gray>`<number>| <lore>;<new_line>`</gray> for make multiple line.");
+							Message.send(player, "Ex: 0|This is line 1;1|This is line 2");
 						}
 						break;
 					case HIDE_FLAGS:
@@ -163,6 +183,8 @@ public class EditMenu extends PaginatedFastInv {
 							update(ci.setFlags(list).save(), player);
 						} else {
 							chatInput(player, EditType.HIDE_FLAGS);
+							Message.send(player, "You can use this format <gray>`<number>| <lore>;<new_line>`</gray> for make multiple line.");
+							Message.send(player, "Ex: 0|This is line 1;1|This is line 2");
 						}
 						break;
 					case ATTRIBUTES:
@@ -176,6 +198,8 @@ public class EditMenu extends PaginatedFastInv {
 							new EditMenu(ci.setAttributes(list).save()).open(player);
 						} else {
 							chatInput(player, EditType.ATTRIBUTES);
+							Message.send(player, "You can use this format <gray>`<number>| <lore>;<new_line>`</gray> for make multiple line.");
+							Message.send(player, "Ex: 0|This is line 1;1|This is line 2");
 						}
 						break;
 					case CROSSBOW_PROJECTILES:
@@ -189,6 +213,8 @@ public class EditMenu extends PaginatedFastInv {
 							new EditMenu(ci.setCrossbowProjectiles(list).save()).open(player);
 						} else {
 							chatInput(player, EditType.CROSSBOW_PROJECTILES);
+							Message.send(player, "You can use this format <gray>`<number>| <lore>;<new_line>`</gray> for make multiple line.");
+							Message.send(player, "Ex: 0|This is line 1;1|This is line 2");
 						}
 						break;
 					case BUNDLE_ITEMS:
@@ -202,6 +228,8 @@ public class EditMenu extends PaginatedFastInv {
 							new EditMenu(ci.setBundleItems(list).save()).open(player);
 						} else {
 							chatInput(player, EditType.BUNDLE_ITEMS);
+							Message.send(player, "You can use this format <gray>`<number>| <lore>;<new_line>`</gray> for make multiple line.");
+							Message.send(player, "Ex: 0|This is line 1;1|This is line 2");
 						}
 						break;
 					default:
@@ -245,6 +273,8 @@ public class EditMenu extends PaginatedFastInv {
 		DISPLAY_NAME,
 		MODEL_DATA,
 		UNBREAKABLE,
+		LORE_FORMAT,
+		HIDE_ALL_FLAG,
 		COLOR,
 		DAMAGE,
 		REPAIR_COST,

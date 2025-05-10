@@ -1,3 +1,12 @@
+/**
+ * Default Configuration for Lore Format.
+ * 
+ * You can modify this and add whatever you want,
+ * recommend to check the wiki because this has
+ * variable that added form the plugin.
+ * 
+ */ 
+
 var ArrayList = Java.type("java.util.ArrayList");
 
 function splitKeyValueLines(map, maxItemsPerLine) {
