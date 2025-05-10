@@ -21,6 +21,7 @@ import io.phanisment.itemcaster.util.Legacy;
 import io.phanisment.itemcaster.gui.EditMenu;
 import io.phanisment.itemcaster.gui.MainMenu;
 import io.phanisment.itemcaster.gui.AbilityMenu;
+import io.phanisment.itemcaster.gui.VariableGui;
 import io.phanisment.itemcaster.config.ItemConfig;
 import io.phanisment.itemcaster.config.item.Pack;
 
@@ -31,6 +32,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.text.NumberFormat;
+import java.text.ParseException;
 
 public class GuiListener implements Listener {
 	@EventHandler
@@ -51,6 +54,7 @@ public class GuiListener implements Listener {
 	public void onChat(AsyncPlayerChatEvent event) {
 		Player player = event.getPlayer();
 		String value = event.getMessage();
+		// Edit Chat Input
 		if (EditMenu.chatInput.containsKey(player.getUniqueId())) {
 			event.setCancelled(true);
 			EditMenu.EditData data = EditMenu.chatInput.remove(player.getUniqueId());
@@ -114,6 +118,7 @@ public class GuiListener implements Listener {
 			Bukkit.getScheduler().runTask(ItemCaster.getInst(), () -> new EditMenu(ci).open(player));
 		}
 		
+		// Menu Chat Input
 		if (MainMenu.create_item.contains(player.getUniqueId())) {
 			event.setCancelled(true);
 			MainMenu.create_item.remove(player.getUniqueId());
@@ -156,6 +161,7 @@ public class GuiListener implements Listener {
 			}
 		}
 		
+		// Ability Chat Input
 		if (AbilityMenu.edit.containsKey(player.getUniqueId())) {
 			event.setCancelled(true);
 			AbilityMenu.AbilityData data = AbilityMenu.edit.remove(player.getUniqueId());
@@ -201,6 +207,79 @@ public class GuiListener implements Listener {
 			final CasterItem ci = item;
 			Bukkit.getScheduler().runTask(ItemCaster.getInst(), () -> new AbilityMenu(ci, map, index).open(player));
 		}
+		
+		// Variable Chat Input
+		if (VariableGui.var_data.containsKey(player.getUniqueId())) {
+			event.setCancelled(true);
+			VariableGui.VariableData data = VariableGui.var_data.remove(player.getUniqueId());
+			CasterItem item = data.item;
+			Map<String, Object> container = data.data;
+			int index = data.index;
+			
+			if (value.equalsIgnoreCase("exit") || value.equalsIgnoreCase("cancel")) {
+				final CasterItem ci = data.item;
+				Bukkit.getScheduler().runTask(ItemCaster.getInst(), () -> new VariableGui(ci, data.data, data.index).open(player));
+				Message.send(player, "Edit Cancelled.");
+				return;
+			}
+			
+			switch (data.type) {
+				case CREATE:
+					List<Map<String, Object>> abilities = item.abilities;
+					Map<String, Object> variables = (Map<String, Object>)container.get("variable");
+					if (variables == null) {
+						variables = new HashMap<>();
+						container.put("variable", variables);
+					}
+					
+					String[] split = value.split("=", 2);
+					if (split.length != 2) {
+						Bukkit.getScheduler().runTask(ItemCaster.getInst(), () -> new VariableGui(item, container, index).open(player));
+						return;
+					}
+					
+					String key = split[0].trim();
+					String rawVal = split[1].trim();
+					if (key.isEmpty()) {
+						Bukkit.getScheduler().runTask(ItemCaster.getInst(), () -> new VariableGui(item, container, index).open(player));
+						return;
+					}
+					Object parsedValue = isNumber(rawVal) ? parseNumber(rawVal) : rawVal;
+					variables.put(key, parsedValue);
+					abilities.set(index, container);
+					item.setAbilities(abilities).save();
+					break;
+				default:
+					break;
+			}
+			final CasterItem ci = item;
+			Bukkit.getScheduler().runTask(ItemCaster.getInst(), () -> new VariableGui(ci, container, index).open(player));
+		}
+	}
+	
+	private boolean isNumber(String value) {
+		try {
+			Number number = NumberFormat.getInstance().parse(value);
+			return true;
+		} catch (ParseException e) {
+			return false;
+		}
+	}
+	
+	private Number parseNumber(String value) {
+		try {
+			return Integer.parseInt(value);
+		} catch (NumberFormatException ignored) {}
+		try {
+			return Long.parseLong(value);
+		} catch (NumberFormatException ignored) {}
+		try {
+			return Float.parseFloat(value);
+		} catch (NumberFormatException ignored) {}
+		try {
+			return Double.parseDouble(value);
+		} catch (NumberFormatException ignored) {}
+		return null;
 	}
 	
 	private static List<String> inputList(List<String> lists, String value) {
@@ -226,7 +305,7 @@ public class GuiListener implements Listener {
 	}
 	
 	public static void tick(Player player) {
-		if (EditMenu.chatInput.containsKey(player.getUniqueId()) || AbilityMenu.edit.containsKey(player.getUniqueId())) {
+		if (EditMenu.chatInput.containsKey(player.getUniqueId()) || AbilityMenu.edit.containsKey(player.getUniqueId()) || VariableGui.var_data.containsKey(player.getUniqueId()) || MainMenu.create_item.contains(player.getUniqueId())) {
 			player.sendTitle(Legacy.serializer("<yellow>Editing Mode"), Legacy.serializer("<gray>Type for set the value"), 0, 40, 0);
 		}
 	}

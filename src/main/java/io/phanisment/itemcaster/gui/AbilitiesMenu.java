@@ -68,13 +68,11 @@ public class AbilitiesMenu extends PaginatedFastInv {
 				if (e.getClick() == ClickType.SHIFT_LEFT || e.getClick() == ClickType.SHIFT_RIGHT) {
 					abilities.remove(index);
 					final CasterItem item = ci;
-					final Map<String, Object> final_ability = ability;
 					new AbilitiesMenu(ci.setAbilities(abilities).save()).open(player);
 				} else if (e.getClick() == ClickType.RIGHT) {
 					Map<String, Object> new_map = new HashMap<>(ability);
 					abilities.add(new_map);
 					final CasterItem item = ci;
-					final Map<String, Object> final_ability = ability;
 					new AbilitiesMenu(ci.setAbilities(abilities).save()).open(player);
 				} else {
 					final CasterItem item = ci;

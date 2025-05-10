@@ -33,6 +33,10 @@ public class Message {
 		player.sendMessage(Legacy.serializer(message));
 	}
 
+	public static void debug(String message) {
+		if (ItemCaster.getInst().getConfig().getBoolean("debug", false)) Bukkit.getConsoleSender().sendMessage(Legacy.serializer(message));
+	}
+
 
 	public static void send(CommandSender sender, String message) {
 		sender.sendMessage(Legacy.serializer(ItemCaster.getInst().getConfig().getString("prefix") + message));

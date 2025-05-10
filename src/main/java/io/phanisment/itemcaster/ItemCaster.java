@@ -9,7 +9,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-
 import de.tr7zw.changeme.nbtapi.NBT;
 
 import fr.mrmicky.fastinv.FastInvManager;
@@ -18,6 +17,7 @@ import io.phanisment.itemcaster.command.BaseCommand;
 import io.phanisment.itemcaster.listeners.*;
 import io.phanisment.itemcaster.config.*;
 import io.phanisment.itemcaster.util.Message;
+import io.phanisment.itemcaster.script.FormatScript;
 
 public class ItemCaster extends JavaPlugin {
 	public static final int plugin_id = 25172;
@@ -27,20 +27,18 @@ public class ItemCaster extends JavaPlugin {
 	public static boolean hasPapi;
 	public ItemConfig itemConfig;
 	public ItemEditConfig itemEditConfig;
+	public FormatScript formatScript;
 	
 	public ItemCaster() {
 		plugin = this;
 	}
 	
 	@Override
-	public void onLoad() {
+	public void onEnable() {
+		saveDefaultConfig();
+		this.formatScript = new FormatScript();
 		this.itemConfig = new ItemConfig();
 		this.itemEditConfig = new ItemEditConfig();
-		saveDefaultConfig();
-	}
-	
-	@Override
-	public void onEnable() {
 		this.metrics = new Metrics(this, plugin_id);
 		FastInvManager.register(this);
 		if (!NBT.preloadApi()) {
@@ -95,8 +93,9 @@ public class ItemCaster extends JavaPlugin {
 		return hasPapi;
 	}
 	
-	public void reloadConfigs() {
+	public static void reloadConfigs() {
 		plugin.reloadConfig();
+		plugin.formatScript.load();
 		plugin.getItemConfig().loadItems();
 		plugin.getItemEditConfig().load();
 	}

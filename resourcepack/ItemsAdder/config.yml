@@ -25,25 +25,25 @@ gui:
   sound:
   icon:
     next:
-      icon: arrow
+      icon: itemsadder:_itemcaster:next
       display_name: 'Next Page'
     previous:
-      icon: arrow
+      icon: itemsadder:_itemcaster:previous
       display_name: 'Previous Page'
     back:
-      icon: arrow
+      icon: itemsadder:_itemcaster:back
       display_name: 'Back'
     create_item:
-      icon: crafting_table
+      icon: itemsadder:_itemcaster:create_item
       display_name: 'Create a new Item'
     ability:
-      icon: fire_charge
+      icon: itemsadder:_itemcaster:ability
       display_name: 'Edit Ability'
     create_ability:
-      icon: nether_star
+      icon: itemsadder:_itemcaster:add
       display_name: 'Add Ability'
     create_variable:
-      icon: comparator
+      icon: itemsadder:_itemcaster:add
       display_name: 'Add Variable'
     variable:
       icon: redstone

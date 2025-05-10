@@ -18,54 +18,21 @@ import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.phanisment.itemcaster.ItemCaster;
 
 public class SetItemModelMechanic implements ITargetedEntitySkill {
-	private final EquipmentSlot slot;
 	private final int modelData;
-	private final String ri;
 	
 	public SetItemModelMechanic(MythicLineConfig config) {
-		this.slot = EquipmentSlot.valueOf(config.getString(new String[]{"slot", "s"}, "HAND").toUpperCase());
 		this.modelData = config.getInteger(new String[]{"modelData", "model", "data", "m", "d"}, 0);
-		this.ri = config.getString(new String[]{"item","i"});
 	}
 
 	public SkillResult castAtEntity(SkillMetadata data, AbstractEntity target) {
 		LivingEntity entity = (LivingEntity) BukkitAdapter.adapt(target);
-		ItemStack item = null;
-		switch(slot) {
-			case CHEST:
-				item = entity.getEquipment().getChestplate();
-				break;
-			case FEET:
-				item = entity.getEquipment().getBoots();
-				break;
-			case HAND:
-				item = entity.getEquipment().getItemInMainHand();
-				break;
-			case HEAD:
-				item = entity.getEquipment().getHelmet();
-				break;
-			case LEGS:
-				item = entity.getEquipment().getLeggings();
-				break;
-			case OFF_HAND:
-				item = entity.getEquipment().getItemInOffHand();
-				break;
-		}
+		ItemStack	item = entity.getEquipment().getItemInMainHand();
 		ItemMeta meta = item.getItemMeta();
 		if (item != null && item.getType() != Material.AIR) {
 			if (modelData >= 1) {
 				meta.setCustomModelData(modelData);
 				item.setItemMeta(meta);
-			} else {
-				if (ItemCaster.hasItemsAdder()) {
-					CustomStack stack = CustomStack.getInstance(ri);
-					if (stack != null) {
-						ItemStack ri_i = stack.getItemStack();
-						item.setType(ri_i.getType());
-						meta.setCustomModelData(ri_i.getItemMeta().getCustomModelData());
-						item.setItemMeta(meta);
-					}
-				}
+				entity.getEquipment().setItemInMainHand(item);
 			}
 			return SkillResult.SUCCESS;
 		}

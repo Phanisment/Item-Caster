@@ -46,6 +46,8 @@ import io.phanisment.itemcaster.ItemCaster;
 import io.phanisment.itemcaster.util.Legacy;
 import io.phanisment.itemcaster.util.Message;
 import io.phanisment.itemcaster.config.TrimsData;
+import io.phanisment.itemcaster.script.FormatScript;
+import io.phanisment.itemcaster.script.FormatScript.ScriptData;
 
 import java.io.File;
 import java.util.HashMap;
@@ -69,6 +71,7 @@ public class CasterItem implements Cloneable, ItemCasterItems {
 	public String display_name;
 	public int model_data;
 	public boolean unbreakable;
+	public boolean hide_all_flags;
 	public String lore_format;
 	public String color;
 	public int damage;
@@ -89,7 +92,6 @@ public class CasterItem implements Cloneable, ItemCasterItems {
 	public List<String> crossbow_projectiles;
 	public List<String> bundle_items;
 	public List<Map<String, Object>> suspicious_stew_effect;
-	
 	public List<Map<String, Object>> abilities;
 	
 	private ItemCaster getPl() {
@@ -106,6 +108,7 @@ public class CasterItem implements Cloneable, ItemCasterItems {
 			this.display_name = config.getString("display_name", "");
 			this.model_data = config.getInt("model_data", 0);
 			this.unbreakable = config.getBoolean("unbreakable", false);
+			this.hide_all_flags = config.getBoolean("hide_all_flags", false);
 			this.lore_format = config.getString("lore_format", "");
 			this.color = config.getString("color");
 			this.damage = config.getInt("damage", 0);
@@ -274,48 +277,80 @@ public class CasterItem implements Cloneable, ItemCasterItems {
 			
 			// Lore
 			List<String> lores = new ArrayList<>();
-			if (!lore.isEmpty()) {
-				for (String line : lore) {
-					lores.add(Legacy.serializer("<white>" + line));
+			if (lore_format.isEmpty()) {
+				if (!lore.isEmpty()) {
+					for (String line : lore) {
+						lores.add(Legacy.serializer("<white>" + line));
+					}
 				}
-			}
-				
-			// Abilities Lore
-			List<String> abilitiesLoreFormat = getPl().getConfig().getStringList("abilities.lore");
-			if (abilities != null && !abilitiesLoreFormat.isEmpty()) {
-				for (Map<String, Object> ability : abilities) {
-					if (ability.containsKey("skill") && ability.containsKey("activator")) {
-						String skill = (String)ability.get("skill");
-						String activator = (String)ability.get("activator");
-						boolean showInLore = (Boolean)ability.getOrDefault("show_in_lore", false);
-						if (showInLore) {
-							String name = (String)ability.getOrDefault("name", "");
-							Integer power = (Integer)ability.getOrDefault("power", 0);
-							Map<String, Object> variable = (Map<String, Object>) ability.get("variable");
-							
-							for (String format : abilitiesLoreFormat) {
-								String formattedLine = format
-									.replace("{name}", name)
-									.replace("{skill}", skill.replace("_", " "))
-									.replace("{activator}", activator.replace("_", " "))
-									.replace("{power}", String.valueOf(power));
-									if (variable != null) {
-										Pattern pattern = Pattern.compile("\\{var\\.(.+?)\\}");
-										Matcher matcher = pattern.matcher(formattedLine);
-										StringBuffer sb = new StringBuffer();
-										while (matcher.find()) {
-											String varName = matcher.group(1);
-											String varValue = variable.containsKey(varName) ? variable.get(varName).toString() : "null";
-											matcher.appendReplacement(sb, varValue);
+					
+				// Abilities Lore
+				List<String> abilitiesLoreFormat = getPl().getConfig().getStringList("abilities.lore");
+				if (abilities != null && !abilitiesLoreFormat.isEmpty()) {
+					for (Map<String, Object> ability : abilities) {
+						if (ability.containsKey("skill") && ability.containsKey("activator")) {
+							String skill = (String)ability.get("skill");
+							String activator = (String)ability.get("activator");
+							boolean showInLore = (Boolean)ability.getOrDefault("show_in_lore", false);
+							if (showInLore) {
+								String name = (String)ability.getOrDefault("name", "");
+								Integer power = (Integer)ability.getOrDefault("power", 0);
+								Map<String, Object> variable = (Map<String, Object>) ability.get("variable");
+								
+								for (String format : abilitiesLoreFormat) {
+									String formattedLine = format
+										.replace("{name}", name)
+										.replace("{skill}", skill.replace("_", " "))
+										.replace("{activator}", activator.replace("_", " "))
+										.replace("{power}", String.valueOf(power));
+										if (variable != null) {
+											Pattern pattern = Pattern.compile("\\{var\\.(.+?)\\}");
+											Matcher matcher = pattern.matcher(formattedLine);
+											StringBuffer sb = new StringBuffer();
+											while (matcher.find()) {
+												String varName = matcher.group(1);
+												String varValue = variable.containsKey(varName) ? variable.get(varName).toString() : "null";
+												matcher.appendReplacement(sb, varValue);
+											}
+											matcher.appendTail(sb);
+											formattedLine = sb.toString();
 										}
-										matcher.appendTail(sb);
-										formattedLine = sb.toString();
-									}
-								lores.add(Legacy.serializer("<white>" + formattedLine));
+									lores.add(Legacy.serializer("<white>" + formattedLine));
+								}
 							}
 						}
 					}
 				}
+			} else {
+				List<String> fmt = FormatScript.run(lore_format,
+					new ScriptData("id", getId()),
+					new ScriptData("nbt", nbt_string),
+					new ScriptData("model_data", model_data),
+					new ScriptData("color", color),
+					new ScriptData("damage", damage),
+					new ScriptData("repair_cost", repair_cost),
+					new ScriptData("axolotl_variant", axolotl_variant),
+					new ScriptData("trim_pattern", trim_pattern),
+					new ScriptData("trim_material", trim_material),
+					new ScriptData("potion_type", potion_type),
+					new ScriptData("potion_color", potion_color),
+					new ScriptData("potion_effect", potion_effect),
+					new ScriptData("potion_duration", potion_duration),
+					new ScriptData("potion_effects", potion_effects),
+					new ScriptData("lore", lore),
+					new ScriptData("enchantments", enchants),
+					new ScriptData("hide_flags", hide_flags),
+					new ScriptData("attributes", attributes),
+					new ScriptData("crossbow_projectiles", crossbow_projectiles),
+					new ScriptData("bundle_items", bundle_items),
+					new ScriptData("suspicious_stew_effect", suspicious_stew_effect),
+					new ScriptData("potion_effects", potion_effects),
+					new ScriptData("abilities", abilities)
+				);
+				
+				fmt.forEach(line -> {
+					lores.add(Legacy.serializer("<white>" + line));
+				});
 			}
 			meta.setLore(lores);
 			
@@ -378,17 +413,20 @@ public class CasterItem implements Cloneable, ItemCasterItems {
 			}
 			
 			// HideFlags
-			if (hide_flags != null) {
-				for (String flag : hide_flags) {
-					try {
-						ItemFlag itemFlag = ItemFlag.valueOf(flag.toUpperCase());
-						meta.addItemFlags(itemFlag);
-					} catch (IllegalArgumentException e) {
-						getPl().getLogger().warning("HideFlag [" + flag + "] is invalid.");
+			if (!hide_all_flags) {
+				if (hide_flags != null) {
+					for (String flag : hide_flags) {
+						try {
+							ItemFlag itemFlag = ItemFlag.valueOf(flag.toUpperCase());
+							meta.addItemFlags(itemFlag);
+						} catch (IllegalArgumentException e) {
+							getPl().getLogger().warning("HideFlag [" + flag + "] is invalid.");
+						}
 					}
 				}
+			} else {
+				meta.addItemFlags(ItemFlag.values());
 			}
-			
 			item.setItemMeta(meta);
 			
 			NBTItem nbtItem = new NBTItem(item);

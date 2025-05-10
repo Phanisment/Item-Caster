@@ -53,6 +53,10 @@
 							<pattern>fr.mrmicky.fastinv</pattern>
 							<shadedPattern>io.phanisment.itemcaster.lib.fastinv</shadedPattern>
 						</relocation>
+						<relocation>
+							<pattern>org.openjdk.nashorn</pattern>
+							<shadedPattern>io.phanisment.itemcaster.lib.nashorn</shadedPattern>
+						</relocation>
 					</relocations>
 				</configuration>
 			</plugin>
@@ -138,6 +142,17 @@
 			<artifactId>placeholderapi</artifactId>
 			<version>2.11.6</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.openjdk.nashorn</groupId>
+			<artifactId>nashorn-core</artifactId>
+			<version>15.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jetbrains</groupId>
+			<artifactId>annotations</artifactId>
+			<version>16.0.2</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 

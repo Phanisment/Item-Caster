@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.event.inventory.ClickType;
+import org.bukkit.Sound;
 
 import fr.mrmicky.fastinv.PaginatedFastInv;
 import fr.mrmicky.fastinv.ItemBuilder;
@@ -51,6 +52,7 @@ public class AbilityMenu extends PaginatedFastInv {
 		for (ItemAbilityInterface icon : interfaces) {
 			addContent(icon.getItemStack(), e -> {
 				Player player = (Player)e.getWhoClicked();
+				player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 0.5F, 2.0F);
 				switch (icon.type) {
 					case SKILL:
 						chatInput(player, AbilityType.SKILL);
@@ -76,6 +78,7 @@ public class AbilityMenu extends PaginatedFastInv {
 						break;
 					case VARIABLE:
 						// TODO: Move to Variable Gui
+						new VariableGui(item, data, index).open(player);
 						break;
 					default:
 						Message.send(player, "Unknown edit Type");
@@ -89,7 +92,12 @@ public class AbilityMenu extends PaginatedFastInv {
 			lore_data.add("<gray>" + ability.getKey() + ": " + ability.getValue());
 		}
 		
-		setItem(49, ItemEditConfig.icon.get("ability").setLore(lore_data).load().getItemStack());
+		setItem(49, ItemEditConfig.icon.get("ability").setLore(lore_data).load().getItemStack(), e -> {
+			Player player = (Player)e.getWhoClicked();
+			player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 2.0F, 0.5F);
+			player.getInventory().addItem(item.getItemStack());
+			Message.send(player, "<color:#f7d340>" + item.getId() + "</color> added to your inventory.");
+		});
 		scheme.apply(this);
 	}
 	
@@ -101,7 +109,7 @@ public class AbilityMenu extends PaginatedFastInv {
 	
 	private void update(Player player, CasterItem ci) {
 		player.closeInventory();
-		new AbilityMenu(ci, data, index).open(player);
+		new AbilityMenu(item, data, index).open(player);
 	}
 	
 	public static class AbilityData {
@@ -125,7 +133,6 @@ public class AbilityMenu extends PaginatedFastInv {
 		SHOW_LORE,
 		SNEAK,
 		SIGNAL,
-		CANCEL_EVENT,
 		VARIABLE;
 	}
 }

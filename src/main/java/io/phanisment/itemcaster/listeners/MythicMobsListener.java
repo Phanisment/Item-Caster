@@ -24,7 +24,6 @@ import io.phanisment.itemcaster.skills.mechanics.*;
 
 public class MythicMobsListener implements Listener {
 	private ItemCaster plugin;
-	private static boolean first_load = false;
 	
 	public MythicMobsListener(ItemCaster plugin) {
 		this.plugin = plugin;
@@ -32,8 +31,7 @@ public class MythicMobsListener implements Listener {
 	
 	@EventHandler
 	public void onReloaded(MythicReloadedEvent event) {
-		if (plugin.getConfig().getBoolean("auto_reload", true) && !first_load) {
-			first_load = true;
+		if (plugin.getConfig().getBoolean("auto_reload", true)) {
 			Message.send("Reloading...");
 			Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
 				try {

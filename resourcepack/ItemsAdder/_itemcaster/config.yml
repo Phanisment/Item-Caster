@@ -4,38 +4,56 @@ items:
   back:
     display_name: back
     resource:
-      material: paper
+      material: stick
       generate: true
       textures:
-      - ui/back_arrow
+      - gui/interface/back_arrow
   next:
     display_name: next
     resource:
-      material: paper
+      material: stick
       generate: true
       textures:
-      - ui/next_arrow
+      - gui/interface/next_arrow
   previous:
     display_name: previous
     resource:
-      material: paper
+      material: stick
       generate: true
       textures:
-      - ui/previous_arrow
+      - gui/interface/previous_arrow
   create_item:
     display_name: back
     resource:
-      material: paper
+      material: stick
       generate: true
       textures:
-      - ui/create_item
+      - gui/interface/create_item
+  add:
+    display_name: add
+    resource:
+      material: stick
+      generate: true
+      textures:
+      - gui/interface/add
+  ability:
+    display_name: ability
+    resource:
+      material: stick
+      generate: true
+      textures:
+      - gui/interface/ability
 
 font_images:
   main:
-    path: "ui/main.png"
+    path: "gui/main.png"
     scale_ratio: 256
     y_position: 14
   edit:
-    path: "ui/edit.png"
+    path: "gui/edit.png"
+    scale_ratio: 256
+    y_position: 14
+  modifiers:
+    path: "gui/modifiers.png"
     scale_ratio: 256
     y_position: 14
