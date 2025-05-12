@@ -59,3 +59,4 @@ dependencies {
 - [x] Create gui for select item.
 - [x] Add Maven Dependency for this plugin.
 - [ ] Make API for plugin developer.
+- [ ] Make Resourcepack Generation.
