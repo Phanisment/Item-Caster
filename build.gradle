@@ -1,0 +1,69 @@
+plugins {
+	id 'maven-publish'
+	id 'java-library'
+	id 'application'
+}
+
+application {
+	mainClass = project.mainClass
+}
+
+group = project.group
+version = project.version
+
+base {
+	archivesName = project.archivesName
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	maven {
+		url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+		content {
+			includeGroup 'org.bukkit'
+			includeGroup 'org.spigotmc'
+		}
+	}
+}
+
+dependencies {
+	compileOnly "org.spigotmc:spigot-api:${project.spigot_api_version}"
+}
+
+processResources {
+	def props = [
+		"version"    : project.version,
+		"main_class" : project.mainClass
+	]
+
+	inputs.properties(props)
+
+	filesMatching("plugin.yml") {
+		expand(props)
+	}
+}
+
+tasks.named('jar') {
+	from('LICENSE') {
+		into('.')
+	}
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.release = 21
+}
+
+java {
+	withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+}
+
+publishing {
+	publications {
+		maven(MavenPublication) {
+			from(components.java)
+		}
+	}
+}
