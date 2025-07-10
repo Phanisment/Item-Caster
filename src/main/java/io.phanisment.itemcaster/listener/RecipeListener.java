@@ -46,7 +46,8 @@ public class RecipeListener implements Listener {
 			ItemStack[] matrix = inv_craft.getMatrix();
 			for (Recipe r : RecipeManager.getRecipes()) {
 				if (r.matchOnly(matrix)) {
-					r.reduceMatrix(e, matrix, inv_craft);
+					e.setCancelled(true);
+					r.reduceMatrix(matrix, inv_craft);
 					break;
 				}
 			}

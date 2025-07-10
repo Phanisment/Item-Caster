@@ -1,5 +1,6 @@
 package io.phanisment.itemcaster.recipe;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
@@ -13,6 +14,7 @@ import org.bukkit.entity.Player;
 import io.lumine.mythic.core.logging.MythicLogger;
 
 import io.phanisment.itemcaster.util.ItemUtil;
+import io.phanisment.itemcaster.ItemCaster;
 
 import java.util.List;
 import java.util.Map;
@@ -84,26 +86,27 @@ public class Recipe {
 		}
 	}
 	
-	public void reduceMatrix(InventoryClickEvent e, ItemStack[] matrix, CraftingInventory inv) {
+	public void reduceMatrix(ItemStack[] matrix, CraftingInventory inv) {
 		for (int i = 0; i < 9; i++) {
-			char symbol = this.shape[i];
-			Ingredient ingredient = this.getIngredient(symbol);
-			
-			ItemStack expect = (ingredient != null) ? ingredient.getItem() : null;
-			ItemStack actual = matrix[i];
-			
-			if (actual == null || actual.getType().isAir() || actual.getAmount() < ingredient.getAmount()) return;
-			
 			int slot = i + 1;
-			int amount = actual.getAmount() - ingredient.getAmount();
-			if (amount > ingredient.getAmount()) {
-				actual.setAmount(amount);
-			} else {
-				
-				return;
-			}
-			
+			inv.setItem(slot, null);
 		}
+		
+		Bukkit.getScheduler().runTask(ItemCaster.getInst(), () -> {
+			for (int i = 0; i < 9; i++) {
+				char symbol = this.shape[i];
+				Ingredient ingredient = this.getIngredient(symbol);
+				ItemStack actual = matrix[i];
+				if (ingredient == null || actual == null || actual.getType().isAir()) continue;
+				
+				int left = actual.getAmount() - ingredient.getAmount();
+				if (left > 0) {
+					ItemStack new_item = actual.clone();
+					new_item.setAmount(left);
+					inv.setItem(i + 1, new_item);
+				}
+			}
+		});
 	}
 	
 	private ItemStack itemResult(ConfigurationSection config) {
