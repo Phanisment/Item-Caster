@@ -1,8 +1,8 @@
 name: ItemCaster
-version: ${version}
+version: R0.1
 author: Phanisment
 description: A rewrite version of ItemCaster that has same functionality, Cast skill using item.
-main: ${main_class}
+main: io.phanisment.itemcaster.ItemCaster
 api-version: 1.19
 depend:
 - MythicMobs

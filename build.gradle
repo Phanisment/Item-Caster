@@ -1,5 +1,5 @@
 plugins {
-	id 'maven-publish'
+	id 'com.gradleup.shadow' version "8.3.0"
 	id 'java-library'
 	id 'application'
 }
@@ -25,10 +25,20 @@ repositories {
 			includeGroup 'org.spigotmc'
 		}
 	}
+	maven {
+		name = "CodeMC"
+		url = uri("https://repo.codemc.io/repository/maven-public/")
+	}
+	maven { url 'https://mvn.lumine.io/repository/maven-public/' }
 }
 
 dependencies {
 	compileOnly "org.spigotmc:spigot-api:${project.spigot_api_version}"
+	compileOnly "io.lumine:Mythic-Dist:${project.mythicmobs_version}"
+	compileOnly "de.tr7zw:item-nbt-api-plugin:${project.nbt_api_version}"
+	compileOnly "javassist:javassist:3.12.1.GA"
+	//implementation "net.kyori:adventure-api:4.21.0"
+	//implementation "net.kyori:adventure-text-minimessage:4.21.0"
 }
 
 processResources {
@@ -42,6 +52,10 @@ processResources {
 	filesMatching("plugin.yml") {
 		expand(props)
 	}
+}
+
+tasks.shadowJar {
+	configurations = [project.configurations.shadow]
 }
 
 tasks.named('jar') {
@@ -58,12 +72,4 @@ java {
 	withSourcesJar()
 	sourceCompatibility = JavaVersion.VERSION_21
 	targetCompatibility = JavaVersion.VERSION_21
-}
-
-publishing {
-	publications {
-		maven(MavenPublication) {
-			from(components.java)
-		}
-	}
 }
