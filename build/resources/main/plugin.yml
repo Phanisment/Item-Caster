@@ -1,0 +1,11 @@
+name: ItemCaster
+version: R0.1
+author: Phanisment
+description: A rewrite version of ItemCaster that has same functionality, Cast skill using item.
+main: io.phanisment.itemcaster.ItemCaster
+api-version: 1.19
+depend:
+- MythicMobs
+- NBTAPI
+libraries:
+- javassist:javassist:3.12.1.GA
